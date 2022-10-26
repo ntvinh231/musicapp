@@ -1,0 +1,164 @@
+:root {
+	--linear-gradient-rainbow: linear-gradient(
+		to right,
+		#73d2f6,
+		#08c 22%,
+		#7fc400 36%,
+		#ffd583 48%,
+		#ffb21e 63%,
+		#ff4d4d 76%,
+		#503873
+	);
+	--white-color: #fff;
+	--black-color: #000;
+	--text-color: #333;
+	--text-color2: #555;
+	--text-color3: #777;
+	--primary-color: #ed2b91;
+	--sub-color: #6a39af;
+	--navbar-logo-width: 120px;
+	--navbar-brand-height: 70px;
+	--slider-width: 240px;
+	--layout-bg: #1e1e1e;
+	--header-height: 70px;
+	--option-color: rgba(192, 192, 192, 0.25);
+	--option-layout: rgba(255, 255, 255, 0.05);
+	--header-box-shadow: rgba(0, 0, 0, 0.2);
+	--artits-name-color: hsla(0, 0%, 100%, 0.5);
+	--hover-color: #c273ed;
+	--purple-primary: #9b4de0;
+	--music-control-border: hsla(0, 0%, 100%, 0.1);
+
+	/* Persional Song */
+	--section-slider-width: 30%;
+	--media-active-song: #353535;
+	--item-media-width-l: 45%;
+	--item-media-width-c: calc(100% - var(--item-media-width-l) - var(--item-media-width-r));
+	--item-media-width-r: 10%;
+
+	/* Control */
+	--music-control-height: 100px;
+	--music-control-bg: #181818;
+	--music-control-color: #fff;
+}
+
+* {
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 62.5%;
+	line-height: 1.6rem;
+	font-family: 'Roboto', sans-serif;
+	box-sizing: border-box;
+}
+
+/* Header */
+.header {
+	height: 70px;
+	width: calc(100% - var(--slider-width));
+	background-color: var(--slider-bg);
+	position: fixed;
+	top: 0;
+	right: 0;
+	z-index: 99;
+	display: flex;
+	align-items: center;
+	box-shadow: var(--header-box-shadow) 0px 5px 5px;
+	justify-content: space-between;
+}
+
+/* Footer */
+.music-control {
+	height: var(--music-control);
+	width: 100%;
+	background-color: #181818;
+	border: 1px solid var(--music-control-border);
+	position: fixed;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 99;
+	padding: 0 20px;
+}
+
+/* List ul - li */
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.navbar-item {
+	height: 38px;
+	font-size: 1.2rem;
+	color: var(--white-color);
+	font-weight: 500;
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.link {
+	text-decoration: none;
+	color: var(--white-color);
+	opacity: 0.7;
+	width: 100%;
+	height: 100%;
+	line-height: 38px;
+	font-size: 1.3rem;
+	font-weight: 700;
+}
+
+.navbar-item:hover .link {
+	opacity: 1;
+	cursor: pointer;
+}
+
+.btn {
+	min-width: 130px;
+	height: 34px;
+	border: none;
+	text-decoration: none;
+	border-radius: 500px;
+	font-size: 1.5rem;
+	padding: 25px 12px;
+	outline: none;
+	cursor: pointer;
+	background-color: #fff;
+	color: var(--text-color);
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+	line-height: 1.6rem;
+}
+
+/* Control Music */
+.control {
+	font-size: 1.5rem;
+	color: var(--music-control-color);
+	padding: 10px 15px;
+	cursor: pointer;
+}
+
+.icon-option {
+	cursor: pointer;
+	padding: 10px;
+	color: var(--white-color);
+}
+
+/* Song Name - Artit Name */
+.title-name {
+	font-weight: 430;
+	font-size: 1.3rem;
+	text-overflow: clip;
+	overflow: visible;
+	cursor: pointer;
+	color: var(--white-color);
+}
+
+.subtitle-name {
+	font-weight: 200;
+	font-size: 1.2rem;
+	color: var(--artits-name-color);
+}

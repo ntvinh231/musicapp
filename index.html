@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+    <!-- Reset css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- dùng google font roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- icon fontawesome -->
+    <link rel="stylesheet" href="./assets/font/fontawesome-free-6.2.0-web/css/all.css">
+    <!-- css base -->
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <!-- Grid system -->
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <!-- css chính -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+
+</head>
+
+<body>
+    <!-- <div class="main" style="background-image: url(./assets/img/background/background-theme.svg);">/ -->
+    <div class="main" style="background-color: #1e1e1e;">/
+
+        <!-- Main -->
+        <div class="grid">
+            <!-- Sliderbar -->
+            <div class="sliderbar">
+                <div class="navbar-brand">
+                    <a href="#" class="navbar-link">
+                        <div class="navbar-logo"></div>
+                    </a>
+                </div>
+            </div>
+            <!-- Header -->
+            <header class="header">
+                <div class="sliderbar-wrapper">
+                    <ul class="header__navbar-menu">
+                        <li class="navbar-item header__navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Cá Nhân</a>
+                        </li>
+                        <li class="navbar-item header__navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Khám Phá</a>
+                        </li>
+                        <li class="navbar-item header__navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">#zingchart</a>
+                        </li>
+                        <li class="navbar-item header__navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link link-live">Radio</a>
+                            <span class="navbar-item-live">Live</span>
+                        </li>
+                        <li class="navbar-item header__navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Theo Dõi</a>
+                        </li>
+                    </ul>
+                    <!-- <ul class="navbar-library">
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Nhạc Mới</a>
+                        </li>
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Thể Loại</a>
+                        </li>
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Top 100</a>
+                        </li>
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">MV</a>
+                        </li>
+                    </ul> -->
+                    <!-- <div class="vip-banner-sliderbar">
+                        <div class="text">Nghe nhạc không quảng cáo cùng kho nhạc VIP </div>
+                        <a href="" class="btn-vip-upgrade">NÂNG CẤP VIP</a>
+                    </div> -->
+                </div>
+                <div class="header__search">
+                    <i class="header__search-icon fa-solid fa-magnifying-glass"></i>
+                    <input type="search" class="header__search-input" placeholder="Bạn muốn nghe gì?">
+                </div>
+                <a href="" class="header-register">Đăng Ký </a>
+                <button class="btn btn-login">
+                    <a href="" class="header-login">Đăng Nhập</a>
+                </button>
+            </header>
+            <!-- song-side -->
+            <div class="song-side">
+                <div class="song-side__container active">
+                    <div class="container-personal">
+                        <div class="personal-heading">
+                            <img src="./assets/img/user/chicago.jpg" alt="Avatar">
+                            <span class="personal-name">Nguyễn Thành Vinh</span>
+                        </div>
+                        <div class="personal-body">
+                            <ul class="personal-body__option">
+                                <li class="option-item">TỔNG QUAN</li>
+                                <li class="option-item active">PLAYLIST</li>
+                                <li class="option-item">BÀI HÁT</li>
+                                <li class="option-item">NGHỆ SĨ</li>
+                            </ul>
+                        </div>
+                        <div class="personal-song__wrapper">
+                            <div class="personal-song__content">
+                                <div class="song__content-left">
+                                    <span>Bài Hát</span>
+                                </div>
+                                <div class="song__content-right">
+                                    <button>Phát Tất Cả</button>
+                                </div>
+                            </div>
+                            <div class="personal-song__section">
+                                <div class="song__section-slider">
+                                    <img src="./assets/img/user/chicago.jpg" alt="" class="song__section-slider-item">
+                                    <img src="./assets/img/user/chicago.jpg" alt="" class="song__section-slider-item">
+                                    <img src="./assets/img/user/chicago.jpg" alt="" class="song__section-slider-item">
+                                </div>
+                                <div class="song__section-list">
+                                    <div class="body-item__media section-list__header">
+                                        <span class="section-list__header-left">Bài Hát</span>
+                                        <span class="section-list__header-center">Album</span>
+                                        <span class="section-list__header-right">Thời Gian</span>
+                                    </div>
+                                    <div class="section-list__body">
+                                        <div class="section-list__body-item active">
+                                            <div class="body-item__checkbox checked">
+                                                <i class="item__checkbox-icon fa-solid fa-music"></i>
+                                                <input type="checkbox" class="item__checkbox-input" id="">
+                                            </div>
+
+                                            <div class="body-item__media">
+                                                <div class="item-media__left">
+                                                    <div class="media__left-image">
+                                                        <div></div>
+                                                    </div>
+                                                    <div class="media__left-info">
+                                                        <span class="media__left-title title-name">Lời Xin Lỗi Vụng
+                                                            Về</span>
+                                                        <span class="media__left-title subtitle-name">Quân A.P</span>
+                                                    </div>
+                                                </div>
+                                                <div class="item-media__center">
+                                                    <span class="media__center-album subtitle-name">Lời Xin Lỗi Vụng Về
+                                                        (Single)</span>
+                                                </div>
+                                                <div class="item-media__right">
+                                                    <span class="media__center-duration subtitle-name">04:44</span>
+                                                    <i
+                                                        class="media__center-option icon-option fa-solid fa-ellipsis"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="section-list__body-item">
+                                            <div class="body-item__checkbox checked">
+                                                <i class="item__checkbox-icon fa-solid fa-music"></i>
+                                                <input type="checkbox" class="item__checkbox-input" id="">
+                                            </div>
+
+                                            <div class="body-item__media">
+                                                <div class="item-media__left">
+                                                    <div class="media__left-image">
+                                                        <div></div>
+                                                    </div>
+                                                    <div class="media__left-info">
+                                                        <span class="media__left-title title-name">Lời Xin Lỗi Vụng
+                                                            Về</span>
+                                                        <span class="media__left-title subtitle-name">Quân A.P</span>
+                                                    </div>
+                                                </div>
+                                                <div class="item-media__center">
+                                                    <span class="media__center-album subtitle-name">Lời Xin Lỗi Vụng Về
+                                                        (Single)</span>
+                                                </div>
+                                                <div class="item-media__right">
+                                                    <span class="media__center-duration subtitle-name">04:44</span>
+                                                    <i
+                                                        class="media__center-option icon-option fa-solid fa-ellipsis"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer -->
+            <footer class="music-control">
+                <div class="row">
+                    <div class="col l-3">
+                        <div class="music-control__left">
+                            <div class="control__left-cd">
+                                <div class="control__left-cdthumb"
+                                    style="background-image: url(./assets/img/user/chicago.jpg);">
+                                </div>
+                            </div>
+                            <div class="control__left-content">
+                                <span class="left-content__song-name title-name">Như Những Phút Ban Đầu</span>
+                                <span class="left-content__artit-name subtitle-name">Hoài Lâm</span>
+                            </div>
+                            <div class="control__left-action">
+                                <i class="icon-option left-action__ellip fa-solid fa-ellipsis"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l-6">
+                        <div class="music-control__center">
+                            <div class="control__center-controls">
+                                <i class="control control-random fa-solid fa-shuffle"></i>
+                                <i class="control control-prev fas fa-step-backward"></i>
+                                <div class="control-toggle">
+                                    <i class="control control-play fas fa-play"></i>
+                                    <i class="control control-pause fas fa-pause"></i>
+                                </div>
+                                <i class="control control-next fas fa-step-forward"></i>
+                                <i class="control control-repeat fa-solid fa-repeat"></i>
+                            </div>
+                            <div class="rangeValue">
+                                <input type="range" class="progress" id="progress" value="0" min="0" step="1" max="100">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l-3">
+                    </div>
+                </div>
+            </footer>
+        </div>
+</body>
+
+</html>
