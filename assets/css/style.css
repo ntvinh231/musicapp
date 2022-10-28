@@ -382,19 +382,15 @@
 	color: var(--hover-color);
 }
 
-.control-toggle.playing .control-pause {
-	display: block;
-}
-
-.control-toggle.playing .control-play {
+.control-toggle .control-pause {
 	display: none;
 }
 
-.control-toggle .control-play {
-	display: block;
+.control-toggle.playing .control-pause {
+	display: inline-block;
 }
 
-.control-toggle .control-pause {
+.control-toggle.playing .control-play {
 	display: none;
 }
 

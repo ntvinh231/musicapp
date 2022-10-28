@@ -5,36 +5,41 @@ const songTitle = $('.left-content__song-name');
 const cdThumb = $('.control__left-cdthumb');
 const artitName = $('.left-content__artit-name');
 const toggleBtn = $('.control-toggle');
-const playBtn = $('.control-play');
+const nextBtn = $('.control-next');
+const prevBtn = $('.control-prev');
 
 var apiSongs = 'https://vinhnguyen-music-api.vercel.app';
+
+var songData = [];
+
+fetch(apiSongs)
+	.then((reponse) => {
+		return reponse.json();
+	})
+	.then(function (reponse) {
+		songData = reponse;
+		console.log(songData);
+		// console.log(reponse );
+	})
+	.catch(() => alert('Error'));
+
 const app = {
+	songs: [...songData],
 	currentIndex: 0,
 	isPlaying: false,
-	songData: [],
+	// songData: songDatas,
 
 	defineProperties: () => {
-		Object.defineProperty(app, 'currentSong', {
-			get: () => app.songData[app.currentIndex],
+		Object.defineProperty(this, 'currentSong', {
+			get: function () {
+				return app.songs[this.currentIndex];
+			},
 		});
 	},
 
-	getSongs: function (callback) {
-		fetch(apiSongs)
-			.then((reponse) => {
-				return reponse.json();
-			})
-			.then(function (reponse) {
-				app.songData = reponse;
-				return app.songData;
-			})
-			.then(callback)
-			.catch(() => alert('Error'));
-	},
-
-	renderSongs: function (songs) {
+	renderSongs: function () {
 		const listSongsBlock = document.getElementById('section-list__body');
-		var htmls = songs.map((song) => {
+		var htmls = app.songs.map((song) => {
 			return `
 			<div class="section-list__body-item">
 				<div class="body-item__checkbox">
@@ -67,32 +72,58 @@ const app = {
 		listSongsBlock.innerHTML = htmls.join('');
 	},
 
-	loadCurrentSong: function () {
-		songTitle.textContent = app.currentSong.name;
-		cdThumb.style.backgroundImage = `url(${app.currentSong.links.images[0].url})`;
-		artitName.textContent = app.currentSong.author;
-		audio.src = app.currentSong.url;
+	loadCurrentSong: function (songs) {
+		songTitle.textContent = songs[app.currentIndex].name;
+		cdThumb.style.backgroundImage = `url(${songs[app.currentIndex].links.images[0].url})`;
+		artitName.textContent = songs[app.currentIndex].author;
+		audio.src = songs[app.currentIndex].url;
 	},
 
 	handleEvent: function () {
 		const _this = this;
 
-		playBtn.onclick = function () {
+		const cbThumbAnimation = cdThumb.animate([{ transform: 'rotate(360deg)' }], {
+			duration: 10000,
+			iterations: Infinity,
+		});
+		cbThumbAnimation.pause();
+
+		toggleBtn.onclick = function () {
 			if (!_this.isPlaying) audio.play();
 			else audio.pause();
 		};
 
-		// audio.onplay = function () {
-		// 	toggleBtn.classList.add('playing');
-		// 	isPlaying = true;
-		// };
+		audio.onplay = function () {
+			toggleBtn.classList.add('playing');
+			_this.isPlaying = true;
+			cbThumbAnimation.play();
+		};
+
+		// Khi song bị pause
+		audio.onpause = function () {
+			toggleBtn.classList.remove('playing');
+			_this.isPlaying = false;
+			cbThumbAnimation.pause();
+		};
+
+		nextBtn.onclick = function () {
+			_this.loadCurrentSong();
+		};
 	},
 
+	// nextSong: function() {
+	// 	this.currentIndex++
+	// 	if(this.currentIndex >= this.)
+	// }
+
 	start: function () {
+		// this.getSongs(this.loadCurrentSong);
+		// this.getSongs(this.renderSongs);
+		// this.loadCurrentSong()
 		this.defineProperties();
-		this.getSongs(this.renderSongs);
+		this.renderSongs();
 		this.handleEvent();
-		this.loadCurrentSong();
+		// this.loadCurrentSong();
 	},
 };
 app.start();
