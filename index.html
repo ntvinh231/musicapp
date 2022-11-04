@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="./assets/css/base.css">
     <!-- Grid system -->
     <link rel="stylesheet" href="./assets/css/grid.css">
+    <!-- Modal layout -->
+    <link rel="stylesheet" href="./assets/css/modal.css">
+    <!-- Control Music -->
+    <link rel="stylesheet" href="./assets/css/musicControl.css">
     <!-- css chính -->
     <link rel="stylesheet" href="./assets/css/style.css">
 
@@ -24,7 +28,108 @@
 
 <body>
     <!-- <div class="main" style="background-image: url(./assets/img/background/background-theme.svg);">/ -->
-    <div class="main" style="background-color: #1e1e1e;">/
+    <div class="main" style="background-color: #1e1e1e;">
+
+        <!-- Modal layout  -->
+        <div class="modal">
+            <div class="modal__overlay"></div>
+            <div class="modal__body">
+                <!-- Register Form -->
+                <div class="auth-form auth-form--register">
+                    <div class="auth-form__container">
+                        <div class="auth-form__header">
+                            <h3 class="auth-form__heading">Đăng ký</h3>
+                            <span class="auth-form__switch-btn">Đăng nhập</span>
+                        </div>
+
+                        <div class="auth-form__form">
+                            <div class="auth-form__group">
+                                <input type="email" class="auth-form__input" placeholder="Nhập email của bạn">
+                            </div>
+                            <div class="auth-form__group">
+                                <input type="password" class="auth-form__input" placeholder="Nhập mật khẩu của bạn">
+                            </div>
+                            <div class="auth-form__group">
+                                <input type="password" class="auth-form__input" placeholder="Nhập lại mật khẩu của bạn">
+                            </div>
+                        </div>
+
+                        <div class="auth-form__aside">
+                            <p class="auth-form__policy-text">
+                                Bằng việc đăng kí, bạn đã đông ý với về
+                                <a href="" class="auto-form__policy-link">Điều khoản dịch vụ </a>&
+                                <a href="" class="auto-form__policy-link">Chính sách bảo mật</a>
+                                của chúng tôi
+                            </p>
+                        </div>
+
+                        <div class="auth-form__control">
+                            <button class="btn btn--normal btn-back">TRỞ LẠI</button>
+                            <button class="btn btn--primary">ĐĂNG KÝ</button>
+                        </div>
+                    </div>
+
+
+                    <!-- <div class="auth-form__socials">
+                        <a href="" class="auth-form__socials--facebook btn-with-s btn">
+                            <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
+                            <span class="auth-form__socials-title">Kết nối với Facebook</span>
+                        </a>
+
+                        <a href="" class="auth-form__socials--google btn-with-s btn">
+                            <i class="auth-form__socials-icon fa-brands fa-google"></i>
+                            <span class="auth-form__socials-title">Kết nối với Google</span>
+                        </a>
+                    </div> -->
+                </div>
+
+
+                <!-- Login Form -->
+                <div class="auth-form auth-form--login">
+                    <div class="auth-form__container">
+                        <div class="auth-form__header">
+                            <h3 class="auth-form__heading">Đăng nhập</h3>
+                            <span class="auth-form__switch-btn">Đăng ký</span>
+                        </div>
+
+                        <div class="auth-form__form">
+                            <div class="auth-form__group">
+                                <input type="email" class="auth-form__input" placeholder="Nhập email của bạn">
+                            </div>
+                            <div class="auth-form__group">
+                                <input type="password" class="auth-form__input" placeholder="Nhập mật khẩu của bạn">
+                            </div>
+                        </div>
+
+                        <div class="auth-form__aside">
+                            <div class="auto-form__help">
+                                <a href="" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
+                                <span class="auth-form__help-separate"></span>
+                                <a href="" class="auth-form__help-link ">Cần trợ giúp</a>
+                            </div>
+                        </div>
+
+                        <div class="auth-form__control">
+                            <button class="btn btn--normal btn-back">TRỞ LẠI</button>
+                            <button class="btn btn--primary">ĐĂNG NHẬP</button>
+                        </div>
+                    </div>
+
+                    <!-- <div class="auth-form__socials">
+                        <a href="" class="auth-form__socials--facebook btn-with-s btn">
+                            <i class="auth-form__socials-icon fa-brands fa-square-facebook"></i>
+                            <span class="auth-form__socials-title"> Đăng nhập với Facebook</span>
+                        </a>
+
+                        <a href="" class="auth-form__socials--google btn-with-s btn">
+                            <i class="auth-form__socials-icon fa-brands fa-google"></i>
+                            <span class="auth-form__socials-title">Đăng nhập với Google</span>
+                        </a>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+
 
         <!-- Main -->
         <div class="grid">
@@ -99,13 +204,13 @@
                 <div class="song-side__container active">
                     <div class="container-personal">
                         <div class="personal-heading">
-                            <img src="./assets/img/user/chicago.jpg" alt="Avatar">
+                            <img src="./assets/img/user/avatar.jpg" alt="Avatar">
                             <span class="personal-name">Nguyễn Thành Vinh</span>
                         </div>
                         <div class="personal-body">
                             <ul class="personal-body__option">
-                                <li class="option-item">TỔNG QUAN</li>
-                                <li class="option-item active">PLAYLIST</li>
+                                <li class="option-item active">TỔNG QUAN</li>
+                                <li class="option-item">PLAYLIST</li>
                                 <li class="option-item">BÀI HÁT</li>
                                 <li class="option-item">NGHỆ SĨ</li>
                             </ul>
@@ -121,9 +226,12 @@
                             </div>
                             <div class="personal-song__section">
                                 <div class="song__section-slider">
-                                    <img src="./assets/img/user/chicago.jpg" alt="" class="song__section-slider-item">
-                                    <img src="./assets/img/user/chicago.jpg" alt="" class="song__section-slider-item">
-                                    <img src="./assets/img/user/chicago.jpg" alt="" class="song__section-slider-item">
+                                    <img src="https://stc-id.nixcdn.com/v11/images/avatar_default.jpg" alt=""
+                                        class="song__section-slider-item">
+                                    <img src="https://stc-id.nixcdn.com/v11/images/avatar_default.jpg" alt=""
+                                        class="song__section-slider-item">
+                                    <img src="https://stc-id.nixcdn.com/v11/images/avatar_default.jpg" alt=""
+                                        class="song__section-slider-item">
                                 </div>
                                 <div class="song__section-list">
                                     <div class="section-list__header">
@@ -131,85 +239,97 @@
                                         <span class="section-list__header-center">Album</span>
                                         <span class="section-list__header-right">Thời Gian</span>
                                     </div>
-                                    <div id="section-list__body">
-                                        <!-- <div class="section-list__body-item active">
-                                            <div class="body-item__checkbox checked">
-                                                <i class="item__checkbox-icon fa-solid fa-music"></i>
-                                                <input type="checkbox" class="item__checkbox-input" id="">
-                                            </div>
-
-                                            <div class="body-item__media">
-                                                <div class="item-media__left">
-                                                    <div class="media__left-image">
-                                                        <div></div>
+                                    <div class="section-list__body">
+                                        <div class="section-list__body-item">
+                                            <div class="section-list__body-item" data-index=${index}>
+                                                <!-- <div class="item-media__left">
+                                                    <div class="body-item__checkbox">
+                                                        <i class="item__checkbox-icon fa-solid fa-music"></i>
+                                                        <input type="checkbox" class="item__checkbox-input" id="">
                                                     </div>
-                                                    <div class="media__left-info">
-                                                        <span class="media__left-title title-name">Lời Xin Lỗi Vụng
-                                                            Về</span>
-                                                        <span class="media__left-title subtitle-name">Quân A.P</span>
+                                                        <div class="media__left-image">
+                                                            <div class="left-image" style="background-image: url('${song.links.images[0].url}')"></div>
+                                                        </div>
+                                                        <div class="media__left-info">
+                                                            <span class="media__left-title title-name">${song.name}</span>
+                                                            <span class="media__left-title subtitle-name">${song.author}</span>
+                                                        </div>
                                                     </div>
-                                                </div>
                                                 <div class="item-media__center">
-                                                    <span class="media__center-album subtitle-name">Lời Xin Lỗi Vụng Về
-                                                        (Single)</span>
+                                                    <span class="media__center-album subtitle-name">Update...</span>
                                                 </div>
-                                                <div class="item-media__right">
-                                                    <span class="media__center-duration subtitle-name">04:44</span>
-                                                    <i
+                                                    <div class="item-media__right">
+                                                        <span class="media__center-duration subtitle-name">Update...</span>
+                                                        <i
                                                         class="media__center-option icon-option fa-solid fa-ellipsis"></i>
                                                 </div>
+                                            </div> -->
                                             </div>
-                                        </div> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <!-- Footer -->
+                <footer class="music-control">
+                    <div class="row">
+                        <div class="col l-3">
+                            <div class="music-control__left">
+                                <div class="control__left-cd">
+                                    <div class="control__left-cdthumb"
+                                        style="background-image: url(./assets/img/music-control/cbthumb.png);">
+                                    </div>
+                                </div>
+                                <div class="control__left-content">
+                                    <span class="left-content__song-name title-name">Loading...</span>
+                                    <span class="left-content__artit-name subtitle-name">Loading...</span>
+                                </div>
+                                <div class="control__left-action">
+                                    <i class="icon-option left-action__ellip fa-solid fa-ellipsis"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col l-6">
+                            <div class="music-control__center">
+                                <div class="control__center-controls">
+                                    <i class="control control-random fa-solid fa-shuffle"></i>
+                                    <i class="control control-prev fas fa-step-backward"></i>
+                                    <div class="control-toggle">
+                                        <i class="fas fa-pause control control-pause"></i>
+                                        <i class="fas fa-play control control-play"></i>
+                                    </div>
+                                    <i class="control control-next fas fa-step-forward"></i>
+                                    <i class="control control-repeat fa-solid fa-repeat"></i>
+                                </div>
+                                <div class="rangeValue">
+                                    <input type="range" class="progress" id="progress" value="0" min="0" step="1"
+                                        max="100">
+                                </div>
+                                <audio id="audio" src=""></audio>
+                            </div>
+                        </div>
+                        <div class="col l-3">
+                            <div class="music-control__right">
+                                <div class="control__right-controls">
+                                    <div class="volume-change">
+                                        <i class="fas fa-volume-up volume__icon"></i>
+                                        <i class="fas fa-volume-mute volume__icon--mute"></i>
+                                    </div>
+
+                                    <div class="rangeVolume">
+                                        <input type="range" class="progress" id="progress" value="0" min="0" step="1"
+                                            max="100">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </footer>
             </div>
-            <!-- Footer -->
-            <footer class="music-control">
-                <div class="row">
-                    <div class="col l-3">
-                        <div class="music-control__left">
-                            <div class="control__left-cd">
-                                <div class="control__left-cdthumb"
-                                    style="background-image: url(./assets/img/user/chicago.jpg);">
-                                </div>
-                            </div>
-                            <div class="control__left-content">
-                                <span class="left-content__song-name title-name">Như Những Phút Ban Đầu</span>
-                                <span class="left-content__artit-name subtitle-name">Hoài Lâm</span>
-                            </div>
-                            <div class="control__left-action">
-                                <i class="icon-option left-action__ellip fa-solid fa-ellipsis"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col l-6">
-                        <div class="music-control__center">
-                            <div class="control__center-controls">
-                                <i class="control control-random fa-solid fa-shuffle"></i>
-                                <i class="control control-prev fas fa-step-backward"></i>
-                                <div class="control-toggle">
-                                    <i class="fas fa-pause control control-pause"></i>
-                                    <i class="fas fa-play control control-play"></i>
-                                </div>
-                                <i class="control control-next fas fa-step-forward"></i>
-                                <i class="control control-repeat fa-solid fa-repeat"></i>
-                            </div>
-                            <div class="rangeValue">
-                                <input type="range" class="progress" id="progress" value="0" min="0" step="1" max="100">
-                            </div>
-                            <audio id="audio" src=""></audio>
-                        </div>
-                    </div>
-                    <div class="col l-3">
-                    </div>
-                </div>
-            </footer>
-        </div>
 </body>
 <script src="./assets/js/main.js"></script>
+<script src="./assets/js/login.js"></script>
 
 </html>

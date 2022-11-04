@@ -133,20 +133,6 @@ ul {
 	line-height: 1.6rem;
 }
 
-/* Control Music */
-.control {
-	font-size: 1.5rem;
-	color: var(--music-control-color);
-	padding: 10px 15px;
-	cursor: pointer;
-}
-
-.icon-option {
-	cursor: pointer;
-	padding: 10px;
-	color: var(--white-color);
-}
-
 /* Song Name - Artit Name */
 .title-name {
 	font-weight: 430;
