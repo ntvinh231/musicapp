@@ -117,12 +117,12 @@ ul {
 
 .btn {
 	min-width: 130px;
-	height: 34px;
+	height: 40px;
 	border: none;
 	text-decoration: none;
 	border-radius: 500px;
 	font-size: 1.5rem;
-	padding: 25px 12px;
+	padding: 10px 12px;
 	outline: none;
 	cursor: pointer;
 	background-color: #fff;
@@ -147,4 +147,13 @@ ul {
 	font-weight: 200;
 	font-size: 1.2rem;
 	color: var(--artits-name-color);
+}
+
+/* Personal Body */
+.personals {
+	display: none;
+}
+
+.personals.active {
+	display: block;
 }

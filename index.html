@@ -44,6 +44,8 @@
 
                         <div class="auth-form__form">
                             <div class="auth-form__group">
+                                <input type="username" class="auth-form__input" placeholder="Nhập username của bạn">
+
                                 <input type="email" class="auth-form__input" placeholder="Nhập email của bạn">
                             </div>
                             <div class="auth-form__group">
@@ -64,7 +66,7 @@
                         </div>
 
                         <div class="auth-form__control">
-                            <button class="btn btn--normal btn-back">TRỞ LẠI</button>
+                            <button class="btn btn--back">TRỞ LẠI</button>
                             <button class="btn btn--primary">ĐĂNG KÝ</button>
                         </div>
                     </div>
@@ -94,6 +96,8 @@
 
                         <div class="auth-form__form">
                             <div class="auth-form__group">
+                                <input type="username" class="auth-form__input" placeholder="Nhập username của bạn">
+
                                 <input type="email" class="auth-form__input" placeholder="Nhập email của bạn">
                             </div>
                             <div class="auth-form__group">
@@ -110,7 +114,7 @@
                         </div>
 
                         <div class="auth-form__control">
-                            <button class="btn btn--normal btn-back">TRỞ LẠI</button>
+                            <button class="btn btn--back">TRỞ LẠI</button>
                             <button class="btn btn--primary">ĐĂNG NHẬP</button>
                         </div>
                     </div>
@@ -215,25 +219,25 @@
                                 <li class="option-item">NGHỆ SĨ</li>
                             </ul>
                         </div>
-                        <div class="personal-song__wrapper">
-                            <div class="personal-song__content">
-                                <div class="song__content-left">
+                        <div class="personals active personal-overview__wrapper">
+                            <div class="personal-overview__content">
+                                <div class="overview__content-left">
                                     <span>Bài Hát</span>
                                 </div>
-                                <div class="song__content-right">
+                                <div class="overview__content-right">
                                     <button>Phát Tất Cả</button>
                                 </div>
                             </div>
-                            <div class="personal-song__section">
-                                <div class="song__section-slider">
+                            <div class="personal-overview__section">
+                                <div class="overview__section-slider">
                                     <img src="https://stc-id.nixcdn.com/v11/images/avatar_default.jpg" alt=""
-                                        class="song__section-slider-item">
+                                        class="overview__section-slider-item">
                                     <img src="https://stc-id.nixcdn.com/v11/images/avatar_default.jpg" alt=""
-                                        class="song__section-slider-item">
+                                        class="overview__section-slider-item">
                                     <img src="https://stc-id.nixcdn.com/v11/images/avatar_default.jpg" alt=""
-                                        class="song__section-slider-item">
+                                        class="overview__section-slider-item">
                                 </div>
-                                <div class="song__section-list">
+                                <div class="overview__section-list">
                                     <div class="section-list__header">
                                         <span class="section-list__header-left">Bài Hát</span>
                                         <span class="section-list__header-center">Album</span>
@@ -243,33 +247,36 @@
                                         <div class="section-list__body-item">
                                             <div class="section-list__body-item" data-index=${index}>
                                                 <!-- <div class="item-media__left">
-                                                    <div class="body-item__checkbox">
-                                                        <i class="item__checkbox-icon fa-solid fa-music"></i>
-                                                        <input type="checkbox" class="item__checkbox-input" id="">
-                                                    </div>
-                                                        <div class="media__left-image">
-                                                            <div class="left-image" style="background-image: url('${song.links.images[0].url}')"></div>
-                                                        </div>
-                                                        <div class="media__left-info">
-                                                            <span class="media__left-title title-name">${song.name}</span>
-                                                            <span class="media__left-title subtitle-name">${song.author}</span>
-                                                        </div>
-                                                    </div>
-                                                <div class="item-media__center">
-                                                    <span class="media__center-album subtitle-name">Update...</span>
+                                                <div class="body-item__checkbox">
+                                                    <i class="item__checkbox-icon fa-solid fa-music"></i>
+                                                    <input type="checkbox" class="item__checkbox-input" id="">
                                                 </div>
-                                                    <div class="item-media__right">
-                                                        <span class="media__center-duration subtitle-name">Update...</span>
-                                                        <i
-                                                        class="media__center-option icon-option fa-solid fa-ellipsis"></i>
+                                                    <div class="media__left-image">
+                                                        <div class="left-image" style="background-image: url('${song.links.images[0].url}')"></div>
+                                                    </div>
+                                                    <div class="media__left-info">
+                                                        <span class="media__left-title title-name">${song.name}</span>
+                                                        <span class="media__left-title subtitle-name">${song.author}</span>
+                                                    </div>
                                                 </div>
-                                            </div> -->
+                                            <div class="item-media__center">
+                                                <span class="media__center-album subtitle-name">Update...</span>
+                                            </div>
+                                                <div class="item-media__right">
+                                                    <span class="media__center-duration subtitle-name">Update...</span>
+                                                    <i
+                                                    class="media__center-option icon-option fa-solid fa-ellipsis"></i>
+                                            </div>
+                                        </div> -->
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="personals">Đây là personal2</div>
+                        <div class="personals">Đây là personal3</div>
+                        <div class="personals">Đây là personal4</div>
                     </div>
                 </div>
                 <!-- Footer -->
@@ -319,7 +326,7 @@
                                     </div>
 
                                     <div class="rangeVolume">
-                                        <input type="range" class="progress" id="progress" value="0" min="0" step="1"
+                                        <input type="range" class="volume" id="volume" value="0" min="0" step="1"
                                             max="100">
                                     </div>
                                 </div>
@@ -331,5 +338,6 @@
 </body>
 <script src="./assets/js/main.js"></script>
 <script src="./assets/js/login.js"></script>
+<script src="./assets/js/personal.js"></script>
 
 </html>

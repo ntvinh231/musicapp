@@ -40,14 +40,12 @@
 /* Authen form */
 .auth-form {
 	width: 500px;
-	max-height: 440px;
 	background-color: #fff;
 	border-radius: 5px;
 	overflow: hidden;
 }
 
 .auth-form--login {
-	max-height: 367px;
 }
 
 .auth-form__container {
@@ -118,15 +116,19 @@
 	margin-bottom: 24px;
 }
 
-.btn-back {
+.btn--back {
 	margin-right: 8px;
 	background-color: #2daaed;
-	padding: 20px 12px;
 }
 
 .btn--primary {
 	background-color: #2daaed;
-	padding: 20px 12px;
+}
+
+.btn--primary:hover,
+.btn--back:hover {
+	background-color: #1e1e1e;
+	color: var(--white-color);
 }
 
 .auth-form__socials {

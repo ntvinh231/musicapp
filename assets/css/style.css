@@ -49,14 +49,14 @@
 	margin-right: 100px;
 }
 
-.btn:hover {
+.btn-login:hover {
 	background: #000;
 	color: var(--white-color);
 	border: solid 1px;
 	border-color: white;
 }
 
-.btn:hover .header-login {
+.btn-login:hover .header-login {
 	color: white;
 }
 
@@ -289,6 +289,7 @@
 	min-height: 24px;
 	color: var(--white-color);
 	cursor: pointer;
+	transition: all 0.3s ease-in;
 }
 
 .option-item.active {
@@ -296,26 +297,25 @@
 	background-color: var(--option-color);
 }
 
-/* Personal Sgong */
-
-.personal-song__wrapper {
+/* Personal Overview */
+.personal-overview__wrapper {
 	margin: 35px 0;
 }
 
-.personal-song__content {
+.personal-overview__wrapper .personal-overview__content {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 }
 
-.song__content-left span {
+.overview__content-left span {
 	font-size: 2rem;
 	color: var(--white-color);
 	font-weight: 550;
 	line-height: 33px;
 }
 
-.song__content-right button {
+.overview__content-right button {
 	font-size: 1.4rem;
 	color: var(--white-color);
 	background-color: var(--purple-primary);
@@ -327,11 +327,11 @@
 	transform: translateY(-3px);
 }
 
-.song__content-right button:hover {
+.overview__content-right button:hover {
 	opacity: 0.65;
 }
 
-.personal-song__section {
+.personal-overview__section {
 	width: 100%;
 	position: relative;
 	height: 200px;
@@ -339,11 +339,12 @@
 	display: flex;
 }
 
-.song__section-slider {
+.overview__section-slider {
 	width: var(--section-slider-width);
 	height: 100%;
+	margin-top: 40px;
 }
-.song__section-slider-item {
+.overview__section-slider-item {
 	border-radius: 4px;
 	width: 200px;
 	height: 100%;
@@ -354,7 +355,7 @@
 
 /* List Song */
 
-.song__section-list {
+.overview__section-list {
 	width: calc(100% - var(--section-slider-width));
 }
 

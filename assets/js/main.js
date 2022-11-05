@@ -10,6 +10,8 @@ const prevBtn = $('.control-prev');
 const randomBtn = $('.control-random');
 const repeatBtn = $('.control-repeat');
 const progress = $('#progress');
+const volumeToggle = $('.volume-change');
+const volumeBar = $('.volume');
 const playList = $('.section-list__body');
 
 var songData = [];
@@ -66,6 +68,8 @@ Promise.all([getData(apiSongs)])
 
 const app = {
 	currentIndex: 0,
+	currentVolume: 0,
+	previousVolume: 0,
 	isPlaying: false,
 	isPlaying2: false,
 	currentSong: '',
@@ -133,10 +137,21 @@ const app = {
 		cdThumbAnimation.pause();
 
 		// Control
-		const volumeToggle = $('.volume-change');
 		volumeToggle.onclick = function () {
 			_this.isMute = !_this.isMute;
 			this.classList.toggle('active', _this.isMute);
+			if (_this.isMute) {
+				audio.muted = true;
+				_this.previousVolume = volumeBar.value / 100;
+				volumeBar.value = 0;
+			} else {
+				audio.muted = false;
+				volumeBar.value = _this.previousVolume * 100;
+			}
+		};
+		volumeBar.onchange = function (e) {
+			_this.currentVolume = e.target.value / 100;
+			audio.volume = _this.currentVolume;
 		};
 
 		toggleBtn.onclick = function () {

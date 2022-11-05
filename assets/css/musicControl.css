@@ -114,11 +114,13 @@
 
 .rangeValue {
 	width: 85%;
+	display: flex;
+	justify-content: center;
 }
 
 .rangeValue input[type='range'] {
 	-webkit-appearance: none;
-	width: 100%;
+	width: 90%;
 	height: 5px;
 	border-radius: 15px;
 	background-color: #666;
@@ -162,16 +164,6 @@
 	justify-content: flex-end;
 }
 
-.volume {
-	background: #d3d3d3;
-	height: 6px;
-	outline: none;
-	opacity: 0.7;
-	display: flex;
-	cursor: pointer;
-	left: 75px;
-	position: absolute;
-}
 .volume-setting {
 	display: flex;
 	align-items: center;
