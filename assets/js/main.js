@@ -159,6 +159,7 @@ const app = {
 				if (!_this.isPlaying) audio.play();
 				else audio.pause();
 			}
+			volumeBar.value = audio.volume * 100;
 		};
 
 		audio.onplay = function () {
