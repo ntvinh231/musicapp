@@ -167,7 +167,6 @@ function SignIn(user) {
 				.then((snapshot) => {
 					if (snapshot.exists()) {
 						let data = snapshot.val();
-						JWTDATA = { ...data };
 						handleLoadSignIn(data);
 					} else {
 						console.log('No data available');
