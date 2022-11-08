@@ -81,7 +81,9 @@
 	padding: 0 12px;
 	height: 40px;
 	width: 100%;
-	border: 1px solid rgba(51, 51, 51, 0.3);
+	border-top: transparent;
+	border-left: transparent;
+	border-right: transparent;
 	outline: none;
 	border-radius: 2px;
 }
@@ -93,7 +95,6 @@
 .auth-form__aside {
 	margin-top: 24px;
 	padding: 0 12px;
-	margin-bottom: 80px;
 	text-align: center;
 }
 
@@ -111,7 +112,8 @@
 .auth-form__control {
 	display: flex;
 	width: 100%;
-	margin: 16px 0;
+	margin: 12px 0;
+	padding-right: 32px;
 	justify-content: flex-end;
 	margin-bottom: 24px;
 }
@@ -179,4 +181,47 @@
 .auth-form__help-forgot {
 	color: var(--primary-color);
 	font-weight: 420;
+}
+
+/* Validator */
+.form-message {
+	text-align: left;
+}
+
+.form-group.invalid .auth-form__input {
+	border-color: #f33a58;
+}
+
+.form-group.invalid .form-message {
+	color: #f33a58;
+}
+
+.loginErrorUser {
+	display: none;
+}
+
+.auth-form__alert-error {
+	display: flex;
+	align-items: center;
+	margin-top: 16px;
+	padding: 5px 0px 2px 0px;
+	background: #e64e4e;
+	border-top: #bb2727 solid 0px;
+}
+
+.auth-form__alert-error span.icon {
+	width: 18px;
+	height: 17px;
+	display: block;
+	background: url(https://stc-id.nixcdn.com/v11/images/icon.png) -233px -40px no-repeat;
+	margin: 2px 10px 5px 15px;
+	float: left;
+}
+
+.auth-form__alert-error .content_alert {
+	float: left;
+	width: 100%;
+	line-height: 18px;
+	font-size: 15px;
+	color: #ffffff;
 }

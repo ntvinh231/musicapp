@@ -36,7 +36,7 @@ var apiSongs = 'https://vinhnguyen-music-api.vercel.app';
 // 	});
 // };
 
-getData = (api) => {
+const getData = (api) => {
 	return new Promise((resolve, reject) => {
 		var request = new XMLHttpRequest();
 		request.open('GET', api);
