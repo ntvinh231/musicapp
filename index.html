@@ -364,9 +364,7 @@
             Validator.isRequired('.userRegister', 'Vui lòng nhập user name của bạn'),
             Validator.isRequired('.emailRegister'),
             Validator.isEmail('.emailRegister', 'Vui lòng nhập đúng địa chỉ emai của bạn'),
-            Validator.isEmail('.emailLogin', 'Vui lòng nhập đúng địa chỉ emai của bạn'),
             Validator.minLength('.passwordRegister', 6, 'Mật khẩu phải bao gồm 1 chữ thường, 1 in hoa và 1 chữ số'),
-            Validator.minLength('.passwordLogin', 6, 'Mật khẩu phải bao gồm 1 chữ thường, 1 in hoa và 1 chữ số'),
             Validator.isRequired('.repasswordRegister'),
             Validator.isConfirmed('.repasswordRegister', function () {
                 return document.querySelector('.form .passwordRegister').value
