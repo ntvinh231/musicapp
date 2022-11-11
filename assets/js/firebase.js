@@ -250,13 +250,13 @@ function setCookie2(params) {
 
 function deleteCookie(name) {
 	setCookie2({ name: name, value: '', seconds: 1 });
+	userLogin.classList.remove('login');
 }
 
 SignOut.addEventListener('click', () => {
 	deleteCookie('userData');
 	localStorage.removeItem('userData');
 	localStorage.removeItem('keepLoggedIn');
-	userLogin.classList.remove('login');
 	window.location = 'index.html';
 });
 
