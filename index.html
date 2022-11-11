@@ -22,6 +22,8 @@
     <link rel="stylesheet" href="./assets/css/musicControl.css">
     <!-- css chính -->
     <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- css banner -->
+    <link rel="stylesheet" href="./assets/css/banner.css">
 
     <link rel="icon" type="image/x-icon" href="#">
 </head>
@@ -85,53 +87,54 @@
 
 
             <!-- Login Form -->
-            <form action="" method="POST">
-                <div class="auth-form auth-form--login">
-                    <div class="auth-form__container">
-                        <div class="auth-form__header">
-                            <h3 class="auth-form__heading">Đăng nhập</h3>
-                            <span class="auth-form__switch-btn">Đăng ký</span>
+            <div class="auth-form auth-form--login">
+                <div class="auth-form__container">
+                    <div class="auth-form__header">
+                        <h3 class="auth-form__heading">Đăng nhập</h3>
+                        <span class="auth-form__switch-btn">Đăng ký</span>
+                    </div>
+                    <div class="auth-form__form">
+                        <div class="form-group">
+                            <input type="email" class="emailLogin auth-form__input" placeholder="Nhập email của bạn">
+                            <span class="form-message"></span>
                         </div>
-                        <div class="auth-form__form">
-                            <div class="form-group">
-                                <input type="email" class="emailLogin auth-form__input"
-                                    placeholder="Nhập email của bạn">
-                                <span class="form-message"></span>
-                            </div>
-                            <div class="form-group">
-                                <input type="password" class="passwordLogin auth-form__input"
-                                    placeholder="Nhập mật khẩu của bạn">
-                                <span class="form-message"></span>
-                            </div>
-                        </div>
-
-                        <div class="auth-form__aside">
-                            <div class="auto-form__help">
-                                <a href="" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
-                                <span class="auth-form__help-separate"></span>
-                                <a href="" class="auth-form__help-link ">Cần trợ giúp</a>
-                            </div>
-                        </div>
-
-                        <div class="loginErrorUser">
-                            <div class="auth-form__alert-error">
-                                <span class="icon"></span>
-                                <div class="content_alert" id="loginAlert">Sai tài khoản hoặc mật khẩu</div>
-                            </div>
+                        <div class="form-group">
+                            <input type="password" class="passwordLogin auth-form__input"
+                                placeholder="Nhập mật khẩu của bạn">
+                            <span class="form-message"></span>
                         </div>
                     </div>
-                    <div class="auth-form__control">
-                        <button class="btn btn--back submit-back">TRỞ LẠI</button>
-                        <button class="btn btn--primary submit-login">ĐĂNG NHẬP</button>
+
+                    <div class="auth-form__aside">
+                        <div class="auto-form__help">
+                            <a href="" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
+                            <span class="auth-form__help-separate"></span>
+                            <a href="" class="auth-form__help-link ">Cần trợ giúp</a>
+                        </div>
                     </div>
-            </form>
+
+                    <div class="loginErrorUser">
+                        <div class="auth-form__alert-error">
+                            <span class="icon"></span>
+                            <div class="content_alert" id="loginAlert">Sai tài khoản hoặc mật khẩu</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-form__control">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch">
+                        <label for="customSwitch" class="custom-control-label">Giữ đăng nhập</label>
+                    </div>
+                    <button class="btn btn--back submit-back">TRỞ LẠI</button>
+                    <button class="btn btn--primary submit-login">ĐĂNG NHẬP</button>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
 
 
     <!-- Main -->
-    <div class="grid">
+    <div class="grid ">
         <!-- Sliderbar -->
         <div class="sliderbar">
             <div class="navbar-brand">
@@ -203,13 +206,47 @@
                         </button>
                     </div>
                 </div>
+                <div class="header__right-logout__container">
+                    <div class="header__right--logout">
+                        <span class="Signout">Sign Out</span>
+                        <div class="header__right-icon">
+                            <i class="fa-sharp fa-solid fa-gear"></i>
+                            <span class="tooltip">Cài Đặt</span>
+                        </div>
+                        <div class="header__right-img"></div>
+                    </div>
+                </div>
             </div>
         </header>
         <!-- song-side -->
         <div class="song-side">
             <div class="song-side__container active">
                 <div style="color: #fff;" class="container-personal">
-                    Đây là Trang chủ
+                    <div class="song-side__banner">
+                        <div class="song-side__banner-list">
+                            <div class="banner-prev">
+                                <button></button>
+                            </div>
+                            <div class="banner-item">
+                                <a href="" class="banner-item-link">
+                                    <img src="https://photo-zmp3.zmdcdn.me/banner/6/c/8/d/6c8dbccaa39a33fab26b30016c2f80b8.jpg"
+                                        alt="">
+                                </a>
+                            </div>
+                            <div class="banner-item">
+                                <a href="" class="banner-item-link">
+                                    <img src="https://photo-zmp3.zmdcdn.me/banner/6/c/8/d/6c8dbccaa39a33fab26b30016c2f80b8.jpg"
+                                        alt="">
+                                </a>
+                            </div>
+                            <div class="banner-item">
+                                <a href="" class="banner-item-link">
+                                    <img src="https://photo-zmp3.zmdcdn.me/banner/6/c/8/d/6c8dbccaa39a33fab26b30016c2f80b8.jpg"
+                                        alt="">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="song-side__container">
@@ -349,7 +386,10 @@
                 </div>
             </footer>
         </div>
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
 <script type="module" src="./assets/js/main.js"></script>
 <script type="module" src="./assets/js/firebase.js"></script>
 <script src="./assets/js/container.js"></script>
