@@ -250,7 +250,7 @@ function setCookie2(params) {
 }
 
 function deleteCookie(name) {
-	setCookie2({ name: name, value: '', seconds: 1 });
+	setCookie2({ name: name, value: '', seconds: 0.1 });
 	userLogin.classList.remove('login');
 }
 
