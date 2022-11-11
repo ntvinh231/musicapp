@@ -216,51 +216,16 @@ export function getCookie() {
 	}, {});
 }
 
-function setCookie2(params) {
-	var name = params.name,
-		value = params.value,
-		expireDays = params.days,
-		expireHours = params.hours,
-		expireMinutes = params.minutes,
-		expireSeconds = params.seconds;
-
-	var expireDate = new Date();
-	if (expireDays) {
-		expireDate.setDate(expireDate.getDate() + expireDays);
-	}
-	if (expireHours) {
-		expireDate.setHours(expireDate.getHours() + expireHours);
-	}
-	if (expireMinutes) {
-		expireDate.setMinutes(expireDate.getMinutes() + expireMinutes);
-	}
-	if (expireSeconds) {
-		expireDate.setSeconds(expireDate.getSeconds() + expireSeconds);
-	}
-
-	document.cookie =
-		name +
-		'=' +
-		escape(value) +
-		';domain=' +
-		window.location.hostname +
-		';path=/' +
-		';expires=' +
-		expireDate.toUTCString();
-}
-
 function deleteCookie(name) {
-	setCookie2({ name: name, value: '', seconds: 0.1 });
-	userLogin.classList.remove('login');
+	document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
 }
 
 SignOut.addEventListener('click', () => {
 	deleteCookie('userData');
 	localStorage.removeItem('userData');
 	localStorage.removeItem('keepLoggedIn');
-	setTimeout(() => {
-		window.location = 'index.html';
-	}, 1010);
+	userLogin.classList.remove('login');
+	window.location = 'index.html';
 });
 
 function renderUserName() {
