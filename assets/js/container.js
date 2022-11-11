@@ -7,8 +7,6 @@ const registerForm = $('.auth-form--register');
 const modal = $('.modal');
 const modalOverlay = $('.modal__overlay');
 
-import { getCookie } from './firebase.js';
-
 const optionsItem = $$('.option-item');
 const tabsPersonal = $$('.personals');
 optionsItem.forEach((option, index) => {
@@ -33,8 +31,8 @@ headerNavbars.forEach((navbar, index) => {
 	const sideContainer = sidesContainer[index];
 	navbar.onclick = function () {
 		const localData = JSON.parse(localStorage.getItem('userData'));
-		const cookieData = getCookie().userData;
-		if (cookieData || localData) {
+		const sessionData = JSON.parse(sessionStorage.getItem('userData'));
+		if (sessionData || localData) {
 			$('.header__navbar-item.active').classList.remove('active');
 			$('.song-side__container.active').classList.remove('active');
 

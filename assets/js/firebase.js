@@ -1,5 +1,3 @@
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
 const btnLogin = $('.btn-login');
 const btnRegister = $('.header-register');
 const loginForm = $('.auth-form--login');
@@ -9,7 +7,6 @@ const modalOverlay = $('.modal__overlay');
 const personalName = $('.personal-name');
 const image = $('#image');
 const userLogin = $('.header__right');
-const SignOut = $('.Signout');
 
 var currentUser = null;
 
@@ -183,98 +180,41 @@ function SignIn(user, user2) {
 	};
 	let keepLoggedIn = document.getElementById('customSwitch').checked;
 	if (!keepLoggedIn) {
-		// sessionStorage.setItem('userData', JSON.stringify(userData));
-		setCookie('userData', JSON.stringify(userData), 1);
+		sessionStorage.setItem('userData', JSON.stringify(userData));
+		window.location = 'index.html';
 	} else {
 		localStorage.setItem('keepLoggedIn', keepLoggedIn);
 		localStorage.setItem('userData', JSON.stringify(userData));
+		window.location = 'index.html';
 	}
-	renderLoggin();
+	// modal.classList.remove('active');
+	// modalOverlay.classList.remove('active');
+	// $('.modal__body').style.display = 'none';
 }
 
-function setCookie(name, value, hours) {
-	if (hours) {
-		var date = new Date();
-		date.setTime(date.getTime() + hours * 60 * 60 * 1000);
-		var expires = '; expires=' + date.toGMTString();
-	} else {
-		var expires = '';
-	}
-	document.cookie = name + '=' + value + expires + '; path=/';
-}
-
-export function getCookie() {
-	return document.cookie.split(';').reduce((res, c) => {
-		const [key, val] = c.trim().split('=').map(decodeURIComponent);
-		const allNumbers = (str) => /^\d+$/.test(str);
-		try {
-			return Object.assign(res, { [key]: allNumbers(val) ? val : JSON.parse(val) });
-		} catch (e) {
-			return Object.assign(res, { [key]: val });
-		}
-	}, {});
-}
-
-function setCookie2(params) {
-	var name = params.name,
-		value = params.value,
-		expireDays = params.days,
-		expireHours = params.hours,
-		expireMinutes = params.minutes,
-		expireSeconds = params.seconds;
-
-	var expireDate = new Date();
-	if (expireDays) {
-		expireDate.setDate(expireDate.getDate() + expireDays);
-	}
-	if (expireHours) {
-		expireDate.setHours(expireDate.getHours() + expireHours);
-	}
-	if (expireMinutes) {
-		expireDate.setMinutes(expireDate.getMinutes() + expireMinutes);
-	}
-	if (expireSeconds) {
-		expireDate.setSeconds(expireDate.getSeconds() + expireSeconds);
-	}
-
-	document.cookie =
-		name +
-		'=' +
-		escape(value) +
-		';domain=' +
-		window.location.hostname +
-		';path=/' +
-		';expires=' +
-		expireDate.toUTCString();
-}
-
-function deleteCookie(name) {
-	setCookie2({ name: name, value: '', seconds: 1 });
-}
-
-SignOut.addEventListener('click', () => {
-	deleteCookie('userData');
-	localStorage.removeItem('userData');
-	localStorage.removeItem('keepLoggedIn');
-	window.location = 'index.html';
-});
-
-function renderLoggin() {
+function renderUserName() {
 	let keepLoggedIn = localStorage.getItem('keepLoggedIn');
 	if (keepLoggedIn) {
 		currentUser = JSON.parse(localStorage.getItem('userData'));
 	} else {
-		// currentUser = JSON.parse(sessionStorage.getItem('userData'));
-		currentUser = getCookie().userData;
+		currentUser = JSON.parse(sessionStorage.getItem('userData'));
 	}
-	modal.classList.remove('active');
-	modalOverlay.classList.remove('active');
-	$('.modal__body').style.display = 'none';
+}
 
+$('.Signout').addEventListener('click', SignOut);
+function SignOut() {
+	sessionStorage.removeItem('userData');
+	localStorage.removeItem('userData');
+	localStorage.removeItem('keepLoggedIn');
+	window.location = 'index.html';
+}
+
+window.onload = function () {
+	renderUserName();
 	if (currentUser != null) {
 		personalName.textContent = currentUser.username;
 		image.src = currentUser.urlImage;
 		userLogin.classList.add('login');
 		$('.header__right-img').style.backgroundImage = `url('${currentUser.urlImage}')`;
 	}
-}
+};
