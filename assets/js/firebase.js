@@ -258,7 +258,9 @@ SignOut.addEventListener('click', () => {
 	deleteCookie('userData');
 	localStorage.removeItem('userData');
 	localStorage.removeItem('keepLoggedIn');
-	window.location = 'index.html';
+	setTimeout(() => {
+		window.location = 'index.html';
+	}, 1010);
 });
 
 function renderUserName() {
