@@ -8,7 +8,6 @@
 	bottom: 0;
 	display: flex;
 	justify-content: center;
-	animation: fadeIn linear 0.9s;
 	z-index: 1000;
 }
 
@@ -181,6 +180,14 @@
 .auth-form__help-forgot {
 	color: var(--primary-color);
 	font-weight: 420;
+}
+
+.custom-control {
+	font-size: 1.5em;
+	display: flex;
+	align-items: center;
+	margin-right: 10px;
+	gap: 10px;
 }
 
 /* Validator */

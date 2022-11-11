@@ -57,8 +57,7 @@ export default function Validator(options) {
 				const name = $('.userRegister').value;
 				const emailRegister = $('.emailRegister').value;
 				const passwordRegister = $('.passwordRegister').value;
-				const repasswordRegister = $('.repasswordRegister').value;
-				SignUp(name, emailRegister, passwordRegister, repasswordRegister);
+				SignUp(name, emailRegister, passwordRegister);
 			}
 		};
 

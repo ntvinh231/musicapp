@@ -64,6 +64,7 @@
 
 .sliderbar-wrapper {
 	margin-left: 40px;
+	width: 40%;
 	display: flex;
 	align-items: center;
 	height: 100%;
@@ -71,16 +72,13 @@
 
 /* Header */
 
-.header {
-	display: flex;
-	justify-content: space-between;
-}
-
 .header__navbar-menu {
 	display: inline-flex;
 	align-items: center;
-	gap: 15px;
+	justify-content: space-between;
+	flex-wrap: wrap;
 	height: 100%;
+	width: 100%;
 	position: relative;
 	outline: none;
 	animation: headerNavbarMenu 0.25s linear;
@@ -159,7 +157,7 @@
 
 .header__search {
 	position: relative;
-	width: 700px;
+	width: 40%;
 	height: 40px;
 	margin-left: 40px;
 	display: flex;
@@ -169,7 +167,7 @@
 }
 
 .header__search-input {
-	width: 450px;
+	width: 90%;
 	height: 100%;
 	border-radius: 500px;
 	background-color: white;
@@ -182,7 +180,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	min-width: 400px;
+	width: 20%;
+	margin-right: 30px;
 }
 
 .header__right.login .header__right-login__container {
@@ -211,6 +210,12 @@
 	justify-content: flex-end;
 	margin-right: 60px;
 	gap: 15px;
+}
+
+.Signout {
+	color: #fff;
+	font-size: 1.5em;
+	cursor: pointer;
 }
 
 .header__right-icon {
@@ -261,7 +266,6 @@
 	font-size: 1.6rem;
 	color: var(--white-color);
 }
-
 .header__right-img {
 	background-image: url('../img/user/avatar.jpg');
 	background-repeat: no-repeat;

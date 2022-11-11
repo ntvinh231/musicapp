@@ -8,7 +8,9 @@ const personalName = $('.personal-name');
 const image = $('#image');
 const userLogin = $('.header__right');
 
-var currentUser = null;
+// var countID = 1;
+
+const isLogin = false;
 
 btnLogin.onclick = (e) => {
 	e.preventDefault();
@@ -56,11 +58,8 @@ import {
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-// import * as dotenv from './';
+// import dotenv from '../node_modules/dotenv';
 // dotenv.config();
-// console.log(process.env.DB_USER);
-// console.log(process.env.ENV);
-// console.log(process.env.DB_PORT);
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -78,7 +77,7 @@ const firebase = initializeApp(firebaseConfig);
 const auth = getAuth();
 const database = getDatabase();
 
-export function SignUp(username, emailRegister, passwordRegister) {
+export function SignUp(name, email, password) {
 	let imageUrl = 'chicago.jpg';
 	var d = new Date();
 	var logRegistration =
@@ -91,39 +90,42 @@ export function SignUp(username, emailRegister, passwordRegister) {
 		('0' + d.getHours()).slice(-2) +
 		':' +
 		('0' + d.getMinutes()).slice(-2);
-	createUserWithEmailAndPassword(auth, emailRegister, passwordRegister)
+	const authenEmail = email;
+	const authenPassword = password;
+	createUserWithEmailAndPassword(auth, authenEmail, authenPassword)
 		.then((userCredential) => {
+			// Signed in
 			const user = userCredential.user;
 			set(ref(database, 'users/' + user.uid), {
-				username: username,
-				email: emailRegister,
+				// id: countID,
+				username: name,
+				email: email,
 				first_name: '',
 				last_name: '',
 				gender: '',
 				// date_of_birth: '',
-				password: encPass(passwordRegister),
+				password: encPass(password),
 				urlImage: `./assets/img/user/${imageUrl}`,
 				registrationDate: logRegistration,
 				last_login: '',
-			})
-				.then(() => {
-					alert('Đăng ký thành công');
-					window.location = 'index.html';
-				})
-				.catch((error) => {
-					console.log(error);
-				});
+			}).then(() => {
+				// Data saved successfully!
+				alert('Đăng ký thành công');
+				// countID++;
+				modal.classList.remove('active');
+				modalOverlay.classList.remove('active');
+				$('.modal__body').style.display = 'none';
+			});
 		})
 		.catch((error) => {
 			const errorCode = error.code;
 			const errorMessage = error.message;
 			console.log(errorMessage);
-			alert('Email đã tồn tại vui lòng sử dụng email khác');
 		});
 }
 
 function encPass(pass) {
-	var passE = CryptoJS.MD5(pass);
+	var passE = CryptoJS.AES.encrypt(pass, pass);
 	return passE.toString();
 }
 
@@ -133,21 +135,17 @@ submitLogin.onclick = (e) => {
 	const email = $('.emailLogin').value;
 	const password = $('.passwordLogin').value;
 
-	const databaseRef = ref(database);
 	signInWithEmailAndPassword(auth, email, password)
 		.then((userCredential) => {
+			alert('Đăng nhập thành công');
 			const user = userCredential.user;
-			get(child(databaseRef, 'users/' + user.uid)).then((snapshot) => {
-				alert('Đăng nhập thành công');
-				user.displayName = snapshot.val().username;
-				// console.log(userCredential);
-				// console.log(snapshot.val());
-				SignIn(snapshot.val(), user);
-			});
+			console.log(userCredential);
+			SignIn(user);
 		})
 		.catch((error) => {
 			const errorCode = error.code;
 			const errorMessage = error.message;
+			// ..
 			console.log(errorMessage);
 			if (errorCode === 'auth/too-many-requests') {
 				$('#loginAlert').textContent = 'Bạn đã nhập sai quá nhiều, hãy thử lại sau 5s';
@@ -155,7 +153,7 @@ submitLogin.onclick = (e) => {
 		});
 };
 
-function SignIn(user, user2) {
+function SignIn(user) {
 	var d = new Date();
 	var logDate =
 		('0' + d.getDate()).slice(-2) +
@@ -167,54 +165,51 @@ function SignIn(user, user2) {
 		('0' + d.getHours()).slice(-2) +
 		':' +
 		('0' + d.getMinutes()).slice(-2);
-	update(ref(database, 'users/' + user2.uid), {
+	update(ref(database, 'users/' + user.uid), {
 		last_login: logDate,
-	});
-	const userData = {
-		email: user.email,
-		first_name: user.first_name,
-		last_name: user.last_name,
-		gender: user.gender,
-		urlImage: user.urlImage,
-		username: user.username,
-	};
-	let keepLoggedIn = document.getElementById('customSwitch').checked;
-	if (!keepLoggedIn) {
-		sessionStorage.setItem('userData', JSON.stringify(userData));
-		window.location = 'index.html';
-	} else {
-		localStorage.setItem('keepLoggedIn', keepLoggedIn);
-		localStorage.setItem('userData', JSON.stringify(userData));
-		window.location = 'index.html';
-	}
-	// modal.classList.remove('active');
-	// modalOverlay.classList.remove('active');
-	// $('.modal__body').style.display = 'none';
-}
+	})
+		.then(() => {
+			// Data saved successfully!
+			const databaseRef = ref(database);
+			// Login Success -> get data -> render data user
+			get(child(databaseRef, `users/` + user.uid))
+				.then((snapshot) => {
+					if (snapshot.exists()) {
+						let data = snapshot.val();
+						// Update lại password database = password authen
+					} else {
+						console.log('No data available');
+					}
+				})
+				.catch((error) => {
+					console.error(error);
+				});
 
-function renderUserName() {
-	let keepLoggedIn = localStorage.getItem('keepLoggedIn');
-	if (keepLoggedIn) {
-		currentUser = JSON.parse(localStorage.getItem('userData'));
-	} else {
-		currentUser = JSON.parse(sessionStorage.getItem('userData'));
-	}
+			modal.classList.remove('active');
+			modalOverlay.classList.remove('active');
+			$('.modal__body').style.display = 'none';
+		})
+		.catch((error) => {
+			// The write failed...
+			console.log(error);
+		});
 }
-
-$('.Signout').addEventListener('click', SignOut);
-function SignOut() {
-	sessionStorage.removeItem('userData');
-	localStorage.removeItem('userData');
-	localStorage.removeItem('keepLoggedIn');
-	window.location = 'index.html';
+console.log(auth.currentUser);
+function handleLoadSignIn(data) {
+	personalName.textContent = data.username;
+	image.src = data.urlImage;
+	userLogin.classList.add('login');
+	$('.header__right-img').style.backgroundImage = `url('${data.urlImage}')`;
+	updateProfile(auth.currentUser, {
+		displayName: data.username,
+		photoURL: data.urlImage,
+	})
+		.then(() => {
+			// Profile updated!
+			// ...
+		})
+		.catch((error) => {
+			// An error occurred
+			// ...
+		});
 }
-
-window.onload = function () {
-	renderUserName();
-	if (currentUser != null) {
-		personalName.textContent = currentUser.username;
-		image.src = currentUser.urlImage;
-		userLogin.classList.add('login');
-		$('.header__right-img').style.backgroundImage = `url('${currentUser.urlImage}')`;
-	}
-};
