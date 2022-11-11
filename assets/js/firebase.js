@@ -1,3 +1,5 @@
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 const btnLogin = $('.btn-login');
 const btnRegister = $('.header-register');
 const loginForm = $('.auth-form--login');
