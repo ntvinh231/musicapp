@@ -185,11 +185,12 @@ function SignIn(user, user2) {
 	if (!keepLoggedIn) {
 		// sessionStorage.setItem('userData', JSON.stringify(userData));
 		setCookie('userData', JSON.stringify(userData), 1);
+		handleLoggedIn();
 	} else {
 		localStorage.setItem('keepLoggedIn', keepLoggedIn);
 		localStorage.setItem('userData', JSON.stringify(userData));
+		handleLoggedIn();
 	}
-	handleLoggedIn();
 }
 
 function setCookie(name, value, hours) {
