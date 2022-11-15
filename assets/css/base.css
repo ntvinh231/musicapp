@@ -1,5 +1,5 @@
 :root {
-	--linear-gradient-rainbow: linear-gradient(
+	--linear-gradient-rainbow1: linear-gradient(
 		to right,
 		#73d2f6,
 		#08c 22%,
@@ -9,16 +9,17 @@
 		#ff4d4d 76%,
 		#503873
 	);
+	--linear-gradient-rainbow2: linear-gradient(90deg, #00dbde, #fc00ff);
 	--white-color: #fff;
 	--black-color: #000;
 	--text-color: #333;
 	--text-color2: #555;
 	--text-color3: #777;
+	--text-color4: #999;
 	--primary-color: #ed2b91;
 	--sub-color: #6a39af;
 	--navbar-logo-width: 120px;
-	--navbar-brand-height: 70px;
-	--slider-width: 15%;
+	--slider-width: 20%;
 	--layout-bg: #1e1e1e;
 	--header-height: 70px;
 	--option-color: rgba(192, 192, 192, 0.25);
@@ -64,7 +65,7 @@ body {
 
 /* Header */
 .header {
-	height: 70px;
+	height: var(--header-height);
 	width: calc(100% - var(--slider-width));
 	background-color: var(--slider-bg);
 	position: fixed;
@@ -79,7 +80,7 @@ body {
 
 /* Footer */
 .music-control {
-	height: var(--music-control);
+	height: var(--music-control-height);
 	width: 100%;
 	background-color: #181818;
 	border: 1px solid var(--music-control-border);
@@ -156,6 +157,7 @@ ul {
 	font-weight: 200;
 	font-size: 1.2rem;
 	color: var(--artits-name-color);
+	cursor: default;
 }
 
 /* Personal Body */
@@ -165,4 +167,24 @@ ul {
 
 .personals.active {
 	display: block;
+}
+
+/* Action */
+
+.action__like {
+	font-size: 1.45rem;
+	color: var(--primary-color);
+	cursor: pointer;
+}
+
+.action__like.liked .action__like-fill {
+	display: block;
+}
+
+.action__like.liked .action__like-empty {
+	display: none;
+}
+
+.action__like-fill {
+	display: none;
 }

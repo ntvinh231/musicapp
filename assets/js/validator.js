@@ -1,5 +1,6 @@
 import { SignUp } from './firebase.js';
-
+const $ = document.querySelector.bind(document);
+const $$ = document.querySelectorAll.bind(document);
 export default function Validator(options) {
 	var selectorRules = {}; // Thực hiện việc tránh bị ghi đè nếu có 2 rules
 	// Hàm thực hiện validate

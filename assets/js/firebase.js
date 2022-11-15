@@ -12,6 +12,7 @@ const userLogin = $('.header__right');
 const SignOut = $('.Signout');
 
 var currentUser = null;
+var currentUserDataFavorite = null;
 
 btnLogin.onclick = (e) => {
 	e.preventDefault();
@@ -40,17 +41,8 @@ modalOverlay.onclick = () => {
 // ------------------ Firebase --------------------------
 
 // Import the functions you need from the SDKs you need
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js';
+import { set, ref, child, get, update } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js';
 import {
-	getDatabase,
-	set,
-	ref,
-	child,
-	get,
-	update,
-} from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js';
-import {
-	getAuth,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	updateProfile,
@@ -59,30 +51,14 @@ import {
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
-// import * as dotenv from './';
+// import dotenv from 'dotenv';
 // dotenv.config();
-// console.log(process.env.DB_USER);
-// console.log(process.env.ENV);
-// console.log(process.env.DB_PORT);
+// console.log(process.env.API_KEY);
 
-// Your web app's Firebase configuration
-const firebaseConfig = {
-	apiKey: 'AIzaSyDoV7Zg2dutjW9Ib0e3LkyEzt6qpzWw8l8',
-	authDomain: 'music-app-2420a.firebaseapp.com',
-	databaseURL: 'https://music-app-2420a-default-rtdb.firebaseio.com',
-	projectId: 'music-app-2420a',
-	storageBucket: 'music-app-2420a.appspot.com',
-	messagingSenderId: '912383656489',
-	appId: '1:912383656489:web:4904d35d7b7ae3e93b9238',
-};
-
-// Initialize Firebase
-const firebase = initializeApp(firebaseConfig);
-const auth = getAuth();
-const database = getDatabase();
+import { firebase, auth, database } from './config.js';
 
 export function SignUp(username, emailRegister, passwordRegister) {
-	let imageUrl = 'chicago.jpg';
+	let imageUrl = 'avatar.jpg';
 	var d = new Date();
 	var logRegistration =
 		('0' + d.getDate()).slice(-2) +
@@ -102,12 +78,15 @@ export function SignUp(username, emailRegister, passwordRegister) {
 				email: emailRegister,
 				first_name: '',
 				last_name: '',
+				phone_number: '',
 				gender: '',
-				// date_of_birth: '',
+				date_of_birth: '',
 				password: encPass(passwordRegister),
 				urlImage: `./assets/img/user/${imageUrl}`,
 				registrationDate: logRegistration,
 				last_login: '',
+				account_type: 0,
+				favorites_music: null,
 			})
 				.then(() => {
 					alert('Đăng ký thành công');
@@ -143,8 +122,8 @@ submitLogin.onclick = (e) => {
 			get(child(databaseRef, 'users/' + user.uid)).then((snapshot) => {
 				alert('Đăng nhập thành công');
 				user.displayName = snapshot.val().username;
-				// console.log(userCredential);
-				// console.log(snapshot.val());
+				// When was logged
+				console.log(snapshot.val());
 				SignIn(snapshot.val(), user);
 			});
 		})
@@ -158,7 +137,7 @@ submitLogin.onclick = (e) => {
 		});
 };
 
-function SignIn(user, user2) {
+function SignIn(user, userUid) {
 	var d = new Date();
 	var logDate =
 		('0' + d.getDate()).slice(-2) +
@@ -170,7 +149,7 @@ function SignIn(user, user2) {
 		('0' + d.getHours()).slice(-2) +
 		':' +
 		('0' + d.getMinutes()).slice(-2);
-	update(ref(database, 'users/' + user2.uid), {
+	update(ref(database, 'users/' + userUid.uid), {
 		last_login: logDate,
 	});
 	const userData = {
@@ -181,16 +160,21 @@ function SignIn(user, user2) {
 		urlImage: user.urlImage,
 		username: user.username,
 	};
+	const userDataFavorite = {
+		userUid: userUid.uid,
+		favorites_music: user.favorites_music != null ? user.favorites_music : [],
+	};
 	let keepLoggedIn = document.getElementById('customSwitch').checked;
 	if (!keepLoggedIn) {
 		// sessionStorage.setItem('userData', JSON.stringify(userData));
-		setCookie('userData', JSON.stringify(userData), 1);
+		setCookie('userData', JSON.stringify(userData), 6);
 		handleLoggedIn();
 	} else {
 		localStorage.setItem('keepLoggedIn', keepLoggedIn);
 		localStorage.setItem('userData', JSON.stringify(userData));
 		handleLoggedIn();
 	}
+	localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
 }
 
 function setCookie(name, value, hours) {
@@ -223,12 +207,13 @@ function deleteCookie(name) {
 SignOut.addEventListener('click', () => {
 	deleteCookie('userData');
 	localStorage.removeItem('userData');
+	localStorage.removeItem('userDataFavorite');
 	localStorage.removeItem('keepLoggedIn');
 	userLogin.classList.remove('login');
 	window.location = 'index.html';
 });
 
-function renderUserName() {
+function renderUser() {
 	let keepLoggedIn = localStorage.getItem('keepLoggedIn');
 	if (keepLoggedIn) {
 		currentUser = JSON.parse(localStorage.getItem('userData'));
@@ -237,8 +222,15 @@ function renderUserName() {
 	}
 }
 
+function renderFavorite() {
+	let userDataFavorite = JSON.parse(localStorage.getItem('userDataFavorite'));
+	if (userDataFavorite) {
+		currentUserDataFavorite = userDataFavorite.favorites_music;
+	}
+}
+
 window.onload = function () {
-	renderUserName();
+	renderUser();
 	if (currentUser != null) {
 		personalName.textContent = currentUser.username;
 		image.src = currentUser.urlImage;
@@ -248,7 +240,7 @@ window.onload = function () {
 };
 
 function handleLoggedIn() {
-	renderUserName();
+	renderUser();
 	if (currentUser != null) {
 		personalName.textContent = currentUser.username;
 		image.src = currentUser.urlImage;

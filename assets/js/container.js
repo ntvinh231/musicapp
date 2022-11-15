@@ -1,13 +1,14 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
+
+import { getCookie } from './firebase.js';
+
 const btnLogin = $('.btn-login');
 const btnRegister = $('.header-register');
 const loginForm = $('.auth-form--login');
 const registerForm = $('.auth-form--register');
 const modal = $('.modal');
 const modalOverlay = $('.modal__overlay');
-
-import { getCookie } from './firebase.js';
 
 const optionsItem = $$('.option-item');
 const tabsPersonal = $$('.personals');

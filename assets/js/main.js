@@ -1,6 +1,10 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+import { renderSongsRank } from './rank.js';
+import { favoriteUser } from './favoriteuser.js';
+const genreList = $('.genre-list');
+
 const songTitle = $('.left-content__song-name');
 const cdThumb = $('.control__left-cdthumb');
 const artitName = $('.left-content__artit-name');
@@ -12,29 +16,13 @@ const repeatBtn = $('.control-repeat');
 const progress = $('#progress');
 const volumeToggle = $('.volume-change');
 const volumeBar = $('.volume');
-const playList = $('.section-list__body');
+const persionalSongList = $('.section-list__body');
+const songListRank = $('.genre-list');
 
 var songData = [];
-
+var RankData = [];
 var apiSongs = 'https://vinhnguyen-music-api.vercel.app';
-
-// var getData = (api) => {
-// 	return new Promise((resolve, reject) => {
-// 		var request = new XMLHttpRequest();
-// 		request.open('GET', api);
-// 		request.onload = () => {
-// 			if (request.status == 200) {
-// 				resolve(request.response);
-// 			} else {
-// 				reject(Error(request.statusText));
-// 			}
-// 		};
-// 		request.onerror = () => {
-// 			return Error('Failed');
-// 		};
-// 		request.send();
-// 	});
-// };
+var apiRank = 'https://mp3.zing.vn/xhr/chart-realtime?songId=0&videoId=0&albumId=0&chart=song&time=-1';
 
 const getData = (api) => {
 	return new Promise((resolve, reject) => {
@@ -44,6 +32,7 @@ const getData = (api) => {
 			if (request.status == 200) {
 				resolve(request.response);
 			} else {
+				console.log(request.status);
 				reject(Error(request.statusText));
 			}
 		};
@@ -53,37 +42,45 @@ const getData = (api) => {
 		request.send();
 	});
 };
-// Promise.all(getData(apiSongs))
-// 	.then(([songs]) => {s
-// 		songData = JSON.parse(songs);
-// 	})
-// 	.then(() => app.start());
 
-Promise.all([getData(apiSongs)])
-	.then(([songs]) => {
+Promise.all([getData(apiSongs), getData(apiRank)])
+	.then(([songs, rank]) => {
 		songData = JSON.parse(songs);
+		RankData = JSON.parse(rank);
 	})
 	.then(() => app.start())
+
 	.catch((err) => alert(err));
 
 const app = {
 	currentIndex: 0,
+	currentIndexLiked: 0,
 	currentVolume: 0,
-	previousVolume: 0,
 	isPlaying: false,
 	isPlaying2: false,
 	currentSong: '',
 	isRandom: false,
 	isRepeat: false,
 	isMute: false,
+	clickSongAtElement: 'genre-list',
 
 	defineProperties: () => {
-		Object.defineProperty(app, 'currentSong', {
-			get: function () {
-				return songData[app.currentIndex];
-			},
-		});
+		if (songData) {
+			Object.defineProperty(app, 'currentSong', {
+				get: function () {
+					return songData[app.currentIndex];
+				},
+			});
+		}
+		if (RankData.data) {
+			Object.defineProperty(app, 'currentSongRank', {
+				get: function () {
+					return RankData.data.song[app.currentIndex];
+				},
+			});
+		}
 	},
+
 	renderSongs: function () {
 		const listSongsBlock = document.querySelector('.section-list__body');
 		var htmls = songData.map((song, index) => {
@@ -118,7 +115,13 @@ const app = {
 
 	loadCurrentSong: function () {
 		// Khi load xong api
-		if (this.currentSong) {
+		if (this.currentSongRank && this.clickSongAtElement === 'genre-list') {
+			songTitle.textContent = this.currentSongRank.title;
+			cdThumb.style.backgroundImage = `url(${this.currentSongRank.thumbnail})`;
+			artitName.textContent = this.currentSongRank.artists_names;
+			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentSongRank.id}/320`;
+			this.activeSong();
+		} else if (this.currentSong && this.clickSongAtElement === 'section-list__body') {
 			songTitle.textContent = this.currentSong.name;
 			cdThumb.style.backgroundImage = `url(${this.currentSong.links.images[0].url})`;
 			artitName.textContent = this.currentSong.author;
@@ -142,16 +145,25 @@ const app = {
 			this.classList.toggle('active', _this.isMute);
 			if (_this.isMute) {
 				audio.muted = true;
-				_this.previousVolume = volumeBar.value / 100;
 				volumeBar.value = 0;
 			} else {
 				audio.muted = false;
-				volumeBar.value = _this.previousVolume * 100;
+				volumeBar.value = _this.currentVolume * 100;
+				audio.volume = _this.currentVolume;
 			}
 		};
 		volumeBar.onchange = function (e) {
 			_this.currentVolume = e.target.value / 100;
 			audio.volume = _this.currentVolume;
+			if (audio.volume === 0) {
+				volumeToggle.classList.add('active');
+			} else {
+				_this.isMute = false;
+
+				audio.muted = false;
+				console.log(audio.volume);
+				volumeToggle.classList.remove('active');
+			}
 		};
 
 		toggleBtn.onclick = function () {
@@ -159,7 +171,8 @@ const app = {
 				if (!_this.isPlaying) audio.play();
 				else audio.pause();
 			}
-			volumeBar.value = audio.volume * 100;
+			// Load when play first
+			if (!_this.isMute) volumeBar.value = audio.volume * 100;
 		};
 
 		audio.onplay = function () {
@@ -219,13 +232,43 @@ const app = {
 			} else nextBtn.onclick();
 		};
 
-		playList.onclick = function (e) {
+		// Persional
+		persionalSongList.onclick = function (e) {
+			_this.clickSongAtElement = e.target.closest('.section-list__body').className;
 			const nodeImg = e.target.closest('.left-image');
-			const node = e.target.closest('.section-list__body-item');
+			const nodeItem = e.target.closest('.section-list__body-item');
 			const nodeOption = e.target.closest('.item-media__right');
 			const nodeTitle = e.target.closest('.media__left-title');
-			if (nodeImg || nodeTitle || (!node && !nodeOption)) {
-				_this.currentIndex = Number(node.dataset.index);
+			if (nodeImg || nodeTitle || (!nodeItem && !nodeOption)) {
+				if (!_this.isMute) volumeBar.value = audio.volume * 100;
+				_this.currentIndex = Number(nodeItem.dataset.index);
+				_this.loadCurrentSong();
+				audio.play();
+				cdThumbAnimation.play();
+			}
+		};
+		// Rank
+		songListRank.onclick = function (e) {
+			const nodeItem = e.target.closest('.genre-item');
+			_this.clickSongAtElement = e.target.closest('.genre-list').className;
+			// Action Like
+			const nodeAction = e.target.closest('.genre-item__action');
+			const nodeActionLiked = e.target.closest('.genre-item__action.liked');
+			if (nodeActionLiked) {
+				nodeActionLiked.classList.remove('liked');
+			} else if (nodeAction || !nodeItem) {
+				nodeAction.classList.add('liked');
+				_this.currentIndexLiked = Number(nodeItem.dataset.index);
+				// Get and Parse Data
+				const userDataFavorite = JSON.parse(localStorage.getItem('userDataFavorite'));
+				let idSongRank = '';
+				idSongRank = RankData.data.song[_this.currentIndexLiked].id;
+				favoriteUser(userDataFavorite, idSongRank);
+			}
+			if (nodeItem && !nodeAction) {
+				// Load when play first
+				if (!_this.isMute) volumeBar.value = audio.volume * 100;
+				_this.currentIndex = Number(nodeItem.dataset.index);
 				_this.loadCurrentSong();
 				audio.play();
 				cdThumbAnimation.play();
@@ -260,23 +303,26 @@ const app = {
 	},
 
 	activeSong: function () {
-		const songs = $$('.section-list__body-item');
-		songs.forEach((song, index) => {
-			if (index == this.currentIndex) {
-				song.classList.add('active');
-				setTimeout(() => {
-					song.scrollIntoView({
-						behavior: 'smooth',
-						block: 'nearest',
-					});
-				}, 300);
-			} else song.classList.remove('active');
-		});
+		if (this.clickSongAtElement === 'section-list__body') {
+			const songs = $$('.section-list__body-item');
+			songs.forEach((song, index) => {
+				if (index == this.currentIndex) {
+					song.classList.add('active');
+					setTimeout(() => {
+						song.scrollIntoView({
+							behavior: 'smooth',
+							block: 'nearest',
+						});
+					}, 300);
+				} else song.classList.remove('active');
+			});
+		}
 	},
 
 	start: function () {
 		this.defineProperties();
-		this.renderSongs();
+		// this.renderSongs();
+		renderSongsRank(RankData, genreList);
 		this.loadCurrentSong();
 		this.handleEvent();
 	},

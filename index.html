@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="./assets/css/style.css">
     <!-- css banner -->
     <link rel="stylesheet" href="./assets/css/banner.css">
+    <!-- css navbar -->
+    <link rel="stylesheet" href="./assets/css/navbar.css">
 
     <link rel="icon" type="image/x-icon" href="#">
 </head>
@@ -57,12 +59,13 @@
                                     <span class="form-message"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="passwordRegister auth-form__input"
+                                    <input type="password" autocomplete="off" class="passwordRegister auth-form__input"
                                         placeholder="Nhập mật khẩu của bạn">
                                     <span class="form-message"></span>
                                 </div>
                                 <div class="form-group">
-                                    <input type="password" class="repasswordRegister auth-form__input"
+                                    <input type="password" autocomplete="off"
+                                        class="repasswordRegister auth-form__input"
                                         placeholder="Nhập lại mật khẩu của bạn">
                                     <span class="form-message"></span>
                                 </div>
@@ -87,7 +90,7 @@
 
 
             <!-- Login Form -->
-            <div class="auth-form auth-form--login">
+            <form class="auth-form auth-form--login">
                 <div class="auth-form__container">
                     <div class="auth-form__header">
                         <h3 class="auth-form__heading">Đăng nhập</h3>
@@ -99,7 +102,7 @@
                             <span class="form-message"></span>
                         </div>
                         <div class="form-group">
-                            <input type="password" class="passwordLogin auth-form__input"
+                            <input type="password" autocomplete="off" class="passwordLogin auth-form__input"
                                 placeholder="Nhập mật khẩu của bạn">
                             <span class="form-message"></span>
                         </div>
@@ -128,7 +131,7 @@
                     <button class="btn btn--back submit-back">TRỞ LẠI</button>
                     <button class="btn btn--primary submit-login">ĐĂNG NHẬP</button>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -136,16 +139,67 @@
     <!-- Main -->
     <div class="grid ">
         <!-- Sliderbar -->
-        <div class="sliderbar">
+        <div class="navbar">
             <div class="navbar-brand">
                 <a href="#" class="navbar-link">
-                    <div class="navbar-logo"></div>
+                    <div class="navbar-logo">
+                        Logo
+                    </div>
                 </a>
+            </div>
+            <div class="navbar-rank">
+                <div class="navbar-rank__top">
+                    <i class="navbar__top-icon fa-solid fa-ranking-star"></i>
+                    <div class="navbar-title__wrapper">
+                        <span class="navbar__top-tile">Bảng Xếp Hạng</span>
+                    </div>
+                </div>
+                <div class="navbar-genres">
+                    <div class="navbar-genre active">
+                        <i class="navbar-genre-icon fa-solid fa-music"></i>
+                        <h4>Việt Nam</h4>
+                    </div>
+                    <div class="navbar-genre">
+                        <i class="navbar-genre-icon fa-solid fa-music"></i>
+                        <h4>Châu Á</h4>
+                    </div>
+                    <div class="navbar-genre">
+                        <i class="navbar-genre-icon fa-solid fa-music"></i>
+                        <h4>Âu Mĩ</h4>
+                    </div>
+                </div>
+                <div class="navbar-genre__container active">
+                    <div class="genre-list">
+                        <!-- <div class="genre-item">
+                            <div class="genre-item__action action__like">
+                                <i class="genre-item__action-empty action__like-empty fa-regular fa-heart"></i>
+                                <i class="genre-item__action-fill action__like-fill fa-solid fa-heart"></i>
+                            </div>
+                            <span class="genre-item__number">01</span>
+                            <div class="genre-item__image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="genre-item__info">
+                                <span class="genre-item__info-name title-name">Loading...</span>
+                                <span class="genre-item__info-artit-name subtitle-name">Loading...</span>
+                            </div>
+                            <div class="genre-item__play">
+                                <i class="genre-icon fa-solid fa-circle-play"></i>
+                            </div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="navbar-genre__container">
+                    <span>Pane 1</span>
+                </div>
+                <div class="navbar-genre__container">
+                    <span>Pane 2</span>
+                </div>
             </div>
         </div>
         <!-- Header -->
         <header class="header">
-            <div class="sliderbar-wrapper">
+            <div class="header__left">
                 <ul class="header__navbar-menu">
                     <li class="navbar-item header__navbar-item active">
                         <i class="fa-regular fa-circle-play"></i>
@@ -388,12 +442,15 @@
         </div>
 
 </body>
+<script type="module" src="./assets/js/config.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
 <script type="module" src="./assets/js/main.js"></script>
 <script type="module" src="./assets/js/firebase.js"></script>
 <script type="module" src="./assets/js/container.js"></script>
 <script type="module" src="./assets/js/validator.js"></script>
+<script type="module" src="./assets/js/rank.js"></script>
+<script type="module" src="./assets/js/favoriteuser.js"></script>
 <script type="module">
     import Validator from './assets/js/validator.js'
     Validator({
