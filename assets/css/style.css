@@ -323,11 +323,11 @@
 
 .container-personal {
 	position: absolute;
+	height: 200%;
 	left: var(--slider-width);
-	right: 0;
-	height: 790px;
-	overflow: hidden scroll;
+	width: calc(100% - var(--slider-width));
 	padding: 10px 35px 50px 35px;
+	overflow: hidden;
 }
 
 .container-personal::-webkit-scrollbar {
@@ -405,9 +405,6 @@
 }
 
 /* Personal Overview */
-.personal-overview__wrapper {
-	margin: 35px 0;
-}
 
 .personal-overview__wrapper .personal-overview__content {
 	display: flex;
@@ -440,8 +437,8 @@
 
 .personal-overview__section {
 	width: 100%;
+	min-height: calc(var(--height-user-wrapper4) + 10%);
 	position: relative;
-	height: 200px;
 	margin: 25px 0;
 	display: flex;
 }
@@ -454,7 +451,6 @@
 .overview__section-slider-item {
 	border-radius: 4px;
 	width: 200px;
-	height: 100%;
 	object-fit: cover;
 	object-position: center;
 	position: absolute;
@@ -464,6 +460,7 @@
 
 .overview__section-list {
 	width: calc(100% - var(--section-slider-width));
+	height: 280px;
 }
 
 .section-list__header {
@@ -498,8 +495,9 @@
 }
 
 .section-list__body {
-	overflow: hidden auto;
-	height: 230px;
+	width: 100%;
+	height: 300px;
+	overflow: hidden scroll;
 }
 
 .section-list__body::-webkit-scrollbar {
@@ -668,4 +666,52 @@ input[type='checkbox']:checked:after {
 	display: none;
 	font-size: 1.6rem;
 	padding: 10px 10px;
+}
+
+/* Artist Info Personal */
+
+.overview__section-list-artists {
+	width: 100%;
+	height: 377px;
+	display: flex;
+	gap: 10px;
+	flex-wrap: wrap;
+	overflow: hidden scroll;
+}
+
+.overview__section-list-artists::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+.overview__section-list-artists::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.overview__section-list-artists::-webkit-scrollbar-thumb {
+	background: linear-gradient(45deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 50%, rgb(255, 204, 112) 100%);
+}
+
+.item-artists__container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 15px;
+}
+
+.section-list__artist-item-artists {
+	margin: 15px 15px 40px 15px;
+	width: 150px;
+	height: 150px;
+}
+
+.section-list__artist-item-artists img {
+	width: 100%;
+	height: 100%;
+	border-radius: 50%;
+	object-fit: contain;
+}
+
+.item-artists-name {
+	font-size: 1.6rem;
+	color: var(--white-color);
 }

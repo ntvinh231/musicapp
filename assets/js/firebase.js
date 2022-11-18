@@ -12,7 +12,6 @@ const userLogin = $('.header__right');
 const SignOut = $('.Signout');
 
 var currentUser = null;
-var currentUserDataFavorite = null;
 
 btnLogin.onclick = (e) => {
 	e.preventDefault();
@@ -56,6 +55,7 @@ import {
 // console.log(process.env.API_KEY);
 
 import { firebase, auth, database } from './config.js';
+import { render } from './favoriteuser.js';
 
 export function SignUp(username, emailRegister, passwordRegister) {
 	let imageUrl = 'avatar.jpg';
@@ -175,6 +175,7 @@ function SignIn(user, userUid) {
 		handleLoggedIn();
 	}
 	localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
+	window.location = 'index.html';
 }
 
 function setCookie(name, value, hours) {
@@ -209,6 +210,7 @@ SignOut.addEventListener('click', () => {
 	localStorage.removeItem('userData');
 	localStorage.removeItem('userDataFavorite');
 	localStorage.removeItem('keepLoggedIn');
+	localStorage.removeItem('dataFavorites');
 	userLogin.classList.remove('login');
 	window.location = 'index.html';
 });
@@ -222,12 +224,19 @@ function renderUser() {
 	}
 }
 
-function renderFavorite() {
-	let userDataFavorite = JSON.parse(localStorage.getItem('userDataFavorite'));
-	if (userDataFavorite) {
-		currentUserDataFavorite = userDataFavorite.favorites_music;
-	}
-}
+const songTitle = $('.left-content__song-name');
+const cdThumb = $('.control__left-cdthumb');
+const artitName = $('.left-content__artit-name');
+const toggleBtn = $('.control-toggle');
+const nextBtn = $('.control-next');
+const prevBtn = $('.control-prev');
+const randomBtn = $('.control-random');
+const repeatBtn = $('.control-repeat');
+const progress = $('#progress');
+const volumeToggle = $('.volume-change');
+const volumeBar = $('.volume');
+const persionalSongList = $('.section-list__body');
+const songListRank = $('.genre-list');
 
 window.onload = function () {
 	renderUser();
@@ -238,9 +247,10 @@ window.onload = function () {
 		$('.header__right-img').style.backgroundImage = `url('${currentUser.urlImage}')`;
 	}
 };
-
+const userDataFavorites = JSON.parse(localStorage.getItem('dataFavorites'));
 function handleLoggedIn() {
 	renderUser();
+	render(userDataFavorites);
 	if (currentUser != null) {
 		personalName.textContent = currentUser.username;
 		image.src = currentUser.urlImage;

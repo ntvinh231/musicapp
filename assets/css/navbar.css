@@ -194,6 +194,7 @@
 	font-weight: 400;
 	color: var(--white-color);
 	font-family: 'K2D', sans-serif;
+	padding: 4px;
 }
 
 .genre-item__image {

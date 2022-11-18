@@ -1,32 +1,34 @@
 import { firebase, auth, database } from './config.js';
 import { getCookie } from './firebase.js';
 import { set, ref, child, get, update } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js';
+import { artistInfo } from './artistsinfo.js';
 
-const $ = document.querySelector.bind(document);
-const $$ = document.querySelectorAll.bind(document);
-const btnLogin = $('.btn-login');
-const btnRegister = $('.header-register');
-const loginForm = $('.auth-form--login');
-const registerForm = $('.auth-form--register');
-const modal = $('.modal');
-const modalOverlay = $('.modal__overlay');
+let useData = [];
 
-export const favoriteUser = (userDataFavorite, idSongRank) => {
+const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
+
+export const idfavoriteUser = (userDataFavorite, idSongRank) => {
 	const localData = JSON.parse(localStorage.getItem('userData'));
 	const cookieData = getCookie().userData;
-	// renderFavoriteUser(userDataFavorite);
-	// check user was logged
+
 	if (localData || cookieData) {
 		// check data exists
 		if (Array.isArray(userDataFavorite.favorites_music)) {
 			if (userDataFavorite.favorites_music.includes(idSongRank)) {
-				console.log('Đã tồn tại trong danh sach');
+				var index = userDataFavorite.favorites_music.indexOf(idSongRank);
+				// Get Index and Delete
+				if (index !== -1) {
+					userDataFavorite.favorites_music.splice(index, 1);
+					if (userDataFavorite.favorites_music.length == 0) localStorage.removeItem('dataFavorites');
+				}
 			} else {
 				userDataFavorite.favorites_music.push(idSongRank);
+				toastSlide();
 			}
 		} else {
 			userDataFavorite.favorites_music = [`${idSongRank}`];
 		}
+
 		localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
 		update(ref(database, 'users/' + userDataFavorite.userUid), {
 			favorites_music: userDataFavorite.favorites_music,
@@ -41,27 +43,78 @@ export const favoriteUser = (userDataFavorite, idSongRank) => {
 	}
 };
 
-const renderFavoriteUser = (dataFavorite) => {
-	const getMusic = async (id) => {
-		try {
-			let reponse = await fetch(`https://apizingmp3.vercel.app/api/infosong?id=${id}`);
-			if (reponse && reponse.status != 200) {
-				throw new Error('Wrongs status code: ' + reponse.status);
+if (userDataFavorites) {
+	userDataFavorites.favorites_music.forEach((id, index) => {
+		artistInfo(id);
+		const getMusic = async () => {
+			try {
+				let data = await axios.get(`https://apizingmp3.vercel.app/api/infosong?id=${id}`);
+				useData.splice(index, 0, data.data.data);
+				if (useData.length === userDataFavorites.favorites_music.length) {
+					localStorage.setItem('dataFavorites', JSON.stringify(useData));
+					render(useData);
+				}
+			} catch (e) {
+				console.log(e);
 			}
-			let data = await reponse.json();
-			return data;
-		} catch (error) {
-			console.log('Check error: ' + error);
-		}
-	};
-
-	dataFavorite.favorites_music.forEach((data) => {
-		getMusic(data)
-			.then((data) => {
-				console.log(data);
-			})
-			.catch((err) => {
-				console.log('Check err: ' + err);
-			});
+		};
+		getMusic();
 	});
+}
+
+const toastSlide = () => {
+	const toatMain = document.querySelector('#toast');
+	if (toatMain) {
+		const toast = document.createElement('div');
+		toast.classList.add('toast');
+		toast.innerHTML = `
+			<div class="toast__item">
+				<i class="fa-solid fa-circle-exclamation"></i>
+				<span>Đã Thêm Bài Hát Vào Danh Sách</span>
+			</div>
+		`;
+		toatMain.appendChild(toast);
+		setTimeout(function () {
+			toatMain.removeChild(toast);
+		}, 3000 + 2000);
+	}
+};
+const timeFormat = (seconds) => {
+	const date = new Date(null);
+	date.setSeconds(seconds);
+	return date.toISOString().slice(14, 19);
+};
+
+export const render = (dataFavorites) => {
+	if (dataFavorites) {
+		const listSongsBlock = document.querySelector('.section-list__body');
+		var htmls = dataFavorites.map((data, index) => {
+			return `
+		<div class="section-list__body-item" data-index=${index}>
+			<div class="item-media__left">
+				<div class="body-item__checkbox">
+					<i class="item__checkbox-icon fa-solid fa-music"></i>
+					<input type="checkbox" class="item__checkbox-input" id="">
+				</div>
+					<div class="media__left-image">
+						<div class="left-image" style="background-image: url('${data.thumbnail}')"></div>
+					</div>
+					<div class="media__left-info">
+						<span class="media__left-title title-name">${data.title}</span>
+						<span class="media__left-title subtitle-name">${data.artistsNames}</span>
+					</div>
+				</div>
+			<div class="item-media__center">
+				<span class="media__center-album subtitle-name">${data.album.title}</span>
+			</div>
+				<div class="item-media__right">
+					<span class="media__center-duration subtitle-name">${timeFormat(data.duration)}</span>
+					<i
+					class="media__center-option icon-option fa-solid fa-ellipsis"></i>
+			</div>
+		</div>
+	`;
+		});
+		listSongsBlock.innerHTML = htmls.join('');
+	}
 };

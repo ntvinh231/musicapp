@@ -9,6 +9,9 @@
 		#ff4d4d 76%,
 		#503873
 	);
+
+	--height-user-wrapper1: 1000px;
+	--height-user-wrapper4: 2000px;
 	--linear-gradient-rainbow2: linear-gradient(90deg, #00dbde, #fc00ff);
 	--white-color: #fff;
 	--black-color: #000;
@@ -56,11 +59,15 @@ html {
 
 body {
 	width: 100%;
-	height: 100vh;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+html,
+body {
+	width: 100%;
+	height: 100%;
 }
 
 /* Header */
@@ -173,6 +180,7 @@ ul {
 
 .action__like {
 	font-size: 1.45rem;
+	padding: 4px;
 	color: var(--primary-color);
 	cursor: pointer;
 }
@@ -187,4 +195,41 @@ ul {
 
 .action__like-fill {
 	display: none;
+}
+
+#toast {
+	position: absolute;
+	bottom: 75px;
+	left: 16px;
+}
+
+@keyframes slideInRight {
+	from {
+		opacity: 0;
+		transform: translateX(calc(100%));
+	}
+	to {
+		opacity: 1;
+		transform: translateX(0);
+	}
+}
+
+@keyframes fadeOut {
+	to {
+		opacity: 0;
+	}
+}
+
+.toast__item {
+	background-color: var(--primary-color);
+	font-size: 1.5rem;
+	font-weight: 500;
+	color: var(--white-color);
+	padding: 5px 20px;
+	border-radius: 10px;
+	margin: 10px 0;
+	border: 2px solid #fff;
+	z-index: 99999999999999;
+	animation: slideInRight ease 0.3s, fadeOut linear 2s 2s forwards;
+	cursor: default;
 }
