@@ -295,7 +295,6 @@ const app = {
 			if (nodeImg || nodeTitle || (!nodeItem && !nodeOption)) {
 				if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
 				_this.currentIndex = Number(nodeItem.dataset.index);
-				optionMenu[Number(nodeItem.dataset.index)].innerHTML = ``;
 				_this.loadCurrentSong();
 				audio.play();
 				cdThumbAnimation.play();
