@@ -23,7 +23,9 @@ export const idfavoriteUser = (userDataFavorite, idSongRank) => {
 				}
 			} else {
 				userDataFavorite.favorites_music.push(idSongRank);
-				toastSlide();
+				setTimeout(() => {
+					toastSlide();
+				}, 1000);
 			}
 		} else {
 			userDataFavorite.favorites_music = [`${idSongRank}`];
@@ -92,10 +94,6 @@ export const render = (dataFavorites) => {
 			return `
 		<div class="section-list__body-item" data-index=${index}>
 			<div class="item-media__left">
-				<div class="body-item__checkbox">
-					<i class="item__checkbox-icon fa-solid fa-music"></i>
-					<input type="checkbox" class="item__checkbox-input" id="">
-				</div>
 					<div class="media__left-image">
 						<div class="left-image" style="background-image: url('${data.thumbnail}')"></div>
 					</div>
@@ -108,9 +106,10 @@ export const render = (dataFavorites) => {
 				<span class="media__center-album subtitle-name">${data.album.title}</span>
 			</div>
 				<div class="item-media__right">
-					<span class="media__center-duration subtitle-name">${timeFormat(data.duration)}</span>
+					<span class="media__right-duration subtitle-name">${timeFormat(data.duration)}</span>
 					<i
-					class="media__center-option icon-option fa-solid fa-ellipsis"></i>
+					class="media__right-option icon-option fa-solid fa-ellipsis"></i>
+					<div class="media__right-option-menu"></div>
 			</div>
 		</div>
 	`;

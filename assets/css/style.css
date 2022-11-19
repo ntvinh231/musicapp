@@ -640,6 +640,7 @@ input[type='checkbox']:checked:after {
 	justify-content: center;
 	align-items: center;
 	max-width: var(--item-media-width-r);
+	position: relative;
 }
 
 .item-media__left,
@@ -652,20 +653,50 @@ input[type='checkbox']:checked:after {
 	width: 90px;
 }
 
-.section-list__body-item:hover .media__center-duration {
+.section-list__body-item:hover .media__right-duration {
 	display: none;
 }
 
-.section-list__body-item:hover .media__center-option {
+.section-list__body-item:hover .media__right-option {
 	border-radius: 20px 20px;
 	background-color: var(--music-control-border);
 	display: block;
 }
 
-.media__center-option {
+.media__right-option {
 	display: none;
 	font-size: 1.6rem;
 	padding: 10px 10px;
+}
+
+.media__right-option-menu {
+	width: 170px;
+	position: absolute;
+	top: 25px;
+	right: 20px;
+}
+
+.media__right-option-list {
+	font-family: 'Roboto', sans-serif;
+	font-size: 1.2rem;
+	width: 140px;
+	background-color: var(--option-item-layout);
+	border-radius: 8px;
+	overflow: hidden;
+	padding: 10px 0;
+	box-shadow: 0 2px 5px #000000b3;
+	z-index: 5;
+}
+
+.media__right-option-item {
+	color: var(--text-color4);
+	cursor: pointer;
+	text-align: center;
+	width: 100%;
+}
+
+.media__right-option-item:hover {
+	background-color: var(--music-control-border);
 }
 
 /* Artist Info Personal */

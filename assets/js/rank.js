@@ -1,6 +1,5 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-
 import { getCookie } from './firebase.js';
 
 const genresSelect = $$('.navbar-genre');
@@ -44,7 +43,8 @@ export function renderSongsRank(rankData, genreList) {
 					<span class="genre-item__info-artit-name subtitle-name">${song.artists_names}</span>
 				</div>
 				<div class="genre-item__play">
-					<i class="genre-icon fa-solid fa-circle-play"></i>
+					<i class="genre-icon genre-icon-play fa-solid fa-circle-play"></i>
+					<i class="genre-icon genre-icon-pause fa-solid fa-circle-pause"></i>
 				</div>
 			</div>
 		`;

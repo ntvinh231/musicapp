@@ -8,6 +8,7 @@ import { getCookie } from './firebase.js';
 const genreList = $('.genre-list');
 const PLAYER_STORAGE_KEY = 'SETTING_STORAGE';
 
+const PlayAll = $('.overview__content-right');
 const songTitle = $('.left-content__song-name');
 const cdThumb = $('.control__left-cdthumb');
 const artitName = $('.left-content__artit-name');
@@ -21,6 +22,8 @@ const volumeToggle = $('.volume-change');
 const volumeBar = $('.volume');
 const persionalSongList = $('.section-list__body');
 const songListRank = $('.genre-list');
+// const test = document.querySelectorAll('.genre-item__play-icon');
+// console.log(test);
 
 var dataRank = [];
 var dataFavorites = [];
@@ -121,10 +124,6 @@ const app = {
 				return `
 				<div class="section-list__body-item" data-index=${index}>
 					<div class="item-media__left">
-						<div class="body-item__checkbox">
-							<i class="item__checkbox-icon fa-solid fa-music"></i>
-							<input type="checkbox" class="item__checkbox-input" id="">
-						</div>
 							<div class="media__left-image">
 								<div class="left-image" style="background-image: url('${data.thumbnail}')"></div>
 							</div>
@@ -215,6 +214,9 @@ const app = {
 
 		audio.onplay = function () {
 			toggleBtn.classList.add('playing');
+			if (this.currentSongRank && this.clickSongAtElement === 'genre-list') {
+				toggleBtnRank.classList.add('playing');
+			}
 			_this.isPlaying = true;
 			cdThumbAnimation.play();
 		};
@@ -222,6 +224,9 @@ const app = {
 		// Khi song bị pause
 		audio.onpause = function () {
 			toggleBtn.classList.remove('playing');
+			if (this.currentSongRank && this.clickSongAtElement === 'genre-list') {
+				toggleBtnRank.classList.remove('playing');
+			}
 			_this.isPlaying = false;
 			cdThumbAnimation.pause();
 		};
@@ -238,6 +243,14 @@ const app = {
 				progress.value = progressPercent;
 				// console.log('Progress Percent: ', progressPercent);
 				// console.log('Current Time: ', Math.floor(audio.currentTime));
+			}
+		};
+
+		PlayAll.onclick = () => {
+			if (this.currentSong && this.clickSongAtElement === 'section-list__body') {
+				this.currentIndex = 0;
+				this.loadCurrentSong();
+				audio.play();
 			}
 		};
 
@@ -280,12 +293,21 @@ const app = {
 			const nodeOption = e.target.closest('.item-media__right');
 			const nodeTitle = e.target.closest('.media__left-title');
 			if (nodeImg || nodeTitle || (!nodeItem && !nodeOption)) {
-				// console.log(_this.currentVolume);
 				if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
 				_this.currentIndex = Number(nodeItem.dataset.index);
+				optionMenu[Number(nodeItem.dataset.index)].innerHTML = ``;
 				_this.loadCurrentSong();
 				audio.play();
 				cdThumbAnimation.play();
+			} else if (nodeOption) {
+				const optionMenu = $$('.media__right-option-menu');
+				optionMenu[Number(nodeItem.dataset.index)].innerHTML = `
+					<ul class="media__right-option-list">
+						<li class="media__right-option-item">Xoá Bài Hát Khỏi Danh Sách</li>
+						<li class="media__right-option-item">Update</li>
+						<li class="media__right-option-item">Update</li>
+					</ul>
+				`;
 			}
 		};
 		// Rank
@@ -313,6 +335,7 @@ const app = {
 				// Load when play first
 				if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
 				_this.currentIndex = Number(nodeItem.dataset.index);
+
 				_this.loadCurrentSong();
 				audio.play();
 				cdThumbAnimation.play();
@@ -371,16 +394,33 @@ const app = {
 	activeSong: function () {
 		if (this.clickSongAtElement === 'section-list__body') {
 			const songs = $$('.section-list__body-item');
+			const songsRankPlaying = $$('.genre-item__play.playing');
 			songs.forEach((song, index) => {
 				if (index == this.currentIndex) {
 					song.classList.add('active');
+					for (let i = 0; i < songsRankPlaying.length; i++) {
+						songsRankPlaying[i].setAttribute('class', 'genre-item__play');
+					}
 					setTimeout(() => {
 						song.scrollIntoView({
 							behavior: 'smooth',
 							block: 'nearest',
 						});
 					}, 300);
-				} else song.classList.remove('active');
+				} else {
+					song.classList.remove('active');
+				}
+			});
+		} else if (this.clickSongAtElement === 'genre-list') {
+			const songsRank = $$('.genre-item__play');
+			const songsActive = $$('.section-list__body-item.active');
+			songsRank.forEach((songRank, index) => {
+				if (index == this.currentIndex) {
+					songRank.classList.add('playing');
+					for (let i = 0; i < songsActive.length; i++) {
+						songsActive[i].setAttribute('class', 'section-list__body-item');
+					}
+				} else songRank.classList.remove('playing');
 			});
 		}
 	},

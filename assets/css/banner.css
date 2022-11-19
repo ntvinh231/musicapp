@@ -114,9 +114,9 @@
 	width: 100%;
 }
 
-.song-side__item:hover .song-side__item-content {
+/* .song-side__item:hover .song-side__item-content {
 	max-height: 100px;
-}
+} */
 
 .song-side__item:hover {
 	background-size: 110%;

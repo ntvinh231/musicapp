@@ -22,15 +22,14 @@ optionsItem.forEach((option, index) => {
 	};
 });
 
-const headerNavbars = $$('.header__navbar-item');
+const navbars = $$('.header__navbar-item');
 const sidesContainer = $$('.song-side__container');
 const navbarActive = $('.header__navbar-item.active');
 const line = $('.line');
 
-line.style.left = navbarActive.offsetLeft + 'px';
-line.style.width = navbarActive.offsetWidth + 'px';
-
-headerNavbars.forEach((navbar, index) => {
+line.style.left = navbarActive.children[0].offsetLeft - 10 + 'px';
+line.style.width = navbarActive.children[0].offsetWidth + 20 + 'px';
+navbars.forEach((navbar, index) => {
 	const sideContainer = sidesContainer[index];
 	navbar.onclick = function () {
 		const localData = JSON.parse(localStorage.getItem('userData'));
@@ -39,8 +38,8 @@ headerNavbars.forEach((navbar, index) => {
 			$('.header__navbar-item.active').classList.remove('active');
 			$('.song-side__container.active').classList.remove('active');
 
-			line.style.left = this.offsetLeft + 'px';
-			line.style.width = this.offsetWidth + 'px';
+			line.style.left = this.children[0].offsetLeft - 10 + 'px';
+			line.style.width = this.children[0].offsetWidth + 20 + 'px';
 
 			this.classList.add('active');
 			sideContainer.classList.add('active');
@@ -55,8 +54,8 @@ headerNavbars.forEach((navbar, index) => {
 				$('.header__navbar-item.active').classList.remove('active');
 				$('.song-side__container.active').classList.remove('active');
 
-				line.style.left = this.offsetLeft + 'px';
-				line.style.width = this.offsetWidth + 'px';
+				line.style.left = this.children[0].offsetLeft - 10 + 'px';
+				line.style.width = this.children[0].offsetWidth + 20 + 'px';
 
 				this.classList.add('active');
 				sideContainer.classList.add('active');

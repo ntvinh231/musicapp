@@ -248,6 +248,18 @@
 	color: var(--white-color);
 }
 
+.genre-icon-pause {
+	display: none;
+}
+
+.genre-item__play.playing .genre-icon-pause {
+	display: block;
+}
+
+.genre-item__play.playing .genre-icon-play {
+	display: none;
+}
+
 /* Action */
 
 .genre-item .genre-item__action {

@@ -203,25 +203,25 @@
             <div class="header__left">
                 <ul class="header__navbar-menu">
                     <li class="navbar-item header__navbar-item active">
-                        <i class="fa-regular fa-circle-play"></i>
-                        <span>Trang Chủ</span>
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Trang Chủ</span>
                     </li>
                     <li class="navbar-item header__navbar-item">
-                        <i class="fa-regular fa-circle-play"></i>
-                        <span>Cá Nhân</span>
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Cá Nhân</span>
                     </li>
                     <li class="navbar-item header__navbar-item">
-                        <i class="fa-regular fa-circle-play"></i>
-                        <span>#zingchart</span>
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Chart</span>
                     </li>
                     <li class="navbar-item header__navbar-item">
-                        <i class="fa-regular fa-circle-play"></i>
-                        <span>Radio</span>
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Radio</span>
                         <span class="navbar-item-live">Live</span>
                     </li>
                     <li class="navbar-item header__navbar-item">
-                        <i class="fa-regular fa-circle-play"></i>
-                        <span>Theo Dõi</span>
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Theo Dõi</span>
                     </li>
                     <div class="line"></div>
                 </ul>
@@ -281,7 +281,7 @@
                         <div class="song-side__slide">
                             <a href="#" class="song-side__item"
                                 style="background-image: url(https://photo-zmp3.zmdcdn.me/banner/c/5/3/9/c539ef8d9451a487d100dde59e5de1d9.jpg);">
-                                <div class="song-side__item-content">
+                                <!-- <div class="song-side__item-content">
                                     <div class="song-side__item-title">
                                         Title
                                     </div>
@@ -291,11 +291,11 @@
                                     <div class="song-side__item-name">
                                         Name
                                     </div>
-                                </div>
+                                </div> -->
                             </a>
                             <a href="#" class="song-side__item"
                                 style="background-image: url(https://photo-zmp3.zmdcdn.me/banner/e/3/2/7/e327625c199b7eecbf989243680f5faf.jpg);">
-                                <div class="song-side__item-content">
+                                <!-- <div class="song-side__item-content">
                                     <div class="song-side__item-title">
                                         Title
                                     </div>
@@ -305,11 +305,11 @@
                                     <div class="song-side__item-name">
                                         Name
                                     </div>
-                                </div>
+                                </div> -->
                             </a>
                             <a href="#" class="song-side__item"
                                 style="background-image: url(https://photo-zmp3.zmdcdn.me/banner/0/3/7/1/03718d64d8f459f130a8cb845ea778aa.jpg)">
-                                <div class="song-side__item-content">
+                                <!-- <div class="song-side__item-content">
                                     <div class="song-side__item-title">
                                         Title
                                     </div>
@@ -319,11 +319,11 @@
                                     <div class="song-side__item-name">
                                         Name
                                     </div>
-                                </div>
+                                </div> -->
                             </a>
                             <a href="#" class="song-side__item"
                                 style="background-image: url(https://photo-zmp3.zmdcdn.me/banner/0/7/6/f/076f06f6766b478993d5afd9d4a51e01.jpg)">
-                                <div class="song-side__item-content">
+                                <!-- <div class="song-side__item-content">
                                     <div class="song-side__item-title">
                                         Title
                                     </div>
@@ -333,11 +333,11 @@
                                     <div class="song-side__item-name">
                                         Name
                                     </div>
-                                </div>
+                                </div> -->
                             </a>
                             <a href="#" class="song-side__item"
                                 style="background-image: url(https://photo-zmp3.zmdcdn.me/banner/f/c/1/e/fc1ed19be59963e9ff21ee8d81877007.jpg)">
-                                <div class="song-side__item-content">
+                                <!-- <div class="song-side__item-content">
                                     <div class="song-side__item-title">
                                         Title
                                     </div>
@@ -347,7 +347,7 @@
                                     <div class="song-side__item-name">
                                         Name
                                     </div>
-                                </div>
+                                </div> -->
                             </a>
                         </div>
                         <div class="slide-buttons">
@@ -392,29 +392,32 @@
                                     <span class="section-list__header-right">Thời Gian</span>
                                 </div>
                                 <div class="section-list__body">
-                                    <!-- <div class="section-list__body-item">
-                                            <div class="item-media__left">
-                                                <div class="body-item__checkbox">
-                                                    <i class="item__checkbox-icon fa-solid fa-music"></i>
-                                                    <input type="checkbox" class="item__checkbox-input" id="">
-                                                </div>
-                                                    <div class="media__left-image">
-                                                        <div class="left-image" style="background-image: url('${song.links.images[0].url}')"></div>
-                                                    </div>
-                                                    <div class="media__left-info">
-                                                        <span class="media__left-title title-name">${song.name}</span>
-                                                        <span class="media__left-title subtitle-name">${song.author}</span>
-                                                    </div>
-                                                </div>
-                                            <div class="item-media__center">
-                                                <span class="media__center-album subtitle-name">Update...</span>
+                                    <!-- <div class="section-list__body-item" data-index=${index}>
+                                        <div class="item-media__left">
+                                            <div class="media__left-image">
+                                                <div class="left-image"
+                                                    style="background-image: url('${data.thumbnail}')"></div>
                                             </div>
-                                                <div class="item-media__right">
-                                                    <span class="media__center-duration subtitle-name">Update...</span>
-                                                    <i
-                                                    class="media__center-option icon-option fa-solid fa-ellipsis"></i>
+                                            <div class="media__left-info">
+                                                <span class="media__left-title title-name">${data.title}</span>
+                                                <span
+                                                    class="media__left-title subtitle-name">${data.artistsNames}</span>
                                             </div>
                                         </div>
+                                        <div class="item-media__center">
+                                            <span class="media__center-album subtitle-name">${data.album.title}</span>
+                                        </div>
+                                        <div class="item-media__right">
+                                            <span
+                                                class="media__right-duration subtitle-name">${timeFormat(data.duration)}</span>
+                                            <i class="media__right-option icon-option fa-solid fa-ellipsis"></i>
+                                            <div class="media__right-option-menu">
+                                                <ul class="media__right-option-list">
+                                                    <li class="media__right-option-item">Xoá Bài Hát Khỏi Danh Sách</li>
+                                                    <li class="media__right-option-item">Update</li>
+                                                    <li class="media__right-option-item">Update</li>
+                                                </ul>
+                                            </div>
                                         </div>
                                     </div> -->
                                 </div>
@@ -524,7 +527,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
 <script type="module" src="./assets/js/main.js"></script>
 <script type="module" src="./assets/js/firebase.js"></script>
-<script type="module" src="./assets/js/container.js"></script>
+<script type="module" src="./assets/js/modal.js"></script>
 <script type="module" src="./assets/js/validator.js"></script>
 <script type="module" src="./assets/js/rank.js"></script>
 <script type="module" src="./assets/js/favoriteuser.js"></script>
