@@ -1,19 +1,43 @@
+/* Song side */
+.song-side {
+	width: 100%;
+	margin-top: calc(var(--header-height) - 15px);
+}
+
+.container-personal-scroll {
+	position: absolute;
+	overflow: hidden scroll;
+	height: 710px;
+}
+
+.container-personal-scroll::-webkit-scrollbar {
+	width: 0.5rem;
+}
+
+.container-personal-scroll::-webkit-scrollbar-track {
+	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.container-personal-scroll::-webkit-scrollbar-thumb {
+	background: linear-gradient(45deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 50%, rgb(255, 204, 112) 100%);
+}
+
 .song-side__container {
 	display: none;
 }
 .song-side__container.active {
-	display: block;
-	height: 3000px;
-	overflow: hidden scroll;
-}
-
-.container__home-body {
 	position: relative;
+	display: block;
+	width: calc(100% - var(--slider-width));
+	margin-left: var(--slider-width);
+	/* padding: 0 20px; */
 }
 
-.container__home-scroll {
+.container-personal {
+	position: relative;
+	width: 100%;
 	height: 100%;
-	margin-bottom: 0px;
+	padding: 0 20px;
 }
 
 .song-side__container.active::-webkit-scrollbar {
@@ -130,13 +154,16 @@
 	filter: brightness(90%);
 }
 
-.new-release__multiline {
+.new-release__multiline-wrapper {
 	display: flex;
-	visibility: hidden;
+}
+
+.new-release__multiline {
+	display: none;
 }
 
 .new-release__multiline.active {
-	visibility: visible;
+	display: block;
 }
 
 .new-release__multiline-column {

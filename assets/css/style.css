@@ -308,33 +308,6 @@
 	color: var(--text-color);
 }
 
-/* Song side */
-.song-side {
-	width: 100%;
-	margin-top: calc(var(--header-height) - 15px);
-}
-
-.container-personal {
-	position: absolute;
-	height: 200%;
-	left: var(--slider-width);
-	width: calc(100% - var(--slider-width));
-	padding: 10px 35px 50px 35px;
-	overflow: hidden;
-}
-
-.container-personal::-webkit-scrollbar {
-	width: 0.5rem;
-}
-
-.container-personal::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-}
-
-.container-personal::-webkit-scrollbar-thumb {
-	background: linear-gradient(45deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 50%, rgb(255, 204, 112) 100%);
-}
-
 /* Personal heading */
 
 .personal-heading {
