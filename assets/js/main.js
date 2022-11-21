@@ -7,7 +7,10 @@ import { getCookie } from './firebase.js';
 
 const genreList = $('.genre-list');
 const PLAYER_STORAGE_KEY = 'SETTING_STORAGE';
-
+const modal = $('.modal');
+const modalOverlay = $('.modal__overlay');
+const loginForm = $('.auth-form--login');
+const registerForm = $('.auth-form--register');
 const PlayAll = $('.overview__content-right');
 const songTitle = $('.left-content__song-name');
 const cdThumb = $('.control__left-cdthumb');
@@ -22,12 +25,20 @@ const volumeToggle = $('.volume-change');
 const volumeBar = $('.volume');
 const persionalSongList = $('.section-list__body');
 const songListRank = $('.genre-list');
+const songListsRelease = $$('.new-release__multiline-wrapper');
+const localData = JSON.parse(localStorage.getItem('userData'));
+const cookieData = getCookie().userData;
 // const test = document.querySelectorAll('.genre-item__play-icon');
 // console.log(test);
 
-var dataRank = [];
 var dataFavorites = [];
+var dataRank = [];
 var apiRank = 'https://mp3.zing.vn/xhr/chart-realtime?songId=0&videoId=0&albumId=0&chart=song&time=-1';
+var dataReleases = [];
+let dataReleaseAll = [];
+let dataReleaseVPOP = [];
+let dataReleaseOthers = [];
+var apiRelease = 'https://apizingmp3.herokuapp.com/api/home?page=1';
 
 const getData = (api) => {
 	return new Promise((resolve, reject) => {
@@ -48,14 +59,13 @@ const getData = (api) => {
 	});
 };
 let i = 0;
-Promise.all([getData(apiRank)])
-	.then(([rank]) => {
-		const localData = JSON.parse(localStorage.getItem('userData'));
-		const cookieData = getCookie().userData;
+Promise.all([getData(apiRank), getData(apiRelease)])
+	.then(([rank, release]) => {
 		dataRank = JSON.parse(rank);
 		setTimeout(() => {
 			dataFavorites = JSON.parse(localStorage.getItem('dataFavorites'));
 		}, 4000);
+		dataReleases = JSON.parse(release);
 	})
 	.then(() => app.start())
 
@@ -101,7 +111,7 @@ const app = {
 	},
 
 	defineProperties: () => {
-		if (dataFavorites) {
+		if ((dataFavorites && cookieData) || localData) {
 			Object.defineProperty(app, 'currentSong', {
 				get: function () {
 					return dataFavorites[app.currentIndex];
@@ -112,6 +122,26 @@ const app = {
 			Object.defineProperty(app, 'currentSongRank', {
 				get: function () {
 					return dataRank.data.song[app.currentIndex];
+				},
+			});
+		}
+		if (dataReleases.data) {
+			dataReleaseAll = dataReleases.data.items[3].items.vPop;
+			Object.defineProperty(app, 'currentReleaseAll', {
+				get: function () {
+					return dataReleases.data.items[3].items.all[app.currentIndex];
+				},
+			});
+			dataReleaseVPOP = dataReleases.data.items[3].items.vPop;
+			Object.defineProperty(app, 'currentReleaseVPOP', {
+				get: function () {
+					return dataReleases.data.items[3].items.vPop[app.currentIndex];
+				},
+			});
+			dataReleaseOthers = dataReleases.data.items[3].items.others;
+			Object.defineProperty(app, 'currentReleaseOthers', {
+				get: function () {
+					return dataReleases.data.items[3].items.others[app.currentIndex];
 				},
 			});
 		}
@@ -149,6 +179,7 @@ const app = {
 
 	loadCurrentSong: function () {
 		// Khi load xong api
+		console.log(this.clickSongAtElement);
 		if (this.currentSongRank && this.clickSongAtElement === 'genre-list') {
 			songTitle.textContent = this.currentSongRank.title;
 			cdThumb.style.backgroundImage = `url(${this.currentSongRank.thumbnail})`;
@@ -161,6 +192,24 @@ const app = {
 			artitName.textContent = this.currentSong.artistsNames;
 			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentSong.encodeId}/320`;
 			$('.overview__section-slider-item').src = this.currentSong.album.thumbnail;
+			this.activeSong();
+		} else if (this.currentReleaseAll && this.clickSongAtElement === 'new-release__multiline-wrapper-0') {
+			songTitle.textContent = this.currentReleaseAll.title;
+			cdThumb.style.backgroundImage = `url(${this.currentReleaseAll.thumbnail})`;
+			artitName.textContent = this.currentReleaseAll.artistsNames;
+			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseAll.encodeId}/320`;
+			this.activeSong();
+		} else if (this.currentReleaseVPOP && this.clickSongAtElement === 'new-release__multiline-wrapper-1') {
+			songTitle.textContent = this.currentReleaseVPOP.title;
+			cdThumb.style.backgroundImage = `url(${this.currentReleaseVPOP.thumbnail})`;
+			artitName.textContent = this.currentReleaseVPOP.artistsNames;
+			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseVPOP.encodeId}/320`;
+			this.activeSong();
+		} else if (this.currentReleaseOthers && this.clickSongAtElement === 'new-release__multiline-wrapper-2') {
+			songTitle.textContent = this.currentReleaseOthers.title;
+			cdThumb.style.backgroundImage = `url(${this.currentReleaseOthers.thumbnail})`;
+			artitName.textContent = this.currentReleaseOthers.artistsNames;
+			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseOthers.encodeId}/320`;
 			this.activeSong();
 		}
 	},
@@ -302,32 +351,63 @@ const app = {
 				handleOption(Number(nodeItem.dataset.index));
 			}
 		};
+
+		// Release
+		songListsRelease.forEach((songListRelease, index) => {
+			songListRelease.onclick = function (e) {
+				_this.clickSongAtElement = e.target.closest('.new-release__multiline-wrapper').className + `-${index}`;
+				const nodeImg = e.target.closest('.media-left__thumb-img');
+				const nodeItem = e.target.closest('.new-release__multiline-item');
+				const nodeOption = e.target.closest('.multiline-item__media-right');
+				const nodeTitle = e.target.closest('.media-left__info-name');
+				const nodeTime = e.target.closest('.media-left__time-release');
+
+				if (nodeImg || (!nodeItem && !nodeOption && !nodeTitle && !nodeTime)) {
+					if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
+					_this.currentIndex = Number(nodeItem.dataset.index);
+					_this.loadCurrentSong();
+					audio.play();
+					cdThumbAnimation.play();
+				}
+				// else if (nodeOption) {
+				// 	handleOption(Number(nodeItem.dataset.index));
+				// }
+			};
+		});
+
 		// Rank
 		songListRank.onclick = function (e) {
 			const nodeItem = e.target.closest('.genre-item');
 			_this.clickSongAtElement = e.target.closest('.genre-list').className;
-			// Action Like
 			const nodeAction = e.target.closest('.genre-item__action');
 			const nodeActionLiked = e.target.closest('.genre-item__action.liked');
+			// Action Like
 			if (nodeActionLiked) {
 				nodeActionLiked.classList.remove('liked');
 				_this.currentIndexLiked = Number(nodeItem.dataset.index);
 				let idDelete = dataRank.data.song[_this.currentIndexLiked].id;
 				idfavoriteUser(JSON.parse(localStorage.getItem('userDataFavorite')), idDelete);
 			} else if (nodeAction || !nodeItem) {
-				nodeAction.classList.add('liked');
-				_this.currentIndexLiked = Number(nodeItem.dataset.index);
-				// Get and Parse Data
-				const userDataFavorite = JSON.parse(localStorage.getItem('userDataFavorite'));
-				let idSongRank = '';
-				idSongRank = dataRank.data.song[_this.currentIndexLiked].id;
-				idfavoriteUser(userDataFavorite, idSongRank);
+				if (localData || cookieData) {
+					nodeAction.classList.add('liked');
+					_this.currentIndexLiked = Number(nodeItem.dataset.index);
+					// Get and Parse Data
+					const userDataFavorite = JSON.parse(localStorage.getItem('userDataFavorite'));
+					let idSongRank = '';
+					idSongRank = dataRank.data.song[_this.currentIndexLiked].id;
+					idfavoriteUser(userDataFavorite, idSongRank);
+				} else {
+					modal.classList.add('active');
+					modalOverlay.classList.add('active');
+					$('.modal__body').style.display = 'block';
+					loginForm.style.display = 'block';
+					registerForm.style.display = 'none';
+				}
 			}
 			if (nodeItem && !nodeAction) {
 				// Load when play first
 				if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
 				_this.currentIndex = Number(nodeItem.dataset.index);
-
 				_this.loadCurrentSong();
 				audio.play();
 				cdThumbAnimation.play();
@@ -344,6 +424,18 @@ const app = {
 			this.currentIndex++;
 			if (this.currentIndex >= dataFavorites.length) this.currentIndex = 0;
 			this.loadCurrentSong();
+		} else if (this.currentReleaseAll && this.clickSongAtElement === 'new-release__multiline-wrapper-0') {
+			this.currentIndex++;
+			if (this.currentIndex >= dataReleaseAll.length) this.currentIndex = 0;
+			this.loadCurrentSong();
+		} else if (this.currentReleaseVPOP && this.clickSongAtElement === 'new-release__multiline-wrapper-1') {
+			this.currentIndex++;
+			if (this.currentIndex >= dataReleaseVPOP.length) this.currentIndex = 0;
+			this.loadCurrentSong();
+		} else if (this.currentReleaseOthers && this.clickSongAtElement === 'new-release__multiline-wrapper-2') {
+			this.currentIndex++;
+			if (this.currentIndex >= dataReleaseOthers.length) this.currentIndex = 0;
+			this.loadCurrentSong();
 		}
 	},
 
@@ -355,6 +447,19 @@ const app = {
 		} else if (this.currentSong && this.clickSongAtElement === 'section-list__body') {
 			this.currentIndex--;
 			if (this.currentIndex < 0) this.currentIndex = dataFavorites.length - 1;
+			this.loadCurrentSong();
+		} else if (this.currentReleaseAll && this.clickSongAtElement === 'new-release__multiline-wrapper-0') {
+			this.currentIndex--;
+			if (this.currentIndex < 0) this.currentIndex = dataReleaseAll.length - 1;
+			this.loadCurrentSong();
+		} else if (this.currentReleaseVPOP && this.clickSongAtElement === 'new-release__multiline-wrapper-1') {
+			console.log('1');
+			this.currentIndex--;
+			if (this.currentIndex < 0) this.currentIndex = dataReleaseVPOP.length - 1;
+			this.loadCurrentSong();
+		} else if (this.currentReleaseOthers && this.clickSongAtElement === 'new-release__multiline-wrapper-2') {
+			this.currentIndex--;
+			if (this.currentIndex < 0) this.currentIndex = dataReleaseOthers.length - 1;
 			this.loadCurrentSong();
 		}
 	},
@@ -376,6 +481,30 @@ const app = {
 				this.currentIndex = randomNumber;
 			}
 			this.loadCurrentSong();
+		} else if (this.currentReleaseAll && this.clickSongAtElement === 'new-release__multiline-wrapper-0') {
+			let randomNumber = Math.floor(Math.random() * dataReleaseAll.length);
+			if (randomNumber >= dataReleaseAll.length) {
+				randomNumber = Math.floor(Math.random() * dataReleaseAll.length);
+			} else {
+				this.currentIndex = randomNumber;
+			}
+			this.loadCurrentSong();
+		} else if (this.currentReleaseVPOP && this.clickSongAtElement === 'new-release__multiline-wrapper-1') {
+			let randomNumber = Math.floor(Math.random() * dataReleaseVPOP.length);
+			if (randomNumber >= dataReleaseVPOP.length) {
+				randomNumber = Math.floor(Math.random() * dataReleaseVPOP.length);
+			} else {
+				this.currentIndex = randomNumber;
+			}
+			this.loadCurrentSong();
+		} else if (this.currentReleaseOthers && this.clickSongAtElement === 'new-release__multiline-wrapper-2') {
+			let randomNumber = Math.floor(Math.random() * dataReleaseOthers.length);
+			if (randomNumber >= dataReleaseOthers.length) {
+				randomNumber = Math.floor(Math.random() * dataReleaseOthers.length);
+			} else {
+				this.currentIndex = randomNumber;
+			}
+			this.loadCurrentSong();
 		}
 	},
 
@@ -384,15 +513,21 @@ const app = {
 	},
 
 	activeSong: function () {
+		const songs = $$('.section-list__body-item');
+		const songsRank = $$('.genre-item__play');
+		const songsRelease = $$('.new-release__multiline-item');
 		if (this.clickSongAtElement === 'section-list__body') {
-			const songs = $$('.section-list__body-item');
-			const songsRankPlaying = $$('.genre-item__play.playing');
 			songs.forEach((song, index) => {
 				if (index == this.currentIndex) {
 					song.classList.add('active');
-					for (let i = 0; i < songsRankPlaying.length; i++) {
-						songsRankPlaying[i].setAttribute('class', 'genre-item__play');
+					// Remove active Others
+					for (let i = 0; i < songsRank.length; i++) {
+						songsRank[i].setAttribute('class', 'genre-item__play');
 					}
+					for (let i = 0; i < songsRelease.length; i++) {
+						songsRelease[i].setAttribute('class', 'new-release__multiline-item');
+					}
+					songsRelease;
 					setTimeout(() => {
 						song.scrollIntoView({
 							behavior: 'smooth',
@@ -404,16 +539,69 @@ const app = {
 				}
 			});
 		} else if (this.clickSongAtElement === 'genre-list') {
-			const songsRank = $$('.genre-item__play');
-			const songsActive = $$('.section-list__body-item.active');
 			songsRank.forEach((songRank, index) => {
 				if (index == this.currentIndex) {
 					songRank.classList.add('playing');
-					for (let i = 0; i < songsActive.length; i++) {
-						songsActive[i].setAttribute('class', 'section-list__body-item');
+					// Remove active Others
+					for (let i = 0; i < songs.length; i++) {
+						songs[i].setAttribute('class', 'section-list__body-item');
+					}
+					for (let i = 0; i < songsRelease.length; i++) {
+						songsRelease[i].setAttribute('class', 'new-release__multiline-item');
 					}
 				} else songRank.classList.remove('playing');
 			});
+		} else if (this.clickSongAtElement.includes(`new-release__multiline-wrapper`)) {
+			// Remove active Others
+			for (let i = 0; i < songsRank.length; i++) {
+				songsRank[i].setAttribute('class', 'genre-item__play');
+			}
+			for (let i = 0; i < songs.length; i++) {
+				songs[i].setAttribute('class', 'section-list__body-item');
+			}
+			if (this.clickSongAtElement === `new-release__multiline-wrapper-0`) {
+				songsRelease.forEach((song, index) => {
+					if (index == this.currentIndex) {
+						song.classList.add('active');
+						setTimeout(() => {
+							song.scrollIntoView({
+								behavior: 'smooth',
+								block: 'nearest',
+							});
+						}, 300);
+					} else {
+						song.classList.remove('active');
+					}
+				});
+			} else if (this.clickSongAtElement === `new-release__multiline-wrapper-1`) {
+				songsRelease.forEach((song, index) => {
+					if (index == this.currentIndex + dataReleaseVPOP.length) {
+						song.classList.add('active');
+						setTimeout(() => {
+							song.scrollIntoView({
+								behavior: 'smooth',
+								block: 'nearest',
+							});
+						}, 300);
+					} else {
+						song.classList.remove('active');
+					}
+				});
+			} else if (this.clickSongAtElement === `new-release__multiline-wrapper-2`) {
+				songsRelease.forEach((song, index) => {
+					if (index == this.currentIndex + dataReleaseOthers.length * 2) {
+						song.classList.add('active');
+						setTimeout(() => {
+							song.scrollIntoView({
+								behavior: 'smooth',
+								block: 'nearest',
+							});
+						}, 300);
+					} else {
+						song.classList.remove('active');
+					}
+				});
+			}
 		}
 	},
 
