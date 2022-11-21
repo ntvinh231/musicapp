@@ -25,7 +25,7 @@ getData();
 const renderBanner = (dataBanner) => {
 	var htmls = dataBanner.map((data) => {
 		return `
-        <a href="#" class="song-side__item">
+        <a href="#" class="song-side__item l-4">
 			<img class="song-side__item-img" src="${data.banner}" alt="">
         </a>
         `;
