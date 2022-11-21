@@ -19,7 +19,9 @@ const getData = async () => {
 		renderReleaseVPOP(dataRelease.items.vPop);
 		renderReleaseOthers(dataRelease.items.others);
 	} catch (e) {
-		console.log(e);
+		if (e.code === 'ERR_NETWORK') {
+			alert('Vui lòng kiểm tra lại đường truyền');
+		}
 	}
 };
 getData();

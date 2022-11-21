@@ -178,8 +178,13 @@ const app = {
 	},
 
 	loadCurrentSong: function () {
+		// Load when play first
+		if (!this.isMute) {
+			volumeBar.value = this.currentVolume * 100;
+		} else {
+			audio.volume = 0;
+		}
 		// Khi load xong api
-		console.log(this.clickSongAtElement);
 		if (this.currentSongRank && this.clickSongAtElement === 'genre-list') {
 			songTitle.textContent = this.currentSongRank.title;
 			cdThumb.style.backgroundImage = `url(${this.currentSongRank.thumbnail})`;
@@ -342,10 +347,10 @@ const app = {
 			const nodeOption = e.target.closest('.item-media__right');
 			const nodeTitle = e.target.closest('.media__left-title');
 			if (nodeImg || nodeTitle || (!nodeItem && !nodeOption)) {
-				if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
 				_this.currentIndex = Number(nodeItem.dataset.index);
 				_this.loadCurrentSong();
 				audio.play();
+
 				cdThumbAnimation.play();
 			} else if (nodeOption) {
 				handleOption(Number(nodeItem.dataset.index));
@@ -405,8 +410,6 @@ const app = {
 				}
 			}
 			if (nodeItem && !nodeAction) {
-				// Load when play first
-				if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
 				_this.currentIndex = Number(nodeItem.dataset.index);
 				_this.loadCurrentSong();
 				audio.play();
