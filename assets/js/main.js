@@ -2,7 +2,7 @@ const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
 import { renderSongsRank } from './rank.js';
-import { idfavoriteUser } from './favoriteuser.js';
+import { handleOption, idfavoriteUser } from './favoriteuser.js';
 import { getCookie } from './firebase.js';
 
 const genreList = $('.genre-list');
@@ -209,7 +209,7 @@ const app = {
 				else audio.pause();
 			}
 			// Load when play first
-			if (!_this.isMute) volumeBar.value = audio.volume * 100;
+			if (!_this.isMute) volumeBar.value = _this.currentVolume * 100;
 		};
 
 		audio.onplay = function () {
@@ -299,14 +299,7 @@ const app = {
 				audio.play();
 				cdThumbAnimation.play();
 			} else if (nodeOption) {
-				const optionMenu = $$('.media__right-option-menu');
-				optionMenu[Number(nodeItem.dataset.index)].innerHTML = `
-					<ul class="media__right-option-list">
-						<li class="media__right-option-item">Xoá Bài Hát Khỏi Danh Sách</li>
-						<li class="media__right-option-item">Update</li>
-						<li class="media__right-option-item">Update</li>
-					</ul>
-				`;
+				handleOption(Number(nodeItem.dataset.index));
 			}
 		};
 		// Rank

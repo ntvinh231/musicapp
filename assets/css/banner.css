@@ -1,15 +1,12 @@
-.container__banner-body {
-	overflow: hidden scroll;
-	height: 2000px;
-}
 .container__banner {
 	position: absolute;
-	top: -0.5%;
+	top: 0%;
 	left: 0%;
 	width: 1400px;
-	height: 300px;
+	height: var(--banner-height);
 	padding: 50px;
 	margin-left: 20px;
+	flex-grow: 1;
 }
 
 .song-side__slide {
@@ -18,15 +15,21 @@
 }
 
 .song-side__item {
-	width: 420px;
-	height: 200px;
-	background-position: 50% 50%;
+	width: 410px;
+	height: 220px;
+	background-position: center;
 	display: inline-block;
 	transition: 1s;
 	background-size: 100%;
 	position: absolute;
 	z-index: 1;
 	border-radius: 10px;
+	overflow: hidden;
+}
+
+.song-side__item-img {
+	width: 100%;
+	height: 100%;
 }
 
 .song-side__item:nth-child(1) {

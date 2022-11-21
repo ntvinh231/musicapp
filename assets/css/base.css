@@ -32,7 +32,8 @@
 	--artits-name-color: hsla(0, 0%, 100%, 0.5);
 	--hover-color: #c273ed;
 	--purple-primary: #9b4de0;
-	--music-control-border: hsla(0, 0%, 100%, 0.1);
+	--purple-text-hover: #c273ed;
+	--alpha-bg: hsla(0, 0%, 100%, 0.1);
 
 	/* Persional Song */
 	--section-slider-width: 30%;
@@ -45,6 +46,9 @@
 	--music-control-height: 100px;
 	--music-control-bg: #181818;
 	--music-control-color: #fff;
+
+	/* Home */
+	--banner-height: 300px;
 }
 
 * {
@@ -135,7 +139,7 @@ ul {
 
 .btn {
 	min-width: 130px;
-	height: 40px;
+	min-height: 40px;
 	border: none;
 	text-decoration: none;
 	border-radius: 500px;
@@ -155,10 +159,13 @@ ul {
 .title-name {
 	font-weight: 430;
 	font-size: 1.3rem;
-	text-overflow: clip;
-	overflow: visible;
 	cursor: pointer;
 	color: var(--white-color);
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+	max-width: 100%;
 }
 
 .subtitle-name {
@@ -166,6 +173,11 @@ ul {
 	font-size: 1.2rem;
 	color: var(--artits-name-color);
 	cursor: default;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	display: block;
+	max-width: 100%;
 }
 
 /* Personal Body */
@@ -182,7 +194,7 @@ ul {
 .action__like {
 	font-size: 1.45rem;
 	padding: 4px;
-	color: var(--primary-color);
+	color: var(--purple-primary);
 	cursor: pointer;
 }
 

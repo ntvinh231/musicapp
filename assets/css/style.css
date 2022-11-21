@@ -183,7 +183,7 @@
 	justify-content: center;
 	width: 33px;
 	height: 33px;
-	background-color: var(--music-control-border);
+	background-color: var(--alpha-bg);
 	border-radius: 50%;
 	position: relative;
 	cursor: pointer;
@@ -312,13 +312,6 @@
 .song-side {
 	width: 100%;
 	margin-top: calc(var(--header-height) - 15px);
-}
-
-.song-side__container {
-	display: none;
-}
-.song-side__container.active {
-	display: block;
 }
 
 .container-personal {
@@ -651,6 +644,11 @@ input[type='checkbox']:checked:after {
 
 .item-media__right {
 	width: 90px;
+	position: relative;
+}
+
+.media__right-duration {
+	z-index: 9px;
 }
 
 .section-list__body-item:hover .media__right-duration {
@@ -659,7 +657,7 @@ input[type='checkbox']:checked:after {
 
 .section-list__body-item:hover .media__right-option {
 	border-radius: 20px 20px;
-	background-color: var(--music-control-border);
+	background-color: var(--alpha-bg);
 	display: block;
 }
 
@@ -670,10 +668,14 @@ input[type='checkbox']:checked:after {
 }
 
 .media__right-option-menu {
-	width: 170px;
 	position: absolute;
 	top: 25px;
-	right: 20px;
+	right: 64px;
+	display: none;
+	z-index: 10px;
+}
+.media__right-option-menu.active {
+	display: block;
 }
 
 .media__right-option-list {
@@ -696,7 +698,7 @@ input[type='checkbox']:checked:after {
 }
 
 .media__right-option-item:hover {
-	background-color: var(--music-control-border);
+	background-color: var(--alpha-bg);
 }
 
 /* Artist Info Personal */

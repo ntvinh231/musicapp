@@ -7,7 +7,7 @@
 	background-color: var(--slider-bg);
 	height: calc(100% - var(--music-control-height));
 	display: block;
-	border: 1px solid var(--music-control-border);
+	border: 1px solid var(--alpha-bg);
 }
 
 .navbar-brand {
@@ -216,7 +216,6 @@
 	flex-wrap: wrap;
 	margin-bottom: -4px;
 	display: flex;
-	justify-content: calc();
 	flex-direction: column;
 	overflow: hidden;
 	cursor: pointer;
@@ -225,17 +224,11 @@
 .genre-item__info-name {
 	display: block;
 	width: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
-.genre-item__info-artit-name {
+.genre-item__info-artist-name {
 	display: block;
 	width: 100%;
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
 }
 
 .genre-item__play {

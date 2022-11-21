@@ -174,8 +174,9 @@ function SignIn(user, userUid) {
 		localStorage.setItem('userData', JSON.stringify(userData));
 		handleLoggedIn();
 	}
-	localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
 	window.location = 'index.html';
+	localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
+	window.onload(user);
 }
 
 function setCookie(name, value, hours) {
@@ -224,29 +225,19 @@ function renderUser() {
 	}
 }
 
-const songTitle = $('.left-content__song-name');
-const cdThumb = $('.control__left-cdthumb');
-const artitName = $('.left-content__artit-name');
-const toggleBtn = $('.control-toggle');
-const nextBtn = $('.control-next');
-const prevBtn = $('.control-prev');
-const randomBtn = $('.control-random');
-const repeatBtn = $('.control-repeat');
-const progress = $('#progress');
-const volumeToggle = $('.volume-change');
-const volumeBar = $('.volume');
-const persionalSongList = $('.section-list__body');
-const songListRank = $('.genre-list');
-
-window.onload = function () {
-	renderUser();
-	if (currentUser != null) {
-		personalName.textContent = currentUser.username;
-		image.src = currentUser.urlImage;
-		userLogin.classList.add('login');
-		$('.header__right-img').style.backgroundImage = `url('${currentUser.urlImage}')`;
-	}
+const windowLoad = () => {
+	window.onload = function () {
+		renderUser();
+		if (currentUser != null) {
+			personalName.textContent = currentUser.username;
+			image.src = currentUser.urlImage;
+			userLogin.classList.add('login');
+			$('.header__right-img').style.backgroundImage = `url('${currentUser.urlImage}')`;
+		}
+	};
 };
+windowLoad();
+
 const userDataFavorites = JSON.parse(localStorage.getItem('dataFavorites'));
 function handleLoggedIn() {
 	renderUser();

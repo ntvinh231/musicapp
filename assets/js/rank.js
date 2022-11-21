@@ -40,7 +40,7 @@ export function renderSongsRank(rankData, genreList) {
 				</div>
 				<div class="genre-item__info">
 					<span class="genre-item__info-name title-name">${song.name}</span>
-					<span class="genre-item__info-artit-name subtitle-name">${song.artists_names}</span>
+					<span class="genre-item__info-artist-name subtitle-name">${song.artists_names}</span>
 				</div>
 				<div class="genre-item__play">
 					<i class="genre-icon genre-icon-play fa-solid fa-circle-play"></i>
