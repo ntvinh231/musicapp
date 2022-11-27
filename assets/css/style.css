@@ -135,6 +135,72 @@
 	font-weight: 400;
 }
 
+.search-history {
+	position: absolute;
+	left: 25px;
+	padding: 10px 0;
+	top: calc(100% + 5px);
+	background-color: #fff;
+	width: 90%;
+	border-radius: 10px;
+	box-shadow: 0 0 5px rgb(189 189 189);
+	display: none;
+	overflow: hidden;
+	z-index: 6;
+}
+
+.header__search-input:focus ~ .search-history {
+	display: block;
+}
+
+.header__search-heading {
+	margin: 8px 12px;
+	font-size: 1.4rem;
+	color: #999;
+	font-weight: 400;
+}
+
+.header__search-list {
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+}
+
+.header__search-item {
+	padding: 4px 12px;
+	display: flex;
+	gap: 10px;
+}
+
+.header__search-item-image {
+	width: 40px;
+	height: 40px;
+}
+
+.header__search-item-image img {
+	width: 100%;
+	height: auto;
+	object-fit: contain;
+}
+
+.header__search-item:hover {
+	background-color: #999999;
+}
+
+.header__search-item-info {
+	display: flex;
+	flex-direction: column;
+}
+
+.header__search-artist-name {
+	line-height: 38px;
+	font-size: 1.4rem;
+	text-decoration: none;
+	color: var(--text-color);
+	display: block;
+}
+
 .header__right {
 	display: flex;
 	align-items: center;

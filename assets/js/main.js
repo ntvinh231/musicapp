@@ -73,6 +73,47 @@ Promise.all([getData(apiRank), getData(apiRelease)])
 		console.log(err);
 	});
 
+// export function download(url, filename) {
+// 	axios
+// 		.get(url)
+// 		.then((response) =>
+// 			fetch(response.data.url)
+// 				.then((response) => response.blob())
+// 				.then((blob) => {
+// 					const link = document.createElement('a');
+// 					link.type = 'audio/mpeg';
+// 					link.href = URL.createObjectURL(blob);
+// 					link.download = filename;
+// 					link.click();
+// 				})
+// 		)
+
+// 		.catch(function (err) {
+// 			console.info(err + ' url: ' + url);
+// 		});
+// }
+
+export function download(url, filename) {
+	fetch(url)
+		.then((response) => {
+			console.log(response);
+		})
+		.then((response) =>
+			fetch(response.data.url)
+				.then((response) => response.blob())
+				.then((blob) => {
+					const link = document.createElement('a');
+					link.type = 'audio/mpeg';
+					link.href = URL.createObjectURL(blob);
+					link.download = filename;
+					link.click();
+				})
+		)
+
+		.catch(function (err) {
+			console.info(err + ' url: ' + url);
+		});
+}
 const app = {
 	currentIndex: 0,
 	currentIndexLiked: 0,

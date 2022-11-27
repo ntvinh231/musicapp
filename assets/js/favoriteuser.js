@@ -6,6 +6,7 @@ import { getCookie } from './firebase.js';
 import { set, ref, child, get, update } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js';
 import { artistInfo } from './artistsinfo.js';
 import { timeFormat } from './format/timeFormat.js';
+import { download } from './main.js';
 
 let useData = [];
 
@@ -131,7 +132,7 @@ export const render = (useData) => {
 					<div class="media__right-option-menu">
 						<ul class="media__right-option-list">
 							<li class="option-delete media__right-option-item">Xoá Bài Hát Khỏi Danh Sách</li>
-							<li class="media__right-option-item">Update</li>
+							<li class="option-download media__right-option-item">Tải Bài Hát Về Máy</li>
 							<li class="media__right-option-item">Update</li>
 							<li class="media__right-option-item">Update</li>
 							<li class="media__right-option-item">Update</li>
@@ -150,6 +151,7 @@ let flag = false;
 export const handleOption = (optionIndex) => {
 	const optionMenu = $$('.media__right-option-menu');
 	const optionItemDelete = $$('.option-delete');
+	const optionDownLoads = $$('.option-download');
 	const dataFavorites = JSON.parse(localStorage.getItem('dataFavorites'));
 	const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
 	optionMenu.forEach((item, index) => {
@@ -171,6 +173,18 @@ export const handleOption = (optionIndex) => {
 				update(ref(database, 'users/' + userDataFavorites.userUid), {
 					favorites_music: userDataFavorites.favorites_music,
 				});
+			};
+			optionDownLoads[index].onclick = () => {
+				if (userDataFavorites) {
+					console.log(
+						`http://167.172.93.181/api/v1/get/redirect?url=https://api.mp3.zing.vn/api/streaming/audio/${dataFavorites[index].encodeId}/320`
+					);
+					console.log(`${dataFavorites[index].alias}.mp3`);
+					download(
+						`http://localhost:3000/redirect?url=https://api.mp3.zing.vn/api/streaming/audio/${dataFavorites[index].encodeId}/320`,
+						`${dataFavorites[index].alias}.mp3`
+					);
+				}
 			};
 		} else {
 			item.classList.remove('active');

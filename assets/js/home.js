@@ -7,6 +7,45 @@ import { dateFormat } from './format/timeFormat.js';
 const releaseGenres = $$('.new-release__genre-btn');
 const releaseMultilines = $$('.new-release__multiline');
 const releaseColumn = $$('.new-release__multiline-column');
+const headerSearchInput = $('.header__search-input');
+const headerSearchList = $('.header__search-list');
+headerSearchInput.onkeyup = (e) => {
+	getSearch(e.target.value);
+};
+
+export const getSearch = async (keyword) => {
+	try {
+		let data = await axios.get(`https://apizingmp3.herokuapp.com/api/search?keyword=${keyword}`);
+		let dataSearchSongs = data.data.data.songs;
+		renderSearch(dataSearchSongs);
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+const renderSearch = (dataSearch) => {
+	if (dataSearch) {
+		let htmls = dataSearch.map((song, index) => {
+			return `
+			<li class="header__search-item">
+				<div class="header__search-item-image">
+					<img src="${song.thumbnail}"
+						alt="">
+				</div>
+				<div class="header__search-item-info">
+					<a href="#" class="header__search-artist-name">${song.title}</a>
+					<span class="header__search-artists">${song.artistsNames}</span>
+				</div>
+			</li>
+		`;
+		});
+		headerSearchList.innerHTML = htmls.join('');
+	} else {
+		$$('.header__search-item').forEach((item) => {
+			item.remove();
+		});
+	}
+};
 
 const getData = async () => {
 	try {
@@ -48,8 +87,6 @@ releaseGenres.forEach((genre, index) => {
 		releaseMultiline.classList.add('active');
 	};
 });
-
-console.log(releaseColumn);
 
 const renderReleaseAll = (dataReleaseAll) => {
 	// Col=0
@@ -299,12 +336,3 @@ const renderReleaseOthers = (dataReleaseOthers) => {
 	});
 	releaseColumn[8].innerHTML = htmls2.join('');
 };
-
-// const getRecent = async () => {
-// 	try {
-// 		let data = await axios.get(`http://apizingmp3.herokuapp.com/api/top100`);
-// 	} catch (e) {
-// 		console.log(e);
-// 	}
-// };
-// getRecent();
