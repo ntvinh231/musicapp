@@ -46,7 +46,7 @@
                     <h4>Tài khoản của tôi</h4>
                 </div>
                 <ul class="column-left__list">
-                    <li class="column-left__item">
+                    <li class="column-left__item active">
                         Hồ Sơ
                     </li>
                     <li class="column-left__item">
@@ -55,60 +55,107 @@
                 </ul>
             </div>
             <div class="column-right col l-8">
-                <div class="form-edit-user">
-                    <div class="form-edit-header">
-                        <h1 class="edit-header-h1">Hồ Sơ Của Tôi</h1>
+                <div class="form-edit__container active">
+                    <div class="form-edit-user">
+                        <div class="form-edit-header">
+                            <h1 class="edit-header-h1">Hồ Sơ Của Tôi</h1>
+                        </div>
+                        <form action="" class="form-edit">
+                            <!-- item -->
+                            <div class="view-i4user-flex">
+                                <div class="i4user-item-left">
+                                    <p class="i4user-item__txt">User Name</p>
+                                </div>
+                                <div class="i4user-item-right">
+                                    <input type="text" name="fullname" class="i4user-input"
+                                        placeholder="Nhập User Name">
+                                </div>
+                            </div>
+                            <!-- check email -->
+                            <!-- item -->
+                            <div class="view-i4user-flex">
+                                <div class="i4user-item-left">
+                                    <p class="i4user-item__txt">Email</p>
+                                </div>
+                                <div class="i4user-item-right">
+                                    <input disabled type="text" name="email" class="i4user-input"
+                                        placeholder="Nhập Email">
+                                </div>
+                            </div>
+                            <!-- check address -->
+                            <!-- item -->
+                            <div class="view-i4user-flex">
+                                <div class="i4user-item-left">
+                                    <p class="i4user-item__txt">Số điện thoại</p>
+                                </div>
+                                <div class="i4user-item-right">
+                                    <input required="" type="text" name="phone" class="i4user-input"
+                                        placeholder="Nhập số điện thoại">
+                                </div>
+                            </div>
+                            <!-- item -->
+                            <div class="view-i4user-flex">
+                                <div class="i4user-item-left">
+                                    <p class="i4user-item__txt">Ngày Sinh</p>
+                                </div>
+                                <div class="i4user-item-right">
+                                    <input type="text" required="" name="birth" class="i4user-input"
+                                        placeholder="Nhập ngày sinh">
+                                </div>
+                            </div>
+                            <div class="i4user-submit">
+                                <input type="submit" value="Thay đổi" class="item-submit__btn">
+                            </div>
+                        </form>
                     </div>
-                    <form action="" class="form-edit">
-                        <!-- item -->
-                        <div class="view-i4user-flex">
-                            <div class="i4user-item-left">
-                                <p class="i4user-item__txt">User Name</p>
-                            </div>
-                            <div class="i4user-item-right">
-                                <input type="text" name="fullname" class="i4user-input" placeholder="Nhập User Name">
-                            </div>
+                </div>
+                <div class="form-edit__container">
+                    <div class="form-edit-pass">
+                        <div class="form-edit-header">
+                            <h1 class="edit-header-h1">Đổi mật khẩu</h1>
                         </div>
-                        <!-- check email -->
-                        <!-- item -->
-                        <div class="view-i4user-flex">
-                            <div class="i4user-item-left">
-                                <p class="i4user-item__txt">Email</p>
+                        <form action="" class="form-edit">
+                            <!-- item -->
+                            <div class="view-i4user-flex">
+                                <div class="i4user-item-left">
+                                    <p class="i4user-item__txt">Mật Khẩu Hiện Tại</p>
+                                </div>
+                                <div class="i4user-item-right">
+                                    <input required type="password" name="Password" class="i4user-input"
+                                        placeholder="Mật Khẩu Hiện Tại">
+                                </div>
                             </div>
-                            <div class="i4user-item-right">
-                                <input disabled type="text" name="email" class="i4user-input" placeholder="Nhập Email">
+                            <div class="view-i4user-flex">
+                                <div class="i4user-item-left">
+                                    <p class="i4user-item__txt">Mật Khẩu Mới</p>
+                                </div>
+                                <div class="i4user-item-right">
+                                    <input required type="password" name="newPassword" class="i4user-input"
+                                        placeholder="Mật Khẩu Mới">
+                                </div>
                             </div>
-                        </div>
-                        <!-- check address -->
-                        <!-- item -->
-                        <div class="view-i4user-flex">
-                            <div class="i4user-item-left">
-                                <p class="i4user-item__txt">Số điện thoại</p>
+                            <div class="view-i4user-flex">
+                                <div class="i4user-item-left">
+                                    <p class="i4user-item__txt">Nhập Lại Mật Khẩu Mới</p>
+                                </div>
+                                <div class="i4user-item-right">
+                                    <input required type="password" name="re-newPassword" class="i4user-input"
+                                        placeholder="Nhập Lại Mật Khẩu Mới">
+                                </div>
                             </div>
-                            <div class="i4user-item-right">
-                                <input required="" type="text" name="phone" class="i4user-input"
-                                    placeholder="Nhập số điện thoại">
+
+                            <div class="i4user-submit">
+                                <input type="button" value="Thay đổi" class="item-submit__btn2">
                             </div>
-                        </div>
-                        <!-- item -->
-                        <div class="view-i4user-flex">
-                            <div class="i4user-item-left">
-                                <p class="i4user-item__txt">Ngày Sinh</p>
-                            </div>
-                            <div class="i4user-item-right">
-                                <input type="text" required="" name="birth" class="i4user-input"
-                                    placeholder="Nhập ngày sinh">
-                            </div>
-                        </div>
-                        <div class="i4user-submit">
-                            <input type="submit" value="Thay đổi" class="item-submit__btn">
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/components/core.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/md5.js"></script>
 <script type="module" src="./assets/js/edituser.js"></script>
 
 </html>

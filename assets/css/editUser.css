@@ -76,3 +76,15 @@ ul {
 	margin-top: 20px;
 	padding-bottom: 20px;
 }
+
+.column-left__item.active {
+	color: red;
+}
+
+.form-edit__container {
+	display: none;
+}
+
+.form-edit__container.active {
+	display: block;
+}

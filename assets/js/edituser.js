@@ -105,3 +105,52 @@ const handleEditUser = () => {
 	}
 };
 handleEditUser();
+
+const panes = $$('.form-edit__container');
+
+$$('.column-left__item').forEach((item, index) => {
+	const pane = panes[index];
+	item.onclick = (e) => {
+		$('.column-left__item.active').classList.remove('active');
+		$('.form-edit__container.active').classList.remove('active');
+		item.classList.add('active');
+		pane.classList.add('active');
+	};
+});
+
+function encPass(pass) {
+	var passE = CryptoJS.MD5(pass);
+	return passE.toString();
+}
+
+$('.item-submit__btn2').onclick = () => {
+	const pass = document.querySelector('input[name="Password"]').value;
+	const newPass = document.querySelector('input[name="newPassword"]').value;
+	const reNewPass = document.querySelector('input[name="re-newPassword"]').value;
+	var regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{6,}$/;
+	if (newPass.match(regex)) {
+		if (encPass(newPass) === encPass(reNewPass)) {
+			signInWithEmailAndPassword(auth, currentUser.email, pass)
+				.then((userCredential) => {
+					updatePassword(auth.currentUser, newPass)
+						.then(() => {
+							// Update successful.
+							update(ref(database, 'users/' + dataEdit.userUid), {
+								password: encPass(newPass),
+							});
+							alert('Đổi mật khẩu thành công');
+						})
+						.catch((error) => {
+							console.log(error);
+						});
+				})
+				.catch((error) => {
+					alert('Mật khẩu Cũ Không Đúng. Vui Lòng Kiểm Tra Lại');
+				});
+		} else {
+			alert('Nhập Lại Mật Khẩu Không Giống. Vui Lòng Kiểm Tra Lại');
+		}
+	} else {
+		alert('Mật Khẩu phải bao gồm 6 kí tự trở lên và phải bao gồm 1 chữ thường, 1 in hoa và 1 chữ số');
+	}
+};
