@@ -9,11 +9,22 @@ const releaseMultilines = $$('.new-release__multiline');
 const releaseColumn = $$('.new-release__multiline-column');
 const headerSearchInput = $('.header__search-input');
 const headerSearchList = $('.header__search-list');
+
+function debounce(cb, delay = 1000) {
+	let timeout;
+	return (...args) => {
+		clearTimeout(timeout);
+		timeout = setTimeout(() => {
+			cb(...args);
+		}, delay);
+	};
+}
+
 headerSearchInput.onkeyup = (e) => {
 	getSearch(e.target.value);
 };
 
-export const getSearch = async (keyword) => {
+const getSearch = debounce(async (keyword) => {
 	try {
 		let data = await axios.get(`https://apizingmp3.herokuapp.com/api/search?keyword=${keyword}`);
 		let dataSearchSongs = data.data.data.songs;
@@ -21,23 +32,25 @@ export const getSearch = async (keyword) => {
 	} catch (e) {
 		console.log(e);
 	}
-};
+}, 250);
 
 const renderSearch = (dataSearch) => {
 	if (dataSearch) {
-		let htmls = dataSearch.map((song, index) => {
-			return `
-			<li class="header__search-item">
-				<div class="header__search-item-image">
-					<img src="${song.thumbnail}"
-						alt="">
-				</div>
-				<div class="header__search-item-info">
-					<a href="#" class="header__search-artist-name">${song.title}</a>
-					<span class="header__search-artists">${song.artistsNames}</span>
-				</div>
-			</li>
-		`;
+		let htmls = dataSearch.map((data, index) => {
+			if (data) {
+				return `
+				<li class="header__search-item">
+					<div class="header__search-item-image">
+						<img src="${data.thumbnail}"
+							alt="">
+					</div>
+					<div class="header__search-item-info">
+						<a href="#" class="header__search-artist-name">${data.title}</a>
+						<span class="header__search-artists">${data.artistsNames}</span>
+					</div>
+				</li>
+			`;
+			}
 		});
 		headerSearchList.innerHTML = htmls.join('');
 	} else {
@@ -93,7 +106,7 @@ const renderReleaseAll = (dataReleaseAll) => {
 	let htmls0 = dataReleaseAll.map((data, index) => {
 		if (index < 5) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -120,7 +133,7 @@ const renderReleaseAll = (dataReleaseAll) => {
 	let htmls1 = dataReleaseAll.map((data, index) => {
 		if (index >= 5 && index < 10) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -147,7 +160,7 @@ const renderReleaseAll = (dataReleaseAll) => {
 	let htmls2 = dataReleaseAll.map((data, index) => {
 		if (index >= 10 && index < 16) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -176,7 +189,7 @@ const renderReleaseVPOP = (dataReleaseVPOP) => {
 	let htmls0 = dataReleaseVPOP.map((data, index) => {
 		if (index < 5) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -203,7 +216,7 @@ const renderReleaseVPOP = (dataReleaseVPOP) => {
 	let htmls1 = dataReleaseVPOP.map((data, index) => {
 		if (index >= 5 && index < 10) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -230,7 +243,7 @@ const renderReleaseVPOP = (dataReleaseVPOP) => {
 	let htmls2 = dataReleaseVPOP.map((data, index) => {
 		if (index >= 10 && index < 16) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -259,7 +272,7 @@ const renderReleaseOthers = (dataReleaseOthers) => {
 	let htmls0 = dataReleaseOthers.map((data, index) => {
 		if (index < 5) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -286,7 +299,7 @@ const renderReleaseOthers = (dataReleaseOthers) => {
 	let htmls1 = dataReleaseOthers.map((data, index) => {
 		if (index >= 5 && index < 10) {
 			return `
-				<div class="new-release__multiline-item" data-index=${index}>
+				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
 						<div class="multiline-item__media-left">
 							<div class="media-left__thumb">
@@ -313,7 +326,7 @@ const renderReleaseOthers = (dataReleaseOthers) => {
 	let htmls2 = dataReleaseOthers.map((data, index) => {
 		if (index >= 10 && index < 16) {
 			return `
-			<div class="new-release__multiline-item" data-index=${index}>
+			<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 				<div class="multiline-item__media">
 					<div class="multiline-item__media-left">
 						<div class="media-left__thumb">

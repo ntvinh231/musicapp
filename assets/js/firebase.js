@@ -42,19 +42,20 @@ modalOverlay.onclick = () => {
 // Import the functions you need from the SDKs you need
 import { set, ref, child, get, update } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js';
 import {
+	getAuth,
 	signInWithEmailAndPassword,
 	createUserWithEmailAndPassword,
 	updateProfile,
 	updatePassword,
 } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-auth.js';
-
+import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js';
+import { firebase, auth, database } from './config.js';
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 // import dotenv from 'dotenv';
 // dotenv.config();
 // console.log(process.env.API_KEY);
 
-import { firebase, auth, database } from './config.js';
 import { render } from './favoriteuser.js';
 
 export function SignUp(username, emailRegister, passwordRegister) {
@@ -176,7 +177,7 @@ function SignIn(user, userUid) {
 	}
 	window.location = 'index.html';
 	localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
-	window.onload(user);
+	window.onload();
 }
 
 function setCookie(name, value, hours) {
@@ -216,7 +217,7 @@ SignOut.addEventListener('click', () => {
 	window.location = 'index.html';
 });
 
-function renderUser() {
+export function renderUser() {
 	let keepLoggedIn = localStorage.getItem('keepLoggedIn');
 	if (keepLoggedIn) {
 		currentUser = JSON.parse(localStorage.getItem('userData'));
@@ -225,23 +226,32 @@ function renderUser() {
 	}
 }
 
-const windowLoad = () => {
-	window.onload = function () {
-		renderUser();
-		if (currentUser != null) {
-			personalName.textContent = currentUser.username;
-			image.src = currentUser.urlImage;
-			userLogin.classList.add('login');
-			$('.header__right-img').style.backgroundImage = `url('${currentUser.urlImage}')`;
-		}
-	};
+const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
+window.onload = function () {
+	renderUser();
+	if (currentUser != null) {
+		const dbRef = ref(database);
+		get(child(dbRef, `users/${userDataFavorites.userUid}`))
+			.then((snapshot) => {
+				if (snapshot.exists()) {
+					personalName.textContent = snapshot.val().username;
+					image.src = snapshot.val().urlImage;
+					userLogin.classList.add('login');
+					$('.header__right-img').style.backgroundImage = `url('${snapshot.val().urlImage}')`;
+				} else {
+					console.log('No data available');
+				}
+			})
+			.catch((error) => {
+				console.error(error);
+			});
+	}
 };
-windowLoad();
 
-const userDataFavorites = JSON.parse(localStorage.getItem('dataFavorites'));
+const dataFavorites = JSON.parse(localStorage.getItem('dataFavorites'));
 function handleLoggedIn() {
 	renderUser();
-	render(userDataFavorites);
+	render(dataFavorites);
 	if (currentUser != null) {
 		personalName.textContent = currentUser.username;
 		image.src = currentUser.urlImage;

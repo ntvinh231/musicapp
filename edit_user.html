@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/editUser.css">
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <title>Chỉnh sửa thông tin người dùng</title>
+</head>
+
+<body>
+    <div class="header-menu">
+        <div class="header-menu-flex">
+            <div class="header-menu">
+                <ul class="header-menu-list">
+                    <a href="./index.html" class="header-menu-link back-home-edit-user">
+                        <li style="padding:0 30px;" class="header-menu-item">
+                            <i class="fix-item-icon fa-solid fa-house"></i>
+                            <p class="item_name">Home</p>
+                        </li>
+                    </a>
+                    <a href="./index.html" class="header-menu-link sign-out-edit-user">
+                        <li style="padding:0 30px;" class="header-menu-item">
+                            <i class="fix-item-icon fa-solid fa-circle-xmark"></i>
+                            <p class="item_name">Sign Out</p>
+                        </li>
+                    </a>
+                </ul>
+            </div>
+            <div class="header-menu_user">
+                <ul class="header-menu-item">
+                    <li class="header-menu-item">
+                        <i class="fix-item-icon fa-solid fa-user"></i>
+                        <a class="header-menu-link menu-link__welcome" href=""> Xin chào</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="grid wide edit-user">
+        <div class="row">
+            <div class="column-left col l-2">
+                <div class="column-left__heading">
+                    <h4>Tài khoản của tôi</h4>
+                </div>
+                <ul class="column-left__list">
+                    <li class="column-left__item">
+                        Hồ Sơ
+                    </li>
+                    <li class="column-left__item">
+                        Đổi mật khẩu
+                    </li>
+                </ul>
+            </div>
+            <div class="column-right col l-8">
+                <div class="form-edit-user">
+                    <div class="form-edit-header">
+                        <h1 class="edit-header-h1">Hồ Sơ Của Tôi</h1>
+                    </div>
+                    <form action="" class="form-edit">
+                        <!-- item -->
+                        <div class="view-i4user-flex">
+                            <div class="i4user-item-left">
+                                <p class="i4user-item__txt">User Name</p>
+                            </div>
+                            <div class="i4user-item-right">
+                                <input type="text" name="fullname" class="i4user-input" placeholder="Nhập User Name">
+                            </div>
+                        </div>
+                        <!-- check email -->
+                        <!-- item -->
+                        <div class="view-i4user-flex">
+                            <div class="i4user-item-left">
+                                <p class="i4user-item__txt">Email</p>
+                            </div>
+                            <div class="i4user-item-right">
+                                <input disabled type="text" name="email" class="i4user-input" placeholder="Nhập Email">
+                            </div>
+                        </div>
+                        <!-- check address -->
+                        <!-- item -->
+                        <div class="view-i4user-flex">
+                            <div class="i4user-item-left">
+                                <p class="i4user-item__txt">Số điện thoại</p>
+                            </div>
+                            <div class="i4user-item-right">
+                                <input required="" type="text" name="phone" class="i4user-input"
+                                    placeholder="Nhập số điện thoại">
+                            </div>
+                        </div>
+                        <!-- item -->
+                        <div class="view-i4user-flex">
+                            <div class="i4user-item-left">
+                                <p class="i4user-item__txt">Ngày Sinh</p>
+                            </div>
+                            <div class="i4user-item-right">
+                                <input type="text" required="" name="birth" class="i4user-input"
+                                    placeholder="Nhập ngày sinh">
+                            </div>
+                        </div>
+                        <div class="i4user-submit">
+                            <input type="submit" value="Thay đổi" class="item-submit__btn">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script type="module" src="./assets/js/edituser.js"></script>
+
+</html>

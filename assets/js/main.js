@@ -240,23 +240,35 @@ const app = {
 			$('.overview__section-slider-item').src = this.currentSong.album.thumbnail;
 			this.activeSong();
 		} else if (this.currentReleaseAll && this.clickSongAtElement === 'new-release__multiline-wrapper-0') {
-			songTitle.textContent = this.currentReleaseAll.title;
-			cdThumb.style.backgroundImage = `url(${this.currentReleaseAll.thumbnail})`;
-			artitName.textContent = this.currentReleaseAll.artistsNames;
-			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseAll.encodeId}/320`;
-			this.activeSong();
+			if (this.currentReleaseAll.streamingStatus === 2) {
+				alert('Bạn không phải là VIP');
+			} else {
+				songTitle.textContent = this.currentReleaseAll.title;
+				cdThumb.style.backgroundImage = `url(${this.currentReleaseAll.thumbnail})`;
+				artitName.textContent = this.currentReleaseAll.artistsNames;
+				audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseAll.encodeId}/320`;
+				this.activeSong();
+			}
 		} else if (this.currentReleaseVPOP && this.clickSongAtElement === 'new-release__multiline-wrapper-1') {
-			songTitle.textContent = this.currentReleaseVPOP.title;
-			cdThumb.style.backgroundImage = `url(${this.currentReleaseVPOP.thumbnail})`;
-			artitName.textContent = this.currentReleaseVPOP.artistsNames;
-			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseVPOP.encodeId}/320`;
-			this.activeSong();
+			if (this.currentReleaseVPOP.streamingStatus === 2) {
+				alert('Bạn không phải là VIP');
+			} else {
+				songTitle.textContent = this.currentReleaseVPOP.title;
+				cdThumb.style.backgroundImage = `url(${this.currentReleaseVPOP.thumbnail})`;
+				artitName.textContent = this.currentReleaseVPOP.artistsNames;
+				audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseVPOP.encodeId}/320`;
+				this.activeSong();
+			}
 		} else if (this.currentReleaseOthers && this.clickSongAtElement === 'new-release__multiline-wrapper-2') {
-			songTitle.textContent = this.currentReleaseOthers.title;
-			cdThumb.style.backgroundImage = `url(${this.currentReleaseOthers.thumbnail})`;
-			artitName.textContent = this.currentReleaseOthers.artistsNames;
-			audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseOthers.encodeId}/320`;
-			this.activeSong();
+			if (this.currentReleaseOthers.streamingStatus === 2) {
+				alert('Bạn không phải là VIP');
+			} else {
+				songTitle.textContent = this.currentReleaseOthers.title;
+				cdThumb.style.backgroundImage = `url(${this.currentReleaseOthers.thumbnail})`;
+				artitName.textContent = this.currentReleaseOthers.artistsNames;
+				audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${this.currentReleaseOthers.encodeId}/320`;
+				this.activeSong();
+			}
 		}
 	},
 
@@ -326,7 +338,7 @@ const app = {
 			cdThumbAnimation.pause();
 		};
 
-		progress.onchange = function (e) {
+		progress.oninput = function (e) {
 			const seekTime = (audio.duration / 100) * e.target.value;
 			audio.currentTime = seekTime;
 			audio.play();
@@ -486,7 +498,7 @@ const app = {
 	prevSong: function () {
 		if (this.currentSongRank && this.clickSongAtElement === 'genre-list') {
 			this.currentIndex--;
-			if (this.currentIndex < 0) this.currentIndex = dataRank.length - 1;
+			if (this.currentIndex < 0) this.currentIndex = dataRank.rank.song.length - 1;
 			this.loadCurrentSong();
 		} else if (this.currentSong && this.clickSongAtElement === 'section-list__body') {
 			this.currentIndex--;
@@ -497,7 +509,6 @@ const app = {
 			if (this.currentIndex < 0) this.currentIndex = dataReleaseAll.length - 1;
 			this.loadCurrentSong();
 		} else if (this.currentReleaseVPOP && this.clickSongAtElement === 'new-release__multiline-wrapper-1') {
-			console.log('1');
 			this.currentIndex--;
 			if (this.currentIndex < 0) this.currentIndex = dataReleaseVPOP.length - 1;
 			this.loadCurrentSong();
@@ -510,9 +521,10 @@ const app = {
 
 	randomSong: function () {
 		if (this.currentSongRank && this.clickSongAtElement === 'genre-list') {
-			let randomNumber = Math.floor(Math.random() * dataRank.length);
-			if (randomNumber >= dataRank.length) {
-				randomNumber = Math.floor(Math.random() * dataRank.length);
+			let randomNumber = Math.floor(Math.random() * dataRank.data.song.length);
+			1;
+			if (randomNumber >= dataRank.data.song.length) {
+				randomNumber = Math.floor(Math.random() * dataRank.data.song.length);
 			} else {
 				this.currentIndex = randomNumber;
 			}

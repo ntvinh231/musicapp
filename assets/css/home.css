@@ -264,3 +264,13 @@
 	color: var(--white-color);
 	font-size: 1.4rem;
 }
+
+.new-release__multiline-item.isvip {
+	filter: brightness(60%);
+	cursor: not-allowed;
+}
+
+.new-release__multiline-item.isvip .media-left__thumb-img {
+	filter: brightness(60%);
+	cursor: not-allowed;
+}
