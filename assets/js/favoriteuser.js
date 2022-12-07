@@ -55,7 +55,7 @@ const handleRender = () => {
 			artistInfo(id);
 			const getMusic = async () => {
 				try {
-					let data = await axios.get(`https://apizingmp3.herokuapp.com/api/infosong?id=${id}`);
+					let data = await axios.get(`https://apizingmp3.vercel.app/api/infosong?id=${id}`);
 					useData.splice(index, 0, data.data.data);
 					if (useData.length === userDataFavorites.favorites_music.length) {
 						localStorage.setItem('dataFavorites', JSON.stringify(useData));

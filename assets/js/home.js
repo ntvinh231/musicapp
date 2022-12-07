@@ -26,7 +26,7 @@ headerSearchInput.onkeyup = (e) => {
 
 const getSearch = debounce(async (keyword) => {
 	try {
-		let data = await axios.get(`https://apizingmp3.herokuapp.com/api/search?keyword=${keyword}`);
+		let data = await axios.get(`https://apizingmp3.vercel.app/api/search?keyword=${keyword}`);
 		let dataSearchSongs = data.data.data.songs;
 		renderSearch(dataSearchSongs);
 	} catch (e) {
@@ -62,7 +62,7 @@ const renderSearch = (dataSearch) => {
 
 const getData = async () => {
 	try {
-		let data = await axios.get(`https://apizingmp3.herokuapp.com/api/home?page=1`);
+		let data = await axios.get(`https://apizingmp3.vercel.app/api/home?page=1`);
 		console.log(data.data.data.items);
 		let dataBanner = data.data.data.items[0];
 		let dataRelease = data.data.data.items[3];
@@ -72,7 +72,7 @@ const getData = async () => {
 		renderReleaseOthers(dataRelease.items.others);
 	} catch (e) {
 		if (e.code === 'ERR_NETWORK') {
-			alert('Vui lòng kiểm tra lại đường truyền');
+			alert('Load API lỗi');
 		}
 	}
 };
