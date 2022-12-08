@@ -11,6 +11,8 @@ const image = $('#image');
 const userLogin = $('.header__right');
 const SignOut = $('.Signout');
 
+import { handleRender } from './favoriteuser.js';
+
 var currentUser = null;
 
 btnLogin.onclick = (e) => {
@@ -228,6 +230,7 @@ export function renderUser() {
 
 const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
 window.onload = function () {
+	handleRender();
 	renderUser();
 	if (currentUser != null) {
 		const dbRef = ref(database);

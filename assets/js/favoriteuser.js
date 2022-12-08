@@ -49,7 +49,7 @@ export const idfavoriteUser = (userDataFavorite, idSongRank) => {
 	}
 };
 
-const handleRender = () => {
+export const handleRender = () => {
 	if (userDataFavorites) {
 		userDataFavorites.favorites_music.forEach((id, index) => {
 			artistInfo(id);

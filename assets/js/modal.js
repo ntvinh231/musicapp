@@ -72,3 +72,21 @@ navbars.forEach((navbar, index) => {
 		}
 	};
 });
+
+$$('.auth-form__switch-btn').forEach((item) => {
+	item.onclick = (e) => {
+		if (e.target.textContent == 'Đăng ký') {
+			modal.classList.add('active');
+			modalOverlay.classList.add('active');
+			$('.modal__body').style.display = 'block';
+			loginForm.style.display = 'none';
+			registerForm.style.display = 'block';
+		} else {
+			modal.classList.add('active');
+			modalOverlay.classList.add('active');
+			$('.modal__body').style.display = 'block';
+			loginForm.style.display = 'block';
+			registerForm.style.display = 'none';
+		}
+	};
+});

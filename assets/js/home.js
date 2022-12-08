@@ -1,6 +1,10 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
 
+const songTitle = $('.left-content__song-name');
+const cdThumb = $('.control__left-cdthumb');
+const artitName = $('.left-content__artit-name');
+
 import handleSlideShow from './banner.js';
 import { dateFormat } from './format/timeFormat.js';
 
@@ -29,6 +33,18 @@ const getSearch = debounce(async (keyword) => {
 		let data = await axios.get(`https://apizingmp3.vercel.app/api/search?keyword=${keyword}`);
 		let dataSearchSongs = data.data.data.songs;
 		renderSearch(dataSearchSongs);
+		// Handle click search
+		$$('.header__search-item').forEach((item, index) => {
+			item.onmousedown = (e) => {
+				if (e.target.closest('.header__search-item')) {
+					songTitle.textContent = dataSearchSongs[index].title;
+					cdThumb.style.backgroundImage = `url(${dataSearchSongs[index].thumbnail})`;
+					artitName.textContent = dataSearchSongs[index].artistsNames;
+					audio.src = `http://api.mp3.zing.vn/api/streaming/audio/${dataSearchSongs[index].encodeId}/320`;
+					audio.play();
+				}
+			};
+		});
 	} catch (e) {
 		console.log(e);
 	}
@@ -59,6 +75,17 @@ const renderSearch = (dataSearch) => {
 		});
 	}
 };
+
+releaseGenres.forEach((genre, index) => {
+	const releaseMultiline = releaseMultilines[index];
+	genre.onclick = () => {
+		$('.new-release__genre-btn.active').classList.remove('active');
+		$('.new-release__multiline.active').classList.remove('active');
+
+		genre.classList.add('active');
+		releaseMultiline.classList.add('active');
+	};
+});
 
 const getData = async () => {
 	try {

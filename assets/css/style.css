@@ -171,6 +171,7 @@
 	padding: 4px 12px;
 	display: flex;
 	gap: 10px;
+	align-items: center;
 }
 
 .header__search-item-image {
@@ -181,6 +182,7 @@
 .header__search-item-image img {
 	width: 100%;
 	height: auto;
+	cursor: pointer;
 	object-fit: contain;
 }
 
@@ -194,7 +196,7 @@
 }
 
 .header__search-artist-name {
-	line-height: 38px;
+	line-height: 30px;
 	font-size: 1.4rem;
 	text-decoration: none;
 	color: var(--text-color);
