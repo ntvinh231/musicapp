@@ -133,10 +133,44 @@ submitLogin.onclick = (e) => {
 		.catch((error) => {
 			const errorCode = error.code;
 			const errorMessage = error.message;
-			console.log(errorMessage);
-			if (errorCode === 'auth/too-many-requests') {
-				$('#loginAlert').textContent = 'Bạn đã nhập sai quá nhiều, hãy thử lại sau 5s';
-			} else $('.loginErrorUser').style.display = 'block';
+			console.log(errorCode);
+			switch (errorCode) {
+				case 'auth/too-many-requests':
+					$('.loginErrorUser').innerHTML = `
+					<div class="auth-form__alert-error">
+						<span class="icon"></span>
+						<div class="content_alert" id="loginAlert">Bạn nhập sai quá nhiều vui lòng thử lại sau 5s</div>
+					</div>`;
+					break;
+				case 'auth/invalid-email':
+					$('.loginErrorUser').innerHTML = `
+					<div class="auth-form__alert-error">
+						<span class="icon"></span>
+						<div class="content_alert" id="loginAlert">Email sai định dạng, vui lòng kiểm tra lại</div>
+					</div>`;
+					break;
+				case 'auth/wrong-password':
+					$('.loginErrorUser').innerHTML = `
+					<div class="auth-form__alert-error">
+						<span class="icon"></span>
+						<div class="content_alert" id="loginAlert">Sai mật khẩu, vui lòng kiểm tra lại</div>
+					</div>`;
+					break;
+				case 'auth/user-not-found':
+					$('.loginErrorUser').innerHTML = `
+					<div class="auth-form__alert-error">
+						<span class="icon"></span>
+						<div class="content_alert" id="loginAlert">Tài khoản không tồn tại, vui lòng kiểm tra lại</div>
+					</div>`;
+					break;
+				case 'auth/internal-error':
+					$('.loginErrorUser').innerHTML = `
+					<div class="auth-form__alert-error">
+						<span class="icon"></span>
+						<div class="content_alert" id="loginAlert">Mật khẩu không được để trống</div>
+					</div>`;
+					break;
+			}
 		});
 };
 

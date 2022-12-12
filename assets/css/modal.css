@@ -202,11 +202,6 @@
 .form-group.invalid .form-message {
 	color: #f33a58;
 }
-
-.loginErrorUser {
-	display: none;
-}
-
 .auth-form__alert-error {
 	display: flex;
 	align-items: center;

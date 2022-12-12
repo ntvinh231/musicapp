@@ -90,3 +90,9 @@ $$('.auth-form__switch-btn').forEach((item) => {
 		}
 	};
 });
+
+$('.modal').onkeypress = (e) => {
+	if (e.key == 'Enter') {
+		$('.submit-login').click();
+	}
+};
