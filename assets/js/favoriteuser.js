@@ -1,6 +1,6 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-
+const genreList = $('.genre-list');
 import { firebase, auth, database } from './config.js';
 import { getCookie } from './firebase.js';
 import { set, ref, child, get, update } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js';
@@ -8,14 +8,14 @@ import { artistInfo } from './artistsinfo.js';
 import { timeFormat } from './format/timeFormat.js';
 import { download } from './main.js';
 
-let useData = [];
-
+const localData = JSON.parse(localStorage.getItem('userData'));
+const cookieData = getCookie().userData;
 const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
 
-export const idfavoriteUser = (userDataFavorite, idSongRank) => {
-	const localData = JSON.parse(localStorage.getItem('userData'));
-	const cookieData = getCookie().userData;
+let useData = [];
+// Add Song Favorite in list
 
+export const idfavoriteUser = (userDataFavorite, idSongRank) => {
 	if (localData || cookieData) {
 		// check data exists
 		if (Array.isArray(userDataFavorite.favorites_music)) {
@@ -30,7 +30,7 @@ export const idfavoriteUser = (userDataFavorite, idSongRank) => {
 				userDataFavorite.favorites_music.push(idSongRank);
 				setTimeout(() => {
 					toastSlide();
-				}, 1500);
+				}, 1200);
 			}
 		} else {
 			userDataFavorite.favorites_music = [`${idSongRank}`];
@@ -71,7 +71,7 @@ export const handleRender = () => {
 };
 handleRender();
 
-const toastSlide = () => {
+export const toastSlide = () => {
 	const toatMain = document.querySelector('#toast');
 	if (toatMain) {
 		const toast = document.createElement('div');
@@ -98,6 +98,24 @@ export const toastUpdate = () => {
 						<div class="toast__item">
 							<i class="fa-solid fa-circle-exclamation"></i>
 							<span>Chức năng đang phát triển, vui lòng thử lại sau</span>
+						</div>
+					`;
+		toatMain.appendChild(toast);
+		setTimeout(function () {
+			toatMain.removeChild(toast);
+		}, 3000 + 2000);
+	}
+};
+
+export const toastDelete = (name) => {
+	const toatMain = document.querySelector('#toast');
+	if (toatMain) {
+		const toast = document.createElement('div');
+		toast.classList.add('toast');
+		toast.innerHTML = `
+						<div class="toast__item">
+							<i class="fa-solid fa-circle-exclamation"></i>
+							<span>Đã xóa bài hát ${name} khỏi danh sách</span>
 						</div>
 					`;
 		toatMain.appendChild(toast);
@@ -153,7 +171,6 @@ export const handleOption = (optionIndex) => {
 	const optionItemDelete = $$('.option-delete');
 	const optionDownLoads = $$('.option-download');
 	const dataFavorites = JSON.parse(localStorage.getItem('dataFavorites'));
-	const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
 	optionMenu.forEach((item, index) => {
 		if (index === optionIndex) {
 			flag = !flag;
@@ -164,22 +181,37 @@ export const handleOption = (optionIndex) => {
 					// Get Index and Delete
 					if (indexOf !== -1) {
 						userDataFavorites.favorites_music.splice(indexOf, 1);
+						// Delete action liked in Rank
+						$$('.genre-item').forEach((item, index) => {
+							const genre_NameSong = $$('.genre-item__info-name')[index];
+							const genre_NameArtist = $$('.genre-item__info-artist-name')[index];
+							if (
+								genre_NameSong.textContent == dataFavorites[indexOf].title &&
+								genre_NameArtist.textContent == dataFavorites[indexOf].artistsNames
+							) {
+								$$('.genre-item__action')[index].classList.remove('liked');
+							}
+						});
+						dataFavorites.splice(indexOf, 1);
 						if (userDataFavorites.favorites_music.length == 0) {
 							localStorage.removeItem('dataFavorites');
 						}
 					}
 				}
+
 				localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorites));
+				localStorage.setItem('dataFavorites', JSON.stringify(dataFavorites));
+				render(dataFavorites);
 				update(ref(database, 'users/' + userDataFavorites.userUid), {
 					favorites_music: userDataFavorites.favorites_music,
 				});
 			};
 			optionDownLoads[index].onclick = () => {
 				if (userDataFavorites) {
-					console.log(
-						`http://167.172.93.181/api/v1/get/redirect?url=https://api.mp3.zing.vn/api/streaming/audio/${dataFavorites[index].encodeId}/320`
-					);
-					console.log(`${dataFavorites[index].alias}.mp3`);
+					// console.log(
+					// 	`http://167.172.93.181/api/v1/get/redirect?url=https://api.mp3.zing.vn/api/streaming/audio/${dataFavorites[index].encodeId}/320`
+					// );
+					// console.log(`${dataFavorites[index].alias}.mp3`);
 					download(
 						`http://localhost:3000/redirect?url=https://api.mp3.zing.vn/api/streaming/audio/${dataFavorites[index].encodeId}/320`,
 						`${dataFavorites[index].alias}.mp3`

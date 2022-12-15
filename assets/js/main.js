@@ -1,8 +1,9 @@
 const $ = document.querySelector.bind(document);
 const $$ = document.querySelectorAll.bind(document);
-
-import { renderSongsRank } from './rank.js';
-import { handleOption, idfavoriteUser } from './favoriteuser.js';
+import { firebase, auth, database } from './config.js';
+import { set, ref, child, get, update } from 'https://www.gstatic.com/firebasejs/9.13.0/firebase-database.js';
+import { renderSongsRank, userDataFavorites } from './rank.js';
+import { handleOption, idfavoriteUser, toastSlide } from './favoriteuser.js';
 import { getCookie } from './firebase.js';
 // import axios from 'axios';
 
@@ -374,7 +375,9 @@ const app = {
 
 		// Persional
 		persionalSongList.onclick = function (e) {
-			_this.clickSongAtElement = e.target.closest('.section-list__body').className;
+			if (e.target.closest('.section-list__body')) {
+				_this.clickSongAtElement = e.target.closest('.section-list__body').className;
+			}
 			const nodeImg = e.target.closest('.left-image');
 			const nodeItem = e.target.closest('.section-list__body-item');
 			const nodeOption = e.target.closest('.item-media__right');
@@ -447,6 +450,43 @@ const app = {
 				_this.loadCurrentSong();
 				audio.play();
 				cdThumbAnimation.play();
+			}
+		};
+		// Current Song
+		// if (
+		// 	this.currentSongRank ||
+		// 	this.currentSong ||
+		// 	this.currentReleaseAll ||
+		// 	this.currentReleaseVPOP ||
+		// 	this.currentReleaseOthers
+		// ) {
+		// 	if (
+		// 		localData ||
+		// 		(cookieData &&
+		// 			userDataFavorites.favorites_music.includes(this.currentSongRank.id) &&
+		// 			userDataFavorites.favorites_music.includes(this.currentSong.id) &&
+		// 			userDataFavorites.favorites_music.includes(this.currentReleaseAll.id) &&
+		// 			userDataFavorites.favorites_music.includes(this.currentReleaseVPOP.id) &&
+		// 			userDataFavorites.favorites_music.includes(this.currentReleaseOthers.id))
+		// 	) {
+		// 		$('.current-item__action').classList.add('liked');
+		// 	} else {
+		// 		if ($('.current-item__action.liked')) {
+		// 			$('.current-item__action.liked').classList.remove('liked');
+		// 		}
+		// 	}
+		// }
+		$('.current-item__action').onclick = (e) => {
+			if (this.currentSongRank) {
+				this.addLikedFavorite(JSON.parse(localStorage.getItem('userDataFavorite')), this.currentSongRank.id);
+			} else if (this.currentSong) {
+				this.addLikedFavorite(JSON.parse(localStorage.getItem('userDataFavorite')), this.currentSong.id);
+			} else if (this.currentReleaseAll) {
+				this.addLikedFavorite(JSON.parse(localStorage.getItem('userDataFavorite')), this.currentReleaseAll.id);
+			} else if ((JSON.parse(localStorage.getItem('userDataFavorite')), this.currentReleaseVPOP)) {
+				this.addLikedFavorite(this.currentReleaseVPOP.id);
+			} else if (this.currentReleaseOthers) {
+				this.addLikedFavorite(JSON.parse(localStorage.getItem('userDataFavorite')), this.currentSongRank.id);
 			}
 		};
 	},
@@ -546,6 +586,36 @@ const app = {
 
 	repeatSong: function () {
 		this.loadCurrentSong();
+	},
+
+	addLikedFavorite: function (userDataFavorite, id) {
+		if (localData || cookieData) {
+			// check data exists
+			if (Array.isArray(userDataFavorite.favorites_music)) {
+				if (!userDataFavorite.favorites_music.includes(id)) {
+					console.log(id);
+					userDataFavorite.favorites_music.push(id);
+					setTimeout(() => {
+						toastSlide();
+					}, 1200);
+				} else {
+					alert('Bài hát đã có trong danh sách');
+				}
+			} else {
+				userDataFavorite.favorites_music = [`${id}`];
+			}
+			localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
+			update(ref(database, 'users/' + userDataFavorite.userUid), {
+				favorites_music: userDataFavorite.favorites_music,
+			});
+		} else {
+			modal.classList.add('active');
+			modalOverlay.classList.add('active');
+			$('.modal__body').style.display = 'block';
+			loginForm.style.display = 'block';
+			registerForm.style.display = 'none';
+			$('.genre-item__action.liked').classList.remove('liked');
+		}
 	},
 
 	activeSong: function () {

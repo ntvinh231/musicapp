@@ -11,7 +11,7 @@ const image = $('#image');
 const userLogin = $('.header__right');
 const SignOut = $('.Signout');
 
-import { handleRender } from './favoriteuser.js';
+import { handleRender, render } from './favoriteuser.js';
 
 var currentUser = null;
 
@@ -57,8 +57,6 @@ import { firebase, auth, database } from './config.js';
 // import dotenv from 'dotenv';
 // dotenv.config();
 // console.log(process.env.API_KEY);
-
-import { render } from './favoriteuser.js';
 
 export function SignUp(username, emailRegister, passwordRegister) {
 	let imageUrl = 'avatar.jpg';
@@ -262,8 +260,15 @@ export function renderUser() {
 	}
 }
 
-const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
 window.onload = function () {
+	const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
+	if (!userDataFavorites) {
+		const userDataFavorite = {
+			userUid: '',
+			favorites_music: [],
+		};
+		localStorage.setItem('userDataFavorite', JSON.stringify(userDataFavorite));
+	}
 	handleRender();
 	renderUser();
 	if (currentUser != null) {

@@ -90,7 +90,6 @@ releaseGenres.forEach((genre, index) => {
 const getData = async () => {
 	try {
 		let data = await axios.get(`https://apizingmp3.vercel.app/api/home?page=1`);
-		console.log(data.data.data.items);
 		let dataBanner = data.data.data.items[0];
 		let dataRelease = data.data.data.items[3];
 		renderBanner(dataBanner.items);
@@ -185,7 +184,7 @@ const renderReleaseAll = (dataReleaseAll) => {
 
 	// Col-2
 	let htmls2 = dataReleaseAll.map((data, index) => {
-		if (index >= 10 && index < 16) {
+		if (index >= 10 && index < 15) {
 			return `
 				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
@@ -268,7 +267,7 @@ const renderReleaseVPOP = (dataReleaseVPOP) => {
 
 	// Col-2
 	let htmls2 = dataReleaseVPOP.map((data, index) => {
-		if (index >= 10 && index < 16) {
+		if (index >= 10 && index < 15) {
 			return `
 				<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 					<div class="multiline-item__media">
@@ -351,7 +350,7 @@ const renderReleaseOthers = (dataReleaseOthers) => {
 
 	// Col-2
 	let htmls2 = dataReleaseOthers.map((data, index) => {
-		if (index >= 10 && index < 16) {
+		if (index >= 10 && index < 15) {
 			return `
 			<div class="new-release__multiline-item ${data.streamingStatus === 2 ? 'isvip' : ''}" data-index=${index}>
 				<div class="multiline-item__media">

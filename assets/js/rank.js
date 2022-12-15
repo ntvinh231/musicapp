@@ -16,18 +16,17 @@ genresSelect.forEach((genre, index) => {
 });
 const localData = JSON.parse(localStorage.getItem('userData'));
 const cookieData = getCookie().userData;
-const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
+export const userDataFavorites = JSON.parse(localStorage.getItem('userDataFavorite'));
 
 export function renderSongsRank(rankData, genreList) {
-	// console.log(!localData, !cookieData);
-	// if (!!cookieData || !localData) $('.header__right').classList.remove('login');
 	if (rankData.msg === 'Success' && rankData.err === 0) {
 		const rankDataSongs = rankData.data.song;
 		var htmls = rankDataSongs.map((song, index) => {
 			return `
 			<div class="genre-item" data-index=${index}>
 				<div class="genre-item__action action__like  ${
-					(localData || cookieData) && userDataFavorites.favorites_music.includes(rankDataSongs[index].id)
+					(localData || (cookieData && userDataFavorites)) &&
+					userDataFavorites.favorites_music.includes(rankDataSongs[index].id)
 						? 'liked'
 						: ''
 				}">
