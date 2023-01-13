@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" />
+    <!-- Reset css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <!-- dùng google font roboto -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <!-- icon fontawesome -->
+    <link rel="stylesheet" href="./assets/font/fontawesome-free-6.2.0-web/css/all.css">
+    <!-- css base -->
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <!-- Grid system -->
+    <link rel="stylesheet" href="./assets/css/grid.css">
+    <!-- Modal layout -->
+    <link rel="stylesheet" href="./assets/css/modal.css">
+    <!-- Control Music -->
+    <link rel="stylesheet" href="./assets/css/musicControl.css">
+    <!-- css chính -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- css banner -->
+    <link rel="stylesheet" href="./assets/css/banner.css">
+    <!-- css Home -->
+    <link rel="stylesheet" href="./assets/css/home.css">
+    <!-- css navbar -->
+    <link rel="stylesheet" href="./assets/css/navbar.css">
+
+    <link rel="icon" type="image/x-icon" href="#">
+</head>
+
+<body>
+    <!-- <div class="main" style="background-image: url(./assets/img/background/background-theme.svg);">/ -->
+    <div class="main" style="background-color: #1e1e1e;">
+
+        <!-- Modal layout  -->
+        <div class="modal">
+            <div class="modal__overlay"></div>
+            <div class="modal__body">
+                <!-- Register Form -->
+                <form action="" method="POST" class="form">
+                    <div class="auth-form auth-form--register">
+                        <div class="auth-form__container">
+                            <div class="auth-form__header">
+                                <h3 class="auth-form__heading">Đăng ký</h3>
+                                <span class="auth-form__switch-btn">Đăng nhập</span>
+                            </div>
+
+                            <div class="auth-form__form">
+                                <div class="form-group">
+                                    <input type="username" class="userRegister auth-form__input"
+                                        placeholder="Nhập username của bạn">
+                                    <span class="form-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="email" class="emailRegister auth-form__input"
+                                        placeholder="Nhập email của bạn">
+                                    <span class="form-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" autocomplete="off" class="passwordRegister auth-form__input"
+                                        placeholder="Nhập mật khẩu của bạn">
+                                    <span class="form-message"></span>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" autocomplete="off"
+                                        class="repasswordRegister auth-form__input"
+                                        placeholder="Nhập lại mật khẩu của bạn">
+                                    <span class="form-message"></span>
+                                </div>
+                            </div>
+
+                            <div class="auth-form__aside">
+                                <p class="auth-form__policy-text">
+                                    Bằng việc đăng kí, bạn đã đông ý với về
+                                    <a href="" class="auto-form__policy-link">Điều khoản dịch vụ </a>&
+                                    <a href="" class="auto-form__policy-link">Chính sách bảo mật</a>
+                                    của chúng tôi
+                                </p>
+                            </div>
+
+                        </div>
+                        <div class="auth-form__control">
+                            <button type="button" class="btn btn--back submit-back">TRỞ LẠI</button>
+                            <button class="btn btn--primary submit-register">ĐĂNG KÝ</button>
+                        </div>
+                </form>
+            </div>
+
+
+            <!-- Login Form -->
+            <form class="auth-form auth-form--login">
+                <div class="auth-form__container">
+                    <div class="auth-form__header">
+                        <h3 class="auth-form__heading">Đăng nhập</h3>
+                        <span class="auth-form__switch-btn">Đăng ký</span>
+                    </div>
+                    <div class="auth-form__form">
+                        <div class="form-group">
+                            <input type="email" class="emailLogin auth-form__input" placeholder="Nhập email của bạn">
+                            <span class="form-message"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" autocomplete="off" class="passwordLogin auth-form__input"
+                                placeholder="Nhập mật khẩu của bạn">
+                            <span class="form-message"></span>
+                        </div>
+                    </div>
+
+                    <div class="auth-form__aside">
+                        <div class="auto-form__help">
+                            <a href="" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
+                            <span class="auth-form__help-separate"></span>
+                            <a href="" class="auth-form__help-link ">Cần trợ giúp</a>
+                        </div>
+                    </div>
+
+                    <div class="loginErrorUser">
+                        <!-- <div class="auth-form__alert-error">
+                            <span class="icon"></span>
+                            <div class="content_alert" id="loginAlert">Sai tài khoản hoặc mật khẩu</div>
+                        </div> -->
+                    </div>
+                </div>
+                <div class="auth-form__control">
+                    <div class="custom-control custom-switch">
+                        <input type="checkbox" class="custom-control-input" id="customSwitch">
+                        <label for="customSwitch" class="custom-control-label">Giữ đăng nhập</label>
+                    </div>
+                    <div class="btn btn--back submit-back">TRỞ LẠI</div>
+                    <div class="btn btn--primary submit-login">ĐĂNG NHẬP</div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Main -->
+    <div class="grid ">
+        <!-- Sliderbar -->
+        <div class="navbar">
+            <div class="navbar-brand">
+                <a href="#" class="navbar-link">
+                    <div class="navbar-logo">
+                        Logo
+                    </div>
+                </a>
+            </div>
+            <div class="navbar-rank">
+                <div class="navbar-rank__top">
+                    <i class="navbar__top-icon fa-solid fa-ranking-star"></i>
+                    <div class="navbar-title__wrapper">
+                        <span class="navbar__top-tile">Bảng Xếp Hạng</span>
+                    </div>
+                </div>
+                <div class="navbar-genres">
+                    <div class="navbar-genre active">
+                        <i class="navbar-genre-icon fa-solid fa-music"></i>
+                        <h4>Việt Nam</h4>
+                    </div>
+                    <div class="navbar-genre">
+                        <i class="navbar-genre-icon fa-solid fa-music"></i>
+                        <h4>Châu Á</h4>
+                    </div>
+                    <div class="navbar-genre">
+                        <i class="navbar-genre-icon fa-solid fa-music"></i>
+                        <h4>Âu Mĩ</h4>
+                    </div>
+                </div>
+                <div class="navbar-genre__container active">
+                    <div class="genre-list">
+                        <div class="genre-item">
+                            <div class="genre-item__action action__like">
+                                <i class="genre-item__action-empty action__like-empty fa-regular fa-heart"></i>
+                                <i class="genre-item__action-fill action__like-fill fa-solid fa-heart"></i>
+                            </div>
+                            <span class="genre-item__number">01</span>
+                            <div class="genre-item__image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="genre-item__info">
+                                <span class="genre-item__info-name title-name">Loading...</span>
+                                <span class="genre-item__info-artist-name subtitle-name">Loading...</span>
+                            </div>
+                            <div class="genre-item__play">
+                                <i class="genre-icon fa-solid fa-circle-play"></i>
+                            </div>
+                        </div>
+                        <div class="genre-item">
+                            <div class="genre-item__action action__like">
+                                <i class="genre-item__action-empty action__like-empty fa-regular fa-heart"></i>
+                                <i class="genre-item__action-fill action__like-fill fa-solid fa-heart"></i>
+                            </div>
+                            <span class="genre-item__number">02</span>
+                            <div class="genre-item__image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="genre-item__info">
+                                <span class="genre-item__info-name title-name">Loading...</span>
+                                <span class="genre-item__info-artist-name subtitle-name">Loading...</span>
+                            </div>
+                            <div class="genre-item__play">
+                                <i class="genre-icon fa-solid fa-circle-play"></i>
+                            </div>
+                        </div>
+                        <div class="genre-item">
+                            <div class="genre-item__action action__like">
+                                <i class="genre-item__action-empty action__like-empty fa-regular fa-heart"></i>
+                                <i class="genre-item__action-fill action__like-fill fa-solid fa-heart"></i>
+                            </div>
+                            <span class="genre-item__number">03</span>
+                            <div class="genre-item__image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="genre-item__info">
+                                <span class="genre-item__info-name title-name">Loading...</span>
+                                <span class="genre-item__info-artist-name subtitle-name">Loading...</span>
+                            </div>
+                            <div class="genre-item__play">
+                                <i class="genre-icon fa-solid fa-circle-play"></i>
+                            </div>
+                        </div>
+                        <div class="genre-item">
+                            <div class="genre-item__action action__like">
+                                <i class="genre-item__action-empty action__like-empty fa-regular fa-heart"></i>
+                                <i class="genre-item__action-fill action__like-fill fa-solid fa-heart"></i>
+                            </div>
+                            <span class="genre-item__number">04</span>
+                            <div class="genre-item__image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="genre-item__info">
+                                <span class="genre-item__info-name title-name">Loading...</span>
+                                <span class="genre-item__info-artist-name subtitle-name">Loading...</span>
+                            </div>
+                            <div class="genre-item__play">
+                                <i class="genre-icon fa-solid fa-circle-play"></i>
+                            </div>
+                        </div>
+                        <div class="genre-item">
+                            <div class="genre-item__action action__like">
+                                <i class="genre-item__action-empty action__like-empty fa-regular fa-heart"></i>
+                                <i class="genre-item__action-fill action__like-fill fa-solid fa-heart"></i>
+                            </div>
+                            <span class="genre-item__number">05</span>
+                            <div class="genre-item__image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="genre-item__info">
+                                <span class="genre-item__info-name title-name">Loading...</span>
+                                <span class="genre-item__info-artist-name subtitle-name">Loading...</span>
+                            </div>
+                            <div class="genre-item__play">
+                                <i class="genre-icon fa-solid fa-circle-play"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="navbar-genre__container">
+                    <span>Pane 1</span>
+                </div>
+                <div class="navbar-genre__container">
+                    <span>Pane 2</span>
+                </div>
+            </div>
+        </div>
+        <!-- Header -->
+        <header class="header">
+            <div class="header__left">
+                <ul class="header__navbar-menu">
+                    <li class="navbar-item header__navbar-item active">
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Trang Chủ</span>
+                    </li>
+                    <li class="navbar-item header__navbar-item">
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Cá Nhân</span>
+                    </li>
+                    <li class="navbar-item header__navbar-item">
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Top 100</span>
+                    </li>
+                    <li class="navbar-item header__navbar-item">
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Radio</span>
+                        <span class="navbar-item-live">Live</span>
+                    </li>
+                    <li class="navbar-item header__navbar-item">
+                        <!-- <i class="fa-regular fa-circle-play"></i> -->
+                        <span class="header__navbar-item-span">Theo Dõi</span>
+                    </li>
+                    <div class="line"></div>
+                </ul>
+                <!-- <ul class="navbar-library">
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Nhạc Mới</a>
+                        </li>
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Thể Loại</a>
+                        </li>
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">Top 100</a>
+                        </li>
+                        <li class="navbar-item">
+                            <i class="fa-regular fa-circle-play"></i>
+                            <a href="" class="link">MV</a>
+                        </li>
+                    </ul> -->
+                <!-- <div class="vip-banner-sliderbar">
+                        <div class="text">Nghe nhạc không quảng cáo cùng kho nhạc VIP </div>
+                        <a href="" class="btn-vip-upgrade">NÂNG CẤP VIP</a>
+                    </div> -->
+            </div>
+            <div class="header__search">
+                <i class="header__search-icon fa-solid fa-magnifying-glass"></i>
+                <input type="search" class="header__search-input" placeholder="Bạn muốn nghe gì?">
+                <div class="search-history">
+                    <h3 class="header__search-heading">Từ Khóa Liên Quan</h3>
+                    <ul class="header__search-list">
+                        <li class="header__search-item">
+                            <div class="header__search-item-image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="header__search-item-info">
+                                <a href="#" class="header__search-artist-name">Bài hát </a>
+                                <span class="header__search-artists">Ca sĩ</span>
+                            </div>
+                        </li>
+                        <li class="header__search-item">
+                            <div class="header__search-item-image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="header__search-item-info">
+                                <a href="#" class="header__search-artist-name">Bài hát</a>
+                                <span class="header__search-artists">Ca sĩ</span>
+                            </div>
+                        </li>
+                        <li class="header__search-item">
+                            <div class="header__search-item-image">
+                                <img src="./assets/img/music-control/defaultImage.webp" alt="">
+                            </div>
+                            <div class="header__search-item-info">
+                                <a href="#" class="header__search-artist-name">Bài hát </a>
+                                <span class="header__search-artists">Ca sĩ</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="header__right">
+                <div class="header__right-login__container">
+                    <div class="header__right--login">
+                        <a href="" class="header-register">Đăng Ký </a>
+                        <button class="btn btn-login">
+                            <a href="" class="header-login">Đăng Nhập</a>
+                        </button>
+                    </div>
+                </div>
+                <div class="header__right-logout__container">
+                    <div class="header__right--logout">
+                        <span class="Signout">Sign Out</span>
+                        <div class="header__right-icon">
+                            <a href="./edit_user.html">
+                                <i class="fa-sharp fa-solid fa-gear"></i>
+                                <span class="tooltip">Cài Đặt</span>
+                            </a>
+                        </div>
+                        <div class="header__right-img"></div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- song-side -->
+        <div class="song-side">
+            <div class="song-side__container active">
+                <div class="container-personal container__home-body">
+                    <div class="container-personal-scroll">
+                        <div class="container__banner">
+                            <div class="song-side__slide">
+                                <!-- <a href="#" class="song-side__item">
+                                <img src="" alt="">
+                                <div class="song-side__item-content">
+                                    <div class="song-side__item-title">
+                                        Title
+                                    </div>
+                                    <div class="song-side__item-info">
+                                        Info
+                                    </div>
+                                    <div class="song-side__item-name">
+                                        Name
+                                    </div>
+                                </div>
+                            </a> -->
+
+                            </div>
+                            <div class="slide-buttons">
+                                <button id="slide-button__prev"><i class="bi bi-chevron-compact-left"></i></button>
+                                <button id="slide-button__next"><i class="bi bi-chevron-compact-right"></i></button>
+                            </div>
+                        </div>
+                        <div class="container__recent">
+                            <h3 class="container__recent-title">
+                                Gần Đây
+                            </h3>
+                            <div class="song-side__recent-wrapper">
+                                <div class="carousel">
+                                    <div class="carousel-list">
+                                        <div class="carousel-item l-2">
+                                            <div class="carousel-item__card">
+                                                <a title="Top 100 bài nhạc hay nhất" href="">
+                                                    <div class="card-image">
+                                                        <img src="https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp/cover/d/8/5/2/d852eba51a52ebbbe73359ae387f4345.jpg"
+                                                            alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="card-content">
+                                                    <h4>Top 100 bài nhạc trẻ hay nhất</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item l-2">
+                                            <div class="carousel-item__card">
+                                                <a title="Top 100 bài nhạc hay nhất" href="">
+                                                    <div class="card-image">
+                                                        <img src="https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp/cover/0/f/3/0/0f30dfbe89a3ac36884f612d16c07753.jpg"
+                                                            alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="card-content">
+                                                    <h4>Top 100 bài nhạc V-POP</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item l-2">
+                                            <div class="carousel-item__card">
+                                                <a title="Top 100 bài nhạc hay nhất" href="">
+                                                    <div class="card-image">
+                                                        <img src="https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp/cover/b/8/0/0/b800a8b039fd00210f54e58b3309b46f.jpg"
+                                                            alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="card-content">
+                                                    <h4>Top 100 Nhạc Dance Việt Nam hay Nhất</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item l-2">
+                                            <div class="carousel-item__card">
+                                                <a title="Top 100 bài nhạc hay nhất" href="">
+                                                    <div class="card-image">
+                                                        <img src="https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp/cover/7/b/1/d/7b1d35be17804ecbda9f6493fe366749.jpg"
+                                                            alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="card-content">
+                                                    <h4>Top 100 Nhạc Phim Việt Nam Hay Nhất</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item l-2">
+                                            <div class="carousel-item__card">
+                                                <a title="Top 100 bài nhạc hay nhất" href="">
+                                                    <div class="card-image">
+                                                        <img src="https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp/cover/7/d/1/d/7d1dfc74ee2118232101a722da9e2b23.jpg"
+                                                            alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="card-content">
+                                                    <h4>Pop Ballad Việt Nổi Bật</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item l-2">
+                                            <div class="carousel-item__card">
+                                                <a title="Top 100 bài nhạc hay nhất" href="">
+                                                    <div class="card-image">
+                                                        <img src="https://photo-resize-zmp3.zmdcdn.me/w320_r1x1_webp/cover/e/7/f/d/e7fd4a8069cd341063b838aeaa249626.jpg"
+                                                            alt="">
+                                                    </div>
+                                                </a>
+                                                <div class="card-content">
+                                                    <h4>Top 100 Nhạc EDM Việt Hay Nhất</h4>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="container__new-release">
+                            <h3 class="new-release-title">
+                                Mới phát hành
+                            </h3>
+                            <div class="new-release__genre">
+                                <button class="new-release__genre-btn active btn">Tất Cả</button>
+                                <button class="new-release__genre-btn btn">Việt Nam</button>
+                                <button class="new-release__genre-btn btn">Quốc Tế</button>
+                            </div>
+                            <div class="new-release__multiline active">
+                                <div class="new-release__multiline-wrapper">
+                                    <div class="new-release__multiline-column l-4">
+                                        <div class="new-release__multiline-list">
+                                            <div class="new-release__multiline-item active">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">Hôm
+                                                                Qua</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">Hôm
+                                                                Qua</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">Hôm
+                                                                Qua</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">Hôm
+                                                                Qua</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">Hôm
+                                                                Qua</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-release__multiline-column l-4">
+                                        <div class="new-release__multiline-list">
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">2 Ngày
+                                                                trước</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-release__multiline-list">
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">2 Ngày
+                                                                trước</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-release__multiline-list">
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">2 Ngày
+                                                                trước</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-release__multiline-column l-4">
+                                        <div class="new-release__multiline-list">
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">Hôm
+                                                                Qua</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="new-release__multiline-list">
+                                            <div class="new-release__multiline-item">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">3 ngày
+                                                                trước</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="new-release__multiline">
+                                <div class="new-release__multiline-wrapper">
+                                    <div class="new-release__multiline-column l-4">
+                                        <div class="new-release__multiline-list">
+                                            <div class="new-release__multiline-item active">
+                                                <div class="multiline-item__media">
+                                                    <div class="multiline-item__media-left">
+                                                        <div class="media-left__thumb">
+                                                            <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                                alt="">
+                                                        </div>
+                                                        <div class="media-left__info">
+                                                            <span class="media-left__info-name title-name">Bài
+                                                                hát</span>
+                                                            <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                            <span class="media-left__time-release subtitle-name">2 ngày
+                                                                trước
+                                                                Qua</span>
+                                                        </div>
+                                                    </div>
+                                                    <div title="Khác" class="multiline-item__media-right">
+                                                        <i
+                                                            class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="new-release__multiline-column l-4">
+                                        <!-- <div class="new-release__multiline-list">
+                                    <div class="new-release__multiline-item">
+                                        <div class="multiline-item__media">
+                                            <div class="multiline-item__media-left">
+                                                <div class="media-left__thumb">
+                                                    <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                        alt="">
+                                                </div>
+                                                <div class="media-left__info">
+                                                    <span class="media-left__info-name title-name">Thiên Tài</span>
+                                                    <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                    <span class="media-left__time-release subtitle-name">Hôm Qua</span>
+                                                </div>
+                                            </div>
+                                            <div title="Khác" class="multiline-item__media-right">
+                                                <i class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                    </div>
+                                    <div class="new-release__multiline-column l-4">
+                                        <!-- <div class="new-release__multiline-list">
+                                    <div class="new-release__multiline-item">
+                                        <div class="multiline-item__media">
+                                            <div class="multiline-item__media-left">
+                                                <div class="media-left__thumb">
+                                                    <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                        alt="">
+                                                </div>
+                                                <div class="media-left__info">
+                                                    <span class="media-left__info-name title-name">Thiên Tài</span>
+                                                    <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                    <span class="media-left__time-release subtitle-name">Hôm Qua</span>
+                                                </div>
+                                            </div>
+                                            <div title="Khác" class="multiline-item__media-right">
+                                                <i class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="new-release__multiline">
+                                <div class="new-release__multiline-wrapper">
+                                    <div class="new-release__multiline-column l-4">
+                                        <!-- <div class="new-release__multiline-list">
+                                    <div class="new-release__multiline-item active">
+                                        <div class="multiline-item__media">
+                                            <div class="multiline-item__media-left">
+                                                <div class="media-left__thumb">
+                                                    <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                        alt="">
+                                                </div>
+                                                <div class="media-left__info">
+                                                    <span class="media-left__info-name title-name">Thiên Tài</span>
+                                                    <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                    <span class="media-left__time-release subtitle-name">Hôm Qua</span>
+                                                </div>
+                                            </div>
+                                            <div title="Khác" class="multiline-item__media-right">
+                                                <i class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                    </div>
+                                    <div class="new-release__multiline-column l-4">
+                                        <!-- <div class="new-release__multiline-list">
+                                    <div class="new-release__multiline-item">
+                                        <div class="multiline-item__media">
+                                            <div class="multiline-item__media-left">
+                                                <div class="media-left__thumb">
+                                                    <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                        alt="">
+                                                </div>
+                                                <div class="media-left__info">
+                                                    <span class="media-left__info-name title-name">Thiên Tài</span>
+                                                    <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                    <span class="media-left__time-release subtitle-name">Hôm Qua</span>
+                                                </div>
+                                            </div>
+                                            <div title="Khác" class="multiline-item__media-right">
+                                                <i class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                    </div>
+                                    <div class="new-release__multiline-column l-4">
+                                        <!-- <div class="new-release__multiline-list">
+                                    <div class="new-release__multiline-item">
+                                        <div class="multiline-item__media">
+                                            <div class="multiline-item__media-left">
+                                                <div class="media-left__thumb">
+                                                    <img src="https://photo-resize-zmp3.zmdcdn.me/w94_r1x1_webp/cover/6/e/0/5/6e0599518a57f1b51c815c7b4b1167ac.jpg"
+                                                        alt="">
+                                                </div>
+                                                <div class="media-left__info">
+                                                    <span class="media-left__info-name title-name">Thiên Tài</span>
+                                                    <a class="media-left__artist-name subtitle-name">Ca sĩ</a>
+                                                    <span class="media-left__time-release subtitle-name">Hôm Qua</span>
+                                                </div>
+                                            </div>
+                                            <div title="Khác" class="multiline-item__media-right">
+                                                <i class="icon-release left-action__ellip fa-solid fa-ellipsis"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="song-side__container">
+                <div class="container-personal">
+                    <div class="personal-heading">
+                        <img src="./assets/img/user/avatar.jpg" id="image" alt="Avatar">
+                        <span class="personal-name">Loading...</span>
+                    </div>
+                    <div class="personal-body">
+                        <ul class="personal-body__option">
+                            <li class="option-item active">TỔNG QUAN</li>
+                            <li class="option-item">PLAYLIST</li>
+                            <li class="option-item">BÀI HÁT</li>
+                            <li class="option-item">NGHỆ SĨ</li>
+                        </ul>
+                    </div>
+                    <div class="personals active personal-overview__wrapper">
+                        <div class="personal-overview__content">
+                            <div class="overview__content-left">
+                                <span>Bài Hát</span>
+                            </div>
+                            <div class="overview__content-right">
+                                <button>Phát Tất Cả</button>
+                            </div>
+                        </div>
+                        <div class="personal-overview__section">
+                            <div class="overview__section-slider">
+                                <img src="https://stc-id.nixcdn.com/v11/images/avatar_default.jpg" alt=""
+                                    class="overview__section-slider-item">`
+                            </div>
+                            <div class="overview__section-list">
+                                <div class="section-list__header">
+                                    <span class="section-list__header-left">Bài Hát</span>
+                                    <span class="section-list__header-center">Album</span>
+                                    <span class="section-list__header-right">Thời Gian</span>
+                                </div>
+                                <div class="section-list__body">
+                                    <!-- <div class="section-list__body-item" data-index=${index}>
+                                        <div class="item-media__left">
+                                            <div class="media__left-image">
+                                                <div class="left-image"
+                                                    style="background-image: url('${data.thumbnail}')"></div>
+                                            </div>
+                                            <div class="media__left-info">
+                                                <span class="media__left-title title-name">${data.title}</span>
+                                                <span
+                                                    class="media__left-title subtitle-name">${data.artistsNames}</span>
+                                            </div>
+                                        </div>
+                                        <div class="item-media__center">
+                                            <span class="media__center-album subtitle-name">${data.album.title}</span>
+                                        </div>
+                                        <div class="item-media__right">
+                                            <span
+                                                class="media__right-duration subtitle-name">${timeFormat(data.duration)}</span>
+                                            <i class="media__right-option icon-option fa-solid fa-ellipsis"></i>
+                                            <div class="media__right-option-menu">
+                                                <ul class="media__right-option-list">
+                                                    <li class="media__right-option-item">Xoá Bài Hát Khỏi Danh Sách</li>
+                                                    <li class="media__right-option-item">Update</li>
+                                                    <li class="media__right-option-item">Update</li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div> -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="personals">Đây là personal2</div>
+                    <div class="personals">Đây là personal3</div>
+                    <div class="personals personal-overview__wrapper">
+                        <div class="personal-overview__content">
+                            <div class="overview__content-left">
+                                <span>Ca Sĩ</span>
+                            </div>
+                        </div>
+                        <div class="personal-overview__section">
+                            <div class="overview__section-list-artists">
+                                <!-- <div class="section-list__artist-item-artists">
+                                    <div class="item-artists__container">
+                                        <img class="item-artists-img"
+                                            src="https://photo-resize-zmp3.zmdcdn.me/w240_r1x1_jpeg/avatars/3/0/8/f/308fa7ce7b60d56448a34ef29c80d246.jpg"
+                                            alt="">
+                                        <span class="item-artists-name">Test</span>
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container-related">
+
+                </div>
+            </div>
+            <div style="color: #fff;" class="song-side__container">
+                <div class="container-personal">Đây là zing chart</div>
+            </div>
+            <div style="color: #fff;" class="song-side__container">
+                <div class="container-personal">Đây là radio</div>
+            </div>
+            <div style="color: #fff;" class="song-side__container">
+                <div class="container-personal">Theo Dõi</div>
+            </div>
+            <!-- Footer -->
+            <footer class="music-control">
+                <div id="toast">
+                    <!-- <div class="toast__item">
+                        <i class="fa-solid fa-circle-exclamation"></i>
+                        <span>Đã Thêm Bài Hát Vào Danh Sách</span>
+                    </div> -->
+                </div>
+                <div class="row">
+                    <div class="col l-3">
+                        <div class="music-control__left">
+                            <div class="control__left-cd">
+                                <div class="control__left-cdthumb"
+                                    style="background-image: url(./assets/img/music-control/cbthumb.png);">
+                                </div>
+                            </div>
+                            <div class="control__left-content">
+                                <span class="left-content__song-name title-name">Loading...</span>
+                                <span class="left-content__artit-name subtitle-name">Loading...</span>
+                            </div>
+                            <div class="current-item__action action__like">
+                                <i class="current-item__action-empty action__like-empty fa-solid fa-plus"></i>
+                                <i class="current-item__action-empty action__like-fill fa-solid fa-minus"></i>
+                            </div>
+                            <div class="control__left-action">
+                                <i class="icon-option left-action__ellip fa-solid fa-ellipsis"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col l-6">
+                        <div class="music-control__center">
+                            <div class="control__center-controls">
+                                <i class="control control-random fa-solid fa-shuffle"></i>
+                                <i class="control control-prev fas fa-step-backward"></i>
+                                <div class="control-toggle">
+                                    <i class="fas fa-pause control control-pause"></i>
+                                    <i class="fas fa-play control control-play"></i>
+                                </div>
+                                <i class="control control-next fas fa-step-forward"></i>
+                                <i class="control control-repeat fa-solid fa-repeat"></i>
+                            </div>
+                            <div class="rangeValue">
+                                <input type="range" class="progress" id="progress" value="0" min="0" step="1" max="100">
+                            </div>
+                            <audio id="audio" src=""></audio>
+                        </div>
+                    </div>
+                    <div class="col l-3">
+                        <div class="music-control__right">
+                            <div class="control__right-controls">
+                                <div class="volume-change">
+                                    <i class="fas fa-volume-up volume__icon"></i>
+                                    <i class="fas fa-volume-mute volume__icon--mute"></i>
+                                </div>
+
+                                <div class="rangeVolume">
+                                    <input type="range" class="volume" id="volume" value="0" min="0" step="1" max="100">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+
+</body>
+
+</html>
